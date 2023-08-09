@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS usuario (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  email_usuario VARCHAR(50) NOT NULL,
+  senha_usuario VARCHAR(25) NOT NULL,
+  tipo_usuario VARCHAR(1) NOT NULL, /* A = ADM V = Vendedor C = Cliente */
+  nome VARCHAR(50) NOT NULL,
+  ativo VARCHAR(1) NOT NULL, /* I=INATIVO, A=ATIVO */
+
+  PRIMARY KEY (`id_usuario`)
+);
+
+/* VENDEDOR */
+CREATE TABLE IF NOT EXISTS vendedor (
+  id_vendedor INT NOT NULL AUTO_INCREMENT,
+  tipo_pessoa VARCHAR(1) NOT NULL,  /* F=Física, J=Jurícica */ 
+  cpf_cnpj VARCHAR(20) NOT NULL,
+  id_usuario INT NOT NULL,
+  CONSTRAINT pk_vendedor PRIMARY KEY (id_vendedor)  
+);
+ALTER TABLE vendedor ADD CONSTRAINT fk_usuario_vendedor FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario);
+
+
+/* CLIENTE */
+CREATE TABLE IF NOT EXISTS cliente (
+  id_cliente INT NOT NULL AUTO_INCREMENT,
+  cpf VARCHAR(20) NOT NULL,
+  id_usuario INT NOT NULL,
+  CONSTRAINT pk_cliente PRIMARY KEY (id_cliente)
+);
+ALTER TABLE cliente ADD CONSTRAINT fk_usuario_cliente FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario);
+
+
+
+INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("admin@gmail.com", "senhaADM", "A", "Adminsitrador", 'A');
+
+INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("cliente@gmail.com", "senhaCLI", "C", "Cliente", 'A');
+INSERT INTO cliente (cpf, id_usuario) VALUES ("11111111111", (SELECT id_usuario FROM usuario WHERE email_usuario = 'cliente@gmail.com'));
+
+INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("vendedor@gmail.com", "senhaVEN", "V", "Vendedor", 'A');
+INSERT INTO vendedor (tipo_pessoa, cpf_cnpj, id_usuario) VALUES ("F", "22222222222", (SELECT id_usuario FROM usuario WHERE email_usuario = 'vendedor@gmail.com'));
+
+
+
+/* Produto */
+CREATE TABLE produto
+(
+    id_produto INT NOT NULL AUTO_INCREMENT,
+    nome_produto varchar(60) NOT NULL,
+    qnt_produto INT NOT NULL,
+    categoria_produto varchar(1) NOT NULL,
+    detalhes text(120) NOT NULL,
+    id_vendedor INT NOT NULL,
+    CONSTRAINT pk_produto PRIMARY KEY (id_produto)
+);
+ALTER TABLE produto ADD CONSTRAINT fk_vendedor_produto FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);
