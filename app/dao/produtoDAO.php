@@ -5,7 +5,7 @@ class ProdutoDAO {
     public function insertProd(Produto $produto) {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO produto (nome_produto, qnt_produto, categoria_produto, detalhes, id_vendedor)" .
+        $sql = "INSERT INTO produto (nome_produto, categoria_produto, detalhes, id_vendedor)" .
                " VALUES (:nomeProd, :catProd, :detalhes, :idVendedor)";
 
         $stm = $conn->prepare($sql);
@@ -33,12 +33,11 @@ class ProdutoDAO {
         $produtos = array();
         foreach ($result as $reg) {
             $produto = new Produto();
-            $produto->setIdProduto($reg['id_produto']);
-            $produto->setNome($reg['nome']);
-            $produto->setEmail($reg['email_usuario']);
-            $produto->setSenha($reg['senha_usuario']);
-            $produto->setTipo($reg['tipo_usuario']);
-            $produto->setAtivo($reg['ativo']);
+            $produto->setIdProduto($reg['idProduto']);
+            $produto->setNomeProduto($reg['nomeProd']);
+            $produto->setCategoriaProduto($reg['catProd']);
+            $produto->setDetalhes($reg['detalhes']);
+            $produto->setIdVendedor($reg['idVendedor']);
             array_push($produtos, $produto);
         }
 

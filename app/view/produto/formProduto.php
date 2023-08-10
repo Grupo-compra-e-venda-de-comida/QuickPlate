@@ -25,11 +25,6 @@
         <label for="nomeProduto">Titulo do Produto</label>
       </div>
 
-      <div class="form-floating mb-2 ">
-        <input type="number" class="form-control" id="quantProd" name="quantProd" />
-        <label for="quantProd">Quantidade Disponivel</label>
-      </div>
-
       <div class="form-floating">
         <input type="text" class="form-control" id="catProd" name="catProd" />
         <label for="catProd">Categoria do Produto</label>

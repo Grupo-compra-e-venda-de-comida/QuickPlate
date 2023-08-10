@@ -16,7 +16,7 @@
 </div>
 
 <a href="../controller/produtoController.php?action=formProd" class="myButton">Cadastre Produto</a></br>
-<a href="#" class="myButtona">Seus Produtos</a></br>
+<a href="../controller/produtoController.php?action=listProd" class="myButtona">Seus Produtos</a></br>
 <a href="#" class="myButtonb">Gerar Cupom</a>
 
 <?php  

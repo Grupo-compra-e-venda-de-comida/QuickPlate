@@ -71,11 +71,11 @@ class ProdutoController extends Controller {
     }
 
     protected function listProd(string $msgErro = "", string $msgSucesso = "") {
-        $usuarios = $this->produtoDAO->list();
+        $usuarios = $this->produtoDAO->listProd();
         //print_r($usuarios);
         $dados["lista"] = $usuarios;
 
-        $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
+        $this->loadView("produto/listProd.php", $dados,  $msgErro, $msgSucesso);
     }  
 
    

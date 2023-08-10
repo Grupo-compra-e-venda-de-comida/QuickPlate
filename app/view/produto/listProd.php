@@ -3,8 +3,8 @@
 #Objetivo: listar os usuarios para o administrador
 
 require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
-require_once(__DIR__ . "/../../controller/usuarioController.php");
+require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
+require_once(__DIR__ . "/../../controller/produtoController.php");
 
 ?>
 
@@ -22,7 +22,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php");
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Titulo</th>
+                        <th>Nome</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
                         <th>Alterar</th>
@@ -31,27 +31,26 @@ require_once(__DIR__ . "/../../controller/usuarioController.php");
                 </thead>
                 <tbody>
                     <?php 
-                        foreach($dados['lista'] as $usu): 
+                        foreach($dados['lista'] as $prod): 
                     ?>
-                        <tr>
-                            <td><?php echo $usu->getIdUsuario(); ?></td>
-                            <td><?= $usu->getNome(); ?></td>
-                            <td><?= $usu->getEmail(); ?></td>
-                            <td><?= $usu->getTipoUsuarioDesc(); ?></td>
-                            <td><?= $usu->getAtivoDesc(); ?></td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/usuarioController.php?action=edit&id=<?= $usu->getIdUsuario() ?>">
+                        <? var_dump($dados['lista']) ?>
+                        <!-- <tr>
+                            <td><?php echo $prod->getIdProduto(); ?></td>
+                            <td><?= $prod->getNomeProduto(); ?></td>
+                            <td><?= $prod->getCategoriaProduto(); ?></td>
+                            <td><?= $prod->getDetalhes(); ?></td>
+                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/produtoController.php?action=ediProdt&id=<?= $usu->getIdProduto() ?>">
                                 Alterar</a> 
                             </td>
                             <td><a class="btn btn-danger" 
-                                onclick="return confirm('Confirma a exclusão do usuário?');"
-                                href="<?= BASEURL ?>/controller/usuarioController.php?action=delete&id=<?= $usu->getIdUsuario() ?>">
+                                onclick="return confirm('Confirma a exclusão do produto?');"
+                                href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $usu->getIdProduto() ?>">
                                 Excluir</a> 
                             </td>
-                        </tr>
+                        </tr> -->
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <
         </div>
     </div>
 
