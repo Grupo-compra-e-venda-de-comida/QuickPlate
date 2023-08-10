@@ -1,0 +1,13 @@
+1- Autoregistrar -> Usuário preenche os dados para registrar-se
+    1.1 - Capturar os dados enviados por POST
+    1.2 - Chamar a controller usuarioController.php 
+        1.2.1 - Verificar o tipo do usuário:
+            - SE Cliente (criar um objeto Cliente e chamar o ClienteDAO)
+            - SE Vendedor (criar um objeto Vendedor e chamar o VendedorDAO)
+
+
+2- Ativar o usuário
+    2.1 - Tela par ao administrador listando os usuário (Cliente ou Vendedor) cadastrados
+        - APENAS inativos
+    2.2 - Exibir botão para ATIVAR (mudar status de inativo para ativo)
+    2.3 - Exibir botão para EXCLUIR 
