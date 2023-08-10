@@ -3,7 +3,7 @@
 #Objetivo: listar os usuarios para o administrador
 
 require_once(__DIR__ . "/../include/header.php");
-require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
+//require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
 require_once(__DIR__ . "/../../controller/produtoController.php");
 
 ?>
@@ -31,23 +31,22 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                 </thead>
                 <tbody>
                     <?php 
-                        foreach($dados['lista'] as $prod): 
+                        foreach($dados['listaProd'] as $prod): 
                     ?>
-                        <? var_dump($dados['lista']) ?>
-                        <!-- <tr>
+                        <tr>
                             <td><?php echo $prod->getIdProduto(); ?></td>
                             <td><?= $prod->getNomeProduto(); ?></td>
                             <td><?= $prod->getCategoriaProduto(); ?></td>
                             <td><?= $prod->getDetalhes(); ?></td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/produtoController.php?action=ediProdt&id=<?= $usu->getIdProduto() ?>">
+                            <td><a class="btn btn-primary" href="../controller/produtoController.php?action=editProd&id=<?= $prod->getIdProduto() ?>">
                                 Alterar</a> 
                             </td>
                             <td><a class="btn btn-danger" 
                                 onclick="return confirm('Confirma a exclusão do produto?');"
-                                href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $usu->getIdProduto() ?>">
+                                href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $prod->getIdProduto() ?>">
                                 Excluir</a> 
                             </td>
-                        </tr> -->
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

@@ -17,7 +17,7 @@ class VendedorDAO {
         $stm->execute();
     }
 
-    public function findVendedoByIdUsuario($idUsuario) {
+    public function findVendedorByIdUsuario($idUsuario) {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM vendedor WHERE id_usuario = :id";

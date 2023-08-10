@@ -46,7 +46,6 @@ CREATE TABLE produto
 (
     id_produto INT NOT NULL AUTO_INCREMENT,
     nome_produto varchar(60) NOT NULL,
-    qnt_produto INT NOT NULL,
     categoria_produto varchar(1) NOT NULL,
     detalhes text(120) NOT NULL,
     id_vendedor INT NOT NULL,

@@ -33,15 +33,80 @@ class ProdutoDAO {
         $produtos = array();
         foreach ($result as $reg) {
             $produto = new Produto();
-            $produto->setIdProduto($reg['idProduto']);
-            $produto->setNomeProduto($reg['nomeProd']);
-            $produto->setCategoriaProduto($reg['catProd']);
+            $produto->setIdProduto($reg['id_produto']);
+            $produto->setNomeProduto($reg['nome_produto']);
+            $produto->setCategoriaProduto($reg['categoria_produto']);
             $produto->setDetalhes($reg['detalhes']);
-            $produto->setIdVendedor($reg['idVendedor']);
+            $produto->setIdVendedor($reg['id_vendedor']);
             array_push($produtos, $produto);
         }
 
         return $produtos;
     } 
+
+    //Método para buscar um usuário por seu ID
+    public function findById(int $id) {
+        $conn = Connection::getConn();
+            $sql = "SELECT * FROM produto p" .
+                   " WHERE p.id_produto = ?";
+            $stm = $conn->prepare($sql);    
+            $stm->execute([$id]);
+            $result = $stm->fetchAll();
+        
+            $produtos = $this->mapProdutos($result);
+        
+            if(count($produtos) == 1)
+                return $produtos[0];
+            elseif(count($produtos) == 0)
+                return null;
+        
+            die("produtoDAO.findById()" . 
+                " - Erro: mais de um produto encontrado.");
+        }
+
+    public function findProdutoByIdUsuario($idProduto) {
+        $conn = Connection::getConn();
+        
+        $sql = "SELECT * FROM produto WHERE id_produto = :id";
+                
+            $stm = $conn->prepare($sql);
+            $stm->bindValue("id", $idProduto);
+            $stm->execute();
+        
+            $result = $stm->fetchAll();
+            $produtos = $this->mapProdutos($result);
+        
+                if(count($produtos) == 1)
+                    return $produtos[0];
+                else if(count($produtos) == 0)
+                    return null;
+                else
+                    die("Mais de um produto encontrado para o id " . $idProduto);
+            }
+
+            public function updateProd(Produto $produto) {
+                $conn = Connection::getConn();
+        
+                $sql = "UPDATE produto SET nome_produto = :nome_produto, categoria_produto = :categoria_produto, detalhes = :detalhes" .  
+                       " WHERE id_produto = :id_produto";
+                
+                $stm = $conn->prepare($sql);
+                $stm->bindValue("nome_produto", $produto->getNomeProduto());
+                $stm->bindValue("categoria_produto", $produto->getCategoriaProduto());
+                $stm->bindValue("detalhes", $produto->getDetalhes());
+                $stm->bindValue("id_produto", $produto->getIdProduto());
+                $stm->execute();
+            }
+
+    //Método para excluir um Produto pelo seu ID
+    public function deleteProdById(int $id) {
+        $conn = Connection::getConn();
+
+        $sql = "DELETE FROM produto WHERE id_produto = :idProduto";
+        
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("idProduto", $id);
+        $stm->execute();
+    }
 
 }
