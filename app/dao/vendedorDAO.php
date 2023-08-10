@@ -8,10 +8,11 @@ class VendedorDAO {
     public function insertVend(Vendedor $vendedor) {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO vendedor (cpf_cnpj, id_usuario)" .
-               " VALUES (:documentos, :id)";
+        $sql = "INSERT INTO vendedor (tipo_pessoa, cpf_cnpj, id_usuario)" .
+               " VALUES (:pessoa, :documentos, :id)";
         
         $stm = $conn->prepare($sql);
+        $stm->bindValue("pessoa", $vendedor->getTipoPessoa());
         $stm->bindValue("documentos", $vendedor->getDocumento());
         $stm->bindValue("id", $vendedor->getIdUsuario());
         $stm->execute();

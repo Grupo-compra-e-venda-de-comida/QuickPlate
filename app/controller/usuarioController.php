@@ -113,6 +113,7 @@ class UsuarioController extends Controller{
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
         $confSenha = isset($_POST['confSenha']) ? trim($_POST['confSenha']) : '';
         $tipo = isset($_POST['tipo']) ? trim($_POST['tipo']) : NULL;
+        $pessoa = isset($_POST['pessoa']) ? trim($_POST['pessoa']) : NULL;
 
         //Cria objeto Usuario
         $usuario = new Usuario();
@@ -142,7 +143,7 @@ class UsuarioController extends Controller{
                         $this->saveClient($idUsuario, $documento);
                     }
                     else if ($usuario->getTipo() == 'V'){
-                        $this->saveVend($idUsuario, $documento);
+                        $this->saveVend($idUsuario, $documento, $pessoa);
                     }
 
                 }
@@ -204,10 +205,11 @@ class UsuarioController extends Controller{
         $this->clienteDAO->insertClient($cliente);
     }
 
-    private function saveVend($idUsuario, $documento) {
+    private function saveVend($idUsuario, $documento, $pessoa) {
         $vendedor = new Vendedor();
         $vendedor->setIdUsuario($idUsuario);
         $vendedor->setDocumento($documento);
+        $vendedor->setTipoPessoa($pessoa);
         
         $this->vendedorDAO->insertVend($vendedor);
     }

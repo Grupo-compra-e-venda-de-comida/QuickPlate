@@ -40,6 +40,7 @@ class ProdutoController extends Controller {
     }
 
     public function formProd() {
+
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
         $vendedor = $this->vendedorDAO->findVendedorByIdUsuario($idUsuario);
         if(! $vendedor) {
@@ -101,6 +102,7 @@ class ProdutoController extends Controller {
     }
 
     protected function listProd(string $msgErro = "", string $msgSucesso = "") {
+
         $produtos = $this->produtoDAO->listProd();
         //print_r($usuarios);
         $dados["listaProd"] = $produtos;
@@ -154,7 +156,7 @@ class ProdutoController extends Controller {
 
             $this->loadView("produto/editProduto.php", $dados);
         } else
-            $this->listProd("Usuário não encontrado.");
+            $this->listProd("Produto não encontrado.");
     }
 
     private function findProdutoById() {
