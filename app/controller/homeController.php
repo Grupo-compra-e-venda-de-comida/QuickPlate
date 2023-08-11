@@ -28,7 +28,11 @@ class HomeController extends Controller {
     }
 
     protected function home() {
-        
+        if(! $this->usuarioPossuiTipo([TipoUsuario::ADMINISTRADOR])) {
+            echo "Acesso negado";
+            exit;
+        }
+
         $this->loadView("home/index.php", []);
     }
     protected function homeCliente() {

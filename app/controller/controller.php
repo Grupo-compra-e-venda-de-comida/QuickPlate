@@ -83,15 +83,15 @@ class Controller {
         return true;
     }
 
-    //Método que retorna o tipo de usuário logado
-    public function getTipoUsuarioLogado() {
-        if(isset($_SESSION[SESSAO_USUARIO_ID])) {
-            $tipoUsuario = $_SESSION[SESSAO_USUARIO_TIPO];
-            return $tipoUsuario;
-        }
-
-        return null;
+   //Método que retorna o tipo de usuário logado
+   public function getTipoUsuarioLogado() {
+    if(isset($_SESSION[SESSAO_USUARIO_ID])) {
+        $tipoUsuario = $_SESSION[SESSAO_USUARIO_TIPO];
+        return $tipoUsuario;
     }
+
+    return null;
+}
 
     //Método que verifica se o usuário possui um tipo necessário
     public function usuarioPossuiTipo(array $tipoNecessarios) {

@@ -51,9 +51,10 @@ require_once(__DIR__ . "/../../controller/usuarioController.php");
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
+                
             </table>
-            <
         </div>
+        <a href="../controller/homeController.php?action=home" class="btn btn-success ml-3">Voltar</a>
     </div>
 
 </div>

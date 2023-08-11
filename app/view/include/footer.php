@@ -1,10 +1,10 @@
 <!-- Footer -->
 <br>
 <footer class="text-center fixed-bottom text-lg-start bg-light text-muted ">
-<!-- Copyright -->
-<div class="text-center p-4">
-    © 2023 Copyright: QuickPlate™ em parceria com <a class="text-reset fw-bold" href="https://ifpr.edu.br/foz-do-iguacu/" target="blank"> IFPR</a>
-</div>
+    <!-- Copyright -->
+    <div class="text-center p-4">
+        © 2023 Copyright: QuickPlate™ em parceria com <a class="text-reset fw-bold" href="https://ifpr.edu.br/foz-do-iguacu/" target="blank"> IFPR</a>
+    </div>
 </footer>
 
 <!-- BOOTSTRAP: scripts requeridos pelo framework -->
@@ -15,4 +15,5 @@
 
 <!-- Fecha as tags BODY e HTML -->
 </body>
+
 </html>

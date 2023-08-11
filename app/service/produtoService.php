@@ -13,7 +13,10 @@ class ProdutoService
 
         //Validar campos vazios
         if (!$produto->getNomeProduto())
-            array_push($erros, "O campo [Nome] é obrigatório.");
+            array_push($erros, "O campo [Titulo] é obrigatório.");
+            
+        if (!$produto->getPrecoProduto())
+            array_push($erros, "O campo [Preço] é obrigatório.");
 
         if (!$produto->getDetalhes())
             array_push($erros, "O campo [Detalhes] é obrigatório.");

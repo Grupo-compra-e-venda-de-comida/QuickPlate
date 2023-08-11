@@ -45,12 +45,6 @@ class UsuarioController extends Controller{
         $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
     }  
 
-    /*protected function create() {
-        $dados["id"] = 0;
-        $dados["papeis"] = TipoUsuario::getAllAsArray();
-        $this->loadView("usuario/autoRegistro.php", $dados);
-    }*/
-
     protected function update() {
 
         //Captura os dados do form -- funciona
@@ -68,8 +62,7 @@ class UsuarioController extends Controller{
         $usuario->setEmail($email);
         $usuario->setAtivo($ativo);
 
-        var_dump($usuario);
-        
+        //var_dump($usuario);
         
         //Validar os dados
         $erros = $this->usuarioService->validarDadosAdm($usuario);
@@ -113,7 +106,6 @@ class UsuarioController extends Controller{
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
         $confSenha = isset($_POST['confSenha']) ? trim($_POST['confSenha']) : '';
         $tipo = isset($_POST['tipo']) ? trim($_POST['tipo']) : NULL;
-        $pessoa = isset($_POST['pessoa']) ? trim($_POST['pessoa']) : NULL;
 
         //Cria objeto Usuario
         $usuario = new Usuario();
@@ -143,14 +135,9 @@ class UsuarioController extends Controller{
                         $this->saveClient($idUsuario, $documento);
                     }
                     else if ($usuario->getTipo() == 'V'){
-                        $this->saveVend($idUsuario, $documento, $pessoa);
+                        $this->saveVend($idUsuario, $documento);
                     }
 
-                }
-                else { 
-                    //Alterando
-                    /*  $usuario->setIdUsuario($dados["id"]);
-                    $this->usuarioDAO->update($usuario);  */
                 }
 
                 $this->loadView("usuario/autoRegistro.php", [], "", "Usuário salvo com sucesso. Aguarde sua ativação.");
@@ -176,6 +163,12 @@ class UsuarioController extends Controller{
     protected function delete() {
         $usuario = $this->findUsuarioById();
         if($usuario) {
+            if($usuario->getTipoUsuario() == 'V') {
+                $this->vendedorDAO->deleteById($usuario->getIdUsuario());
+            }
+            else if($usuario->getTipoUsuario() == 'C') {
+                $this->clienteDAO->deleteById($usuario->getIdUsuario());
+            }
             $this->usuarioDAO->deleteById($usuario->getIdUsuario());
             $this->list("", "Usuário excluído com sucesso!");
         } else
@@ -205,11 +198,10 @@ class UsuarioController extends Controller{
         $this->clienteDAO->insertClient($cliente);
     }
 
-    private function saveVend($idUsuario, $documento, $pessoa) {
+    private function saveVend($idUsuario, $documento) {
         $vendedor = new Vendedor();
         $vendedor->setIdUsuario($idUsuario);
         $vendedor->setDocumento($documento);
-        $vendedor->setTipoPessoa($pessoa);
         
         $this->vendedorDAO->insertVend($vendedor);
     }

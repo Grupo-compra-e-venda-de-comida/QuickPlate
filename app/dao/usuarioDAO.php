@@ -96,8 +96,9 @@ class UsuarioDAO {
     public function update(Usuario $usuario) {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE usuario SET nome = :nome, email_usuario = :email_usuario, ativo = :ativo" 
-        . " WHERE id_usuario = :id_usuario";
+        $sql = "UPDATE usuario SET nome = :nome, email_usuario = :email_usuario," .  
+               " ativo = :ativo" .  
+               " WHERE id_usuario = :id_usuario";
         
         $stm = $conn->prepare($sql);
         $stm->bindValue("nome", $usuario->getNome());

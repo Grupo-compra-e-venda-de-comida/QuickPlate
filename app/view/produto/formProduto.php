@@ -25,23 +25,29 @@ include_once(__DIR__ . "/../include/header.php")
     <div class="form-floating mb-2 ">
       <input type="text" class="form-control" id="nomeProd" name="nomeProd" 
       value="<?php echo (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>"/>
-      <label for="nomeProduto">Titulo do Produto</label>
+      <label for="nomeProduto">Titulo:</label>
+    </div>
+
+    <div class="form-floating mb-2 ">
+      <input type="number" class="form-control" id="precoProd" name="precoProd" 
+      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
+      <label for="nomeProduto">Preço:</label>
     </div>
 
     <div class="form-floating">
       <input type="text" class="form-control" id="detalhes" name="detalhes" 
-      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getProduto() : ''); ?>"/>
-      <label for="detalhes">Descrição do Produro</label>
+      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getDescrição() : ''); ?>"/>
+      <label for="detalhes">Descrição do Produro:</label>
     </div>
 
-    <label class="selectlabel mb-2">Categoria</label>
+    <label class="selectlabel mb-2">Categoria:</label>
     <select class="select" id="catProd" name="catProd">
       <option value="S">Salgado</option>
       <option value="D">Doce</option>
       <option value="B">Bebida</option>
     </select>
 
-    <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo (isset($dados['produto']) ? $dados['produto']->getIdVendedor() : ''); ?>" />
+    <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo $dados['idVendedor']; ?>" />
 
     <button class="w-100 btn btn-lg btn-outline-success mb-2 mt-2" type="submit">Registrar</button>
     <a href="../controller/homeController.php?action=homeVendedor" class="btn btn-primary mb-4">Voltar</a>

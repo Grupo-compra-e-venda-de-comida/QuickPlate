@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "/../include/header.php");
+include_once(__DIR__ . "/../include/header.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="../css/estiloLog.css">
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+
 
     <!-- Linha do form -->
     <div class="row" style="margin-top: 20px;">
@@ -25,26 +25,25 @@
                 <br>
 
                 <!-- Formulário de login -->
-                    <form id="frmLogin" name="formLogin" >
+                <form id="frmLogin" name="formLogin">
                     <div class="form-group">
                         <label for="txtEmail">Email:</label>
-                        <input type="text"class="form-control" name="email" id="txtEmail"
-                            maxlength="50" />        
+                        <input type="text" class="form-control" name="email" id="txtEmail" maxlength="50" />
                     </div>
 
                     <div class="form-group">
                         <label for="txtSenha">Senha:</label>
-                        <input type="password" class="form-control" name="senha" id="txtSenha"
-                            maxlength="25" />        
+                        <input type="password" class="form-control" name="senha" id="txtSenha" maxlength="25" />
                     </div>
                     <div>
                         <button type="button" class="btn btn-success" onclick="logar();">Logar</button>
                         <a href="../controller/usuarioController.php?action=autoReg" class="link">Cadastre-se aqui!</a>
                     </div>
                 </form>
-
+                <br><br>
+                <?php require_once(__DIR__ . "/../include/msg.php"); ?>
             </div>
-            
+
         </div>
     </div>
     <div class="col-12">
@@ -54,6 +53,6 @@
     </div>
 </div>
 
-<?php  
-    include_once(__DIR__ . "/../include/footer.php");
+<?php
+include_once(__DIR__ . "/../include/footer.php");
 ?>

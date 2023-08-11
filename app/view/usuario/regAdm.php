@@ -67,7 +67,7 @@ require_once(__DIR__ . "/../include/header.php");
             <option value="A">Ativo</option>
       </select>
 
-      <br><br><button class="w-100 btn btn-lg btn-outline-success" type="submit">Registrar</button>
+      <br><br><button class="w-100 btn btn-lg btn-outline-success" type="submit">Alterar</button>
 
     </form>   
 

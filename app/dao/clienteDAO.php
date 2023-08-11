@@ -17,4 +17,15 @@ class ClienteDAO {
         $stm->execute();
     }
 
+    //Método para excluir um Usuario pelo seu ID
+    public function deleteById(int $id) {
+        $conn = Connection::getConn();
+
+        $sql = "DELETE FROM cliente WHERE id_usuario = :id_usuario";
+        
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id_usuario", $id);
+        $stm->execute();
+    }
+
 }
