@@ -23,6 +23,24 @@ require_once("../util/config.php");
 
   <form method="POST" action="<?= BASEURL ?>/controller/usuarioController.php?action=save">
 
+  <div>
+      <label class="selectlabel mb-1">Tipo de Usuário</label>
+      <select class="select" id="tipo" name="tipo" onchange="mostrar()">
+        <option value="C">Cliente</option>
+        <option value="V">Vendedor</option>
+      </select>
+    </div>
+
+    <div id="divTipoVend" class="form-group" style="display: none;">
+      <label class="selectlabel mb-1">Tipo de Vendedor</label>
+      <select class="select" id="tipoPessoa" name="tipoPessoa">
+        <option value="F">Física</option>
+        <option value="J">Jurídica</option>
+      </select>
+    </div>
+
+</br>
+
     <div class="form-floating mb-2 ">
       <input type="nome" class="form-control" id="nome" name="nome" value="<?php echo (isset($dados['usuario']) ? $dados['usuario']->getNome() : ''); ?>" />
       <label for="nome">Nome</label>
@@ -46,22 +64,6 @@ require_once("../util/config.php");
     <div class="form-floating">
       <input type="password" class="form-control" id="confSenha" name="confSenha" />
       <label for="senha">Confirmar Senha</label>
-    </div>
-
-    <div>
-      <label class="selectlabel mb-1">Tipo de Usuário</label>
-      <select class="select" id="tipo" name="tipo" onchange="mostrar()">
-        <option value="C">Cliente</option>
-        <option value="V">Vendedor</option>
-      </select>
-    </div>
-
-    <div id="divTipoVend" class="form-group" style="display: none;">
-      <label class="selectlabel mb-1">Tipo de Vendedor</label>
-      <select class="select" id="tipo_pessoa" name="tipo_pessoa">
-        <option value="F">Física</option>
-        <option value="J">Jurídica</option>
-      </select>
     </div>
 
     <div class="checkbox mb-3">

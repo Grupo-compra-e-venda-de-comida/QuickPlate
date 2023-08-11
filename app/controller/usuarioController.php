@@ -106,6 +106,7 @@ class UsuarioController extends Controller{
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
         $confSenha = isset($_POST['confSenha']) ? trim($_POST['confSenha']) : '';
         $tipo = isset($_POST['tipo']) ? trim($_POST['tipo']) : NULL;
+        $tipoPessoa = isset($_POST['tipoPessoa']) ? trim($_POST['tipoPessoa']) : NULL;
 
         //Cria objeto Usuario
         $usuario = new Usuario();
@@ -114,10 +115,8 @@ class UsuarioController extends Controller{
         $usuario->setSenha($senha);
         $usuario->setTipo($tipo);
 
-        //TODO - Temporario
         $ativo = "I";
         $usuario->setAtivo($ativo);
-
 
         //Validar os dados
         $erros = $this->usuarioService->validarDados($usuario, $confSenha, $documento);
@@ -135,7 +134,7 @@ class UsuarioController extends Controller{
                         $this->saveClient($idUsuario, $documento);
                     }
                     else if ($usuario->getTipo() == 'V'){
-                        $this->saveVend($idUsuario, $documento);
+                        $this->saveVend($idUsuario, $documento, $tipoPessoa);
                     }
 
                 }
@@ -198,10 +197,11 @@ class UsuarioController extends Controller{
         $this->clienteDAO->insertClient($cliente);
     }
 
-    private function saveVend($idUsuario, $documento) {
+    private function saveVend($idUsuario, $documento, $tipoPessoa) {
         $vendedor = new Vendedor();
         $vendedor->setIdUsuario($idUsuario);
         $vendedor->setDocumento($documento);
+        $vendedor->setTipoPessoa($tipoPessoa);
         
         $this->vendedorDAO->insertVend($vendedor);
     }
