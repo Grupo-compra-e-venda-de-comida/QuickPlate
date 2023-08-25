@@ -14,14 +14,14 @@ require_once(__DIR__ . "/../include/header.php");
 
     <div class="row" style="margin-top: 10px;">
         <div class="col-12">
-            <table id="tabUsuarios" class='table table-striped table-bordered'>
+            <table id="tabProdDisponivel" class='table table-striped table-bordered'>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nome</th>
                         <th>Preço</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,13 +30,12 @@ require_once(__DIR__ . "/../include/header.php");
                     foreach ($dados["listProd"] as $prod) :
                     ?>
                         <tr>
-                            <td><?= $prod->getIdProduto(); ?></td>
                             <td><?= $prod->getNomeProduto(); ?></td>
                             <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><?= $prod->getCategoriaDesc(); ?></td>
                             <td><?= $prod->getDetalhes(); ?></td>
-                            <td><a class="btn btn-primary" href="../controller/pedidoController.php?action=addPed&id=<?= $prod->getIdProduto() ?>">
-                                    Adicionar</a>
+                            <td><button class="btn btn-primary" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);">
+                                    Adicionar</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -46,7 +45,30 @@ require_once(__DIR__ . "/../include/header.php");
         </div>
     </div>
 
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-12">
+            <table id="tabProdCarrinho" class='table table-striped table-bordered'>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Categorias</th>
+                        <th>Detalhes</th>
+                        <th>Quantidade</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
+
+<script src="<?php echo BASEURL . "/js/pedido.js" ?>"></script>
 
 <?php
 require_once(__DIR__ . "/../include/footer.php");

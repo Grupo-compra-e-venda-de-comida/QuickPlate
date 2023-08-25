@@ -54,7 +54,7 @@ class PedidoController extends Controller {
     public function addPed() {
         $produto = $this->findProdutoById();
         if ($produto) {
-            $itens = array_push($produto->getIdProduto());
+            echo json_encode($produto);
         } else {
             echo "Falha ao adicionar o Produto";
         }

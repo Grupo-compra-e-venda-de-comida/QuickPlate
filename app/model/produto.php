@@ -14,7 +14,11 @@ class Produto implements JsonSerializable
 
     public function jsonSerialize(): array {
         return ['id' => $this->idProduto,
-                'nomeProduto' => $this->nomeProduto];
+                'nomeProduto' => $this->nomeProduto,
+                'precoProduto' => $this->precoProduto,
+                'categoriaProduto' => $this->categoriaProduto,
+                'detalhes' => $this->detalhes,
+                'idVendedor' => $this->idVendedor];
     }
 
     /**

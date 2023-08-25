@@ -28,7 +28,7 @@ include_once(__DIR__ . "/../include/header.php")
       <label for="nomeProduto">Titulo:</label>
     </div>
 
-    <div class="form-floating mb-2 ">
+    <div class="form mb-2 ">
       <input type="number" class="form-control" id="precoProd" name="precoProd" 
       value="<?php echo (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
       <label for="nomeProduto">Preço:</label>

@@ -1,5 +1,7 @@
 <?php
 
+require_once("../model/produto.php");
+
 class ProdutoDAO
 {
 
