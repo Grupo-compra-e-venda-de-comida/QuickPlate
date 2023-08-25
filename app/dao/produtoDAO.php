@@ -33,6 +33,19 @@ class ProdutoDAO
         return $this->mapProdutos($result);
     }
 
+    public function listProdByIdVendedor(int $idVendedor)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM produto WHERE id_vendedor = :id ORDER BY produto.id_produto";
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id", $idVendedor);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapProdutos($result);
+    }
+
     private function mapProdutos($result)
     {
         $produtos = array();
@@ -70,27 +83,6 @@ class ProdutoDAO
 
         die("produtoDAO.findById()" .
             " - Erro: mais de um produto encontrado.");
-    }
-
-    public function findProdutoByIdUsuario($idProduto)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "SELECT * FROM produto WHERE id_produto = :id";
-
-        $stm = $conn->prepare($sql);
-        $stm->bindValue("id", $idProduto);
-        $stm->execute();
-
-        $result = $stm->fetchAll();
-        $produtos = $this->mapProdutos($result);
-
-        if (count($produtos) == 1)
-            return $produtos[0];
-        else if (count($produtos) == 0)
-            return null;
-        else
-            die("Mais de um produto encontrado para o id " . $idProduto);
     }
 
     public function updateProd(Produto $produto)

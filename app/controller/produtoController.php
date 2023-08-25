@@ -24,7 +24,7 @@ class ProdutoController extends Controller
         }
 
         //Verificar o tipo de acesso - apenas VENDEDOR
-        $tipoUsuario = $this->getTipoUsuarioLogado();
+       $tipoUsuario = $this->getTipoUsuarioLogado();
         if ($tipoUsuario != TipoUsuario::VENDEDOR) {
             echo "O usuário deve ser um vendedor!";
             exit;
@@ -66,6 +66,8 @@ class ProdutoController extends Controller
         $detalhes = isset($_POST['detalhes']) ? trim($_POST['detalhes']) : NULL;
         $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
 
+        $dados['idVendedor'] = $idVendedor;
+
         //Cria objeto Produto
         $produto = new Produto();
         $produto->setNomeProduto($nomeProd);
@@ -86,7 +88,7 @@ class ProdutoController extends Controller
                     $this->produtoDAO->insertProd($produto);
                 }
 
-                $this->loadView("produto/formProduto.php", [], "", "Produto salvo com sucesso.");
+                $this->loadView("produto/formProduto.php", $dados, "", "Produto salvo com sucesso.");
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar o usuário na base de dados." . $e];
@@ -95,19 +97,19 @@ class ProdutoController extends Controller
 
         //Carregar os valores recebidos por POST de volta para o formulário
         $dados["produto"] = $produto;
-        $dados["nomeProd"] = $nomeProd;
-        $dados["precoProd"] = $precoProd;
-        $dados["detalhes"] = $detalhes;
+        //$dados["nomeProd"] = $nomeProd;
+        //$dados["precoProd"] = $precoProd;
+        //$dados["detalhes"] = $detalhes;
 
         $msgsErro = implode("<br>", $erros);
         $this->loadView("produto/formProduto.php", $dados, $msgsErro);
     }
 
-    protected function listProd(string $msgErro = "", string $msgSucesso = "")
-    {
+    protected function listProd(string $msgErro = "", string $msgSucesso = "") {
+
         $produtos = $this->produtoDAO->listProd();
         //print_r($usuarios);
-        $dados["listaProd"] = $produtos;
+        $dados["listProd"] = $produtos;
 
         $this->loadView("produto/listProd.php", $dados,  $msgErro, $msgSucesso);
     }
@@ -165,6 +167,7 @@ class ProdutoController extends Controller
         if ($produto) {
             $dados["id"] = $produto->getIdProduto();
             $dados["produto"] = $produto;
+            $dados['idVendedor'] = $produto->getIdVendedor();
 
             $this->loadView("produto/editProduto.php", $dados);
         } else

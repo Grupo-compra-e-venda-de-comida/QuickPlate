@@ -5,18 +5,17 @@
 require_once(__DIR__ . "/../include/header.php");
 require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 require_once(__DIR__ . "/../../controller/usuarioController.php");
-
+require_once(__DIR__ . "/../include/menu3.php");
 ?>
-
 <div class="container">
-    
     <div class="row">
         <div class="col-6">
             <?php require_once(__DIR__ . "/../include/msg.php"); ?>
         </div>
     </div>
 
-    <div class="row" style="margin-top: 10px;">
+    <div class="row" style="margin-top: 400px;">
+    <div> <p class="texto"><b>TABELA DO USUÁRIOS</b></p></div>
         <div class="col-12">
             <table id="tabUsuarios" class='table table-striped table-bordered'>
                 <thead>

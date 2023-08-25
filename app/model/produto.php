@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . "/enum/tipoProduto.php");
 
-class Produto
+class Produto implements JsonSerializable
 {
     private $idProduto;
     private $nomeProduto;
@@ -10,6 +10,12 @@ class Produto
     private $categoriaProduto;
     private $detalhes;
     private $idVendedor;
+
+
+    public function jsonSerialize(): array {
+        return ['id' => $this->idProduto,
+                'nomeProduto' => $this->nomeProduto];
+    }
 
     /**
      * Get the value of idProduto

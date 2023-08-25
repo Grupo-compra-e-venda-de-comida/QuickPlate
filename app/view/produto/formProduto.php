@@ -36,15 +36,15 @@ include_once(__DIR__ . "/../include/header.php")
 
     <div class="form-floating">
       <input type="text" class="form-control" id="detalhes" name="detalhes" 
-      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getDescrição() : ''); ?>"/>
+      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getDetalhes() : ''); ?>"/>
       <label for="detalhes">Descrição do Produro:</label>
     </div>
 
     <label class="selectlabel mb-2">Categoria:</label>
     <select class="select" id="catProd" name="catProd">
-      <option value="S">Salgado</option>
-      <option value="D">Doce</option>
-      <option value="B">Bebida</option>
+      <option value="S" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'S')  ? 'selected' : ''); ?> >Salgado</option>
+      <option value="D" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'D')  ? 'selected' : ''); ?>>Doce</option>
+      <option value="B" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'B')  ? 'selected' : ''); ?>>Bebida</option>
     </select>
 
     <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo $dados['idVendedor']; ?>" />

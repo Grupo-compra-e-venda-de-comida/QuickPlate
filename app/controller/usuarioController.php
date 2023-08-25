@@ -43,7 +43,7 @@ class UsuarioController extends Controller{
         $dados["lista"] = $usuarios;
 
         $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
-    }  
+    }
 
     protected function update() {
 

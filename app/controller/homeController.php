@@ -2,8 +2,11 @@
 #Classe controller para a Home do sistema
 require_once(__DIR__ . "/controller.php");
 require_once(__DIR__ . "/../model/enum/tipoUsuario.php");
+require_once(__DIR__ . "/../dao/vendedorDAO.php");
 
 class HomeController extends Controller {
+
+    private VendedorDAO $vendedorDAO;
 
     public function __construct() {
         if(! $this->usuarioLogado())
@@ -24,6 +27,8 @@ class HomeController extends Controller {
             $this->setActionDefault("home");
         }
 
+        $this->vendedorDAO = new VendedorDAO();
+
         $this->handleAction();
     }
 
@@ -41,13 +46,19 @@ class HomeController extends Controller {
             exit;
         } 
 
-        $this->loadView("home/indexCliente.php", []);
+        //Carrega a lista de vendedores
+        $vendedores = $this->vendedorDAO->list();
+        $dados['listaVendedores'] = $vendedores;
+
+        $this->loadView("home/indexCliente.php", $dados);
     }
     protected function homeVendedor() {
         if(! $this->usuarioPossuiTipo([TipoUsuario::VENDEDOR])) {
             echo "Acesso negado";
             exit;
         } 
+
+        
 
         $this->loadView("home/indexVendedor.php", []);
     }

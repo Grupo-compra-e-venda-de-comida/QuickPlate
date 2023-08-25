@@ -11,71 +11,54 @@ require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 
 $nome = "(Sessão expirada)";
 if (isset($_SESSION[SESSAO_USUARIO_NOME]))
-    $nome = $_SESSION[SESSAO_USUARIO_NOME];
+  $nome = $_SESSION[SESSAO_USUARIO_NOME];
 
 //Variável para validar o acesso
 //$acessoCont = new AcessoController();
 //$isAdministrador = $acessoCont->tipoUsuario([TipoUsuario::ADMINISTRADOR]);
 
 ?>
+<link rel="stylesheet" type="text/css" href="../view/include/menu.css">
 <!-- Navbar -->
-<div class="container-fluid">
-    <div class="row">
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-
-                <!-- Logo -->
-                <div class="col-4">
-                    <img src="../view/img/logo.png" class="logo m-4" alt="Logo">
-                </div>
-
-                <!-- Barra de Navegação com aba 'home', 'categorias' e 'vendedores' -->
-                <div class="col-4">
-                    <ul class="cont navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home<span class="sr-only">(página atual)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">
-                                Categorias
-                            </a>
-                        </li>
-
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Vendedores</a>
-                        </li>
-                    </ul>
-                    <br>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Procurar" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                    </form>
-                </div>
-
-                <!-- Botões de sacola e bate-papo, com botão de sair do usuario logado -->
-                <div class="col-4">
-                    <ul class="cont navbar-nav">
-                        <li class="nav-item active m-3">
-                            <button class="btn btn-success"><i class="bi bi-cart2"></i></button>
-                        </li>
-                        <li class="nav-item active m-3">
+<header data-bs-theme="light">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <div class="container-fluid">
+      <img src="../view/img/logo.png" class="logo m-1" alt="Logo" a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Categoria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#">Vendedores</a>
+          </li>
+        </ul>
+        <div class="col-4">
+          <ul class="cont navbar-nav">
+            <li class="nav-item active me-auto mb-2 mb-md-0">
+              <button class="btn btn-success"><i class="bi bi-cart2"></i></button>
+              <!--  <li class="nav-item active me-auto mb-2 mb-md-0">
                             <button class="btn btn-success"><i class="bi bi-chat-square-dots"></i></button>
-                        </li>
-
-                    </ul>
-                    <ul class="cont navbar-nav m-1">
-                        <li class="nav-item active">
-                            <a class="nav-link ml-3" href="loginController.php?action=logout">Sair</a>
-                        </li>
-                        <br>
-                        <li class="nav-item active ml-3 mt-2"><?php echo $nome; ?></li>
-                    </ul>
-
-                </div>
-            </div>
-
-        </nav>
-    </div>
-
-</div>
+                        </li> -->
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <ul class="cont navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="loginController.php?action=logout">Sair</a>
+                  </li>
+                  <br>
+                  <li class="nav-item active"><?php echo $nome; ?></li>
+                </ul>
+              </form>
+        </div>
+      </div>
+      <div id="linha-horizontal" style=" position: absolute; width: 100%; border: 1px solid #000; top: 100%; left:0%"></div>
+  </nav>
+</header>

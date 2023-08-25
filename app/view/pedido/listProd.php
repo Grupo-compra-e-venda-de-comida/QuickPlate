@@ -1,11 +1,7 @@
 <?php
-#Nome do arquivo: usuario/list.php
-#Objetivo: listar os usuarios para o administrador
+#Objetivo: listar os produtos para o cliente
 
 require_once(__DIR__ . "/../include/header.php");
-//require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
-require_once(__DIR__ . "/../../controller/produtoController.php");
-
 ?>
 
 <div class="container">
@@ -26,31 +22,27 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                         <th>Preço</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
-                        <th>Alterar</th>
-                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($dados['listProd'] as $prod) :
+                    //faz a listagem (filtrada pelo id do vendedor) dos produtos
+                    foreach ($dados["listProd"] as $prod) :
                     ?>
                         <tr>
-                            <td><?php echo $prod->getIdProduto(); ?></td>
+                            <td><?= $prod->getIdProduto(); ?></td>
                             <td><?= $prod->getNomeProduto(); ?></td>
                             <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><?= $prod->getCategoriaDesc(); ?></td>
                             <td><?= $prod->getDetalhes(); ?></td>
-                            <td><a class="btn btn-primary" href="../controller/produtoController.php?action=editProd&id=<?= $prod->getIdProduto() ?>">
-                                    Alterar</a>
-                            </td>
-                            <td><a class="btn btn-danger" onclick="return confirm('Confirma a exclusão do produto?');" href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $prod->getIdProduto() ?>">
-                                    Excluir</a>
+                            <td><a class="btn btn-primary" href="../controller/pedidoController.php?action=addPed&id=<?= $prod->getIdProduto() ?>">
+                                    Adicionar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <a href="../controller/homeController.php?action=homeVendedor" class="btn btn-success ">Voltar</a>
+            <a href="../controller/homeController.php?action=homeCliente" class="btn btn-success ">Voltar</a>
         </div>
     </div>
 
