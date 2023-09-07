@@ -84,7 +84,9 @@ class PedidoController extends Controller {
         $this->loadView("pedido/pagPedido.php", []);
     }
 
-    
+    public function finishPed() {
+
+    }
 
 }
 

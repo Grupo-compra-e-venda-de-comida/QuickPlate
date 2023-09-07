@@ -17,6 +17,7 @@ class Produto implements JsonSerializable
                 'nomeProduto' => $this->nomeProduto,
                 'precoProduto' => $this->precoProduto,
                 'categoriaProduto' => $this->categoriaProduto,
+                'categoriaDesc' => $this->getCategoriaDesc(),
                 'detalhes' => $this->detalhes,
                 'idVendedor' => $this->idVendedor];
     }

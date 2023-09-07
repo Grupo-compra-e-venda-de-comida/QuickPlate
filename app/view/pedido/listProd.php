@@ -18,9 +18,9 @@ require_once(__DIR__ . "/../include/header.php");
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Preço</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
+                        <th>Preço</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -31,9 +31,9 @@ require_once(__DIR__ . "/../include/header.php");
                     ?>
                         <tr>
                             <td><?= $prod->getNomeProduto(); ?></td>
-                            <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><?= $prod->getCategoriaDesc(); ?></td>
                             <td><?= $prod->getDetalhes(); ?></td>
+                            <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><button class="btn btn-primary" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);">
                                     Adicionar</button>
                             </td>
@@ -42,6 +42,12 @@ require_once(__DIR__ . "/../include/header.php");
                 </tbody>
             </table>
             <a href="../controller/homeController.php?action=homeCliente" class="btn btn-success ">Voltar</a>
+            <div>
+                <label> Total da Compra: </label><label id="total"></label>
+            </div>
+            <div> 
+                <a class="btn btn-success" href="<?= BASEURL ?>/controller/pedidoController.php?action=finishPed"> Finalizar </a> 
+            </div>
         </div>
     </div>
 
@@ -51,13 +57,14 @@ require_once(__DIR__ . "/../include/header.php");
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Preço</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
+                        <th>Preço</th>
                         <th>Quantidade</th>
                         <th>Total</th>
                         <th></th>
                     </tr>
+
                 </thead>
                 <tbody>
                     
