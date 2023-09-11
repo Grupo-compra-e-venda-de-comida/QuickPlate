@@ -105,14 +105,17 @@ function criarBotaoRemover(elemLinha) {
 
 function calcTotalPedido() {
 
-    //variavel apenas para valor da coluna 'tal'
-    var arrayTotais = document.querySelectorAll('#' + TOTAL_ID);
+    var precoTotal = 0;
+    //var nodeTotal = document.querySelectorAll(TOTAL_ID);
+    var arraysTotal = document.querySelectorAll("[id^='CAMPO_TOTAL_']");
 
-    var precoTotal = 1 + 2;
-    console.log(arrayTotais);
+    arraysTotal.forEach((p) => precoTotal = precoTotal + p.value);
+
+    //var precoTotal = 1 + 2;
+    console.log(arraysTotal);
 
     //var precoT = precoT + preco;
     var label = document.querySelector("#total");
 
-    //label.textContent = "Teste " . precoT;
+    label.textContent = precoTotal;
 } 

@@ -18,48 +18,31 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 //$isAdministrador = $acessoCont->tipoUsuario([TipoUsuario::ADMINISTRADOR]);
 
 ?>
-<link rel="stylesheet" type="text/css" href="../../css/estiloMenu2.css">
+
 <!-- Navbar -->
 <header data-bs-theme="light">
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
         <div class="container-fluid">
-            <img src="../view/img/logo.png" class="logo m-1" alt="Logo" a class="navbar-brand" href="#"></a>
+            <img src="../view/img/logo.png" class="logo m-1" alt="Logo" style="height:20%; width:20%" class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Página Inicial</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Produtos</a>
-                    </li>
-                    -->
                     <div class="text" style="position: absolute; top: 40%; bottom: 400px; left: 48%; font-size:25px; font-style:oblique; font-style: bold;">
                         Vendedor
                     </div>
-
                 </ul>
                 <div class="col-4">
                     <ul class="cont navbar-nav">
-                        <!--
-                        <li class="nav-item active me-auto mb-2 mb-md-0">
-                            <button class="btn btn-success"><i class="bi bi-cart2"></i></button>
-                              <li class="nav-item active me-auto mb-2 mb-md-0">
-                            <button class="btn btn-success"><i class="bi bi-chat-square-dots"></i></button>
-                        </li> 
-                        -->
-
                         <li class="nav-item active">
                             <a class="nav-link mr-2" href="loginController.php?action=logout">Sair</a>
                         </li>
-                        <br>
-                        <li class="nav-item active ml-2"><?php echo $nome; ?></li>
+                        <li class="nav-item active" style="position: absolute; top:25%; left:20%;"><?php echo $nome; ?></li>
                     </ul>
                     </form>
                 </div>
+                <div id="linha-horizontal" style=" position: absolute; width: 100%; border: 1px solid #000; top: 100%; left:0%"></div>
             </div>
     </nav>
 </header>

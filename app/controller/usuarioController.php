@@ -32,6 +32,16 @@ class UsuarioController extends Controller{
         $this->vendedorDAO = new VendedorDAO();
 
         //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
+        /*
+        if($this->usuarioLogado()){
+            $tipoUsuarioLogado = $_SESSION[SESSAO_USUARIO_TIPO];
+            if ($tipoUsuarioLogado == TipoUsuario::ADMINISTRADOR) {
+                $this->setActionDefault("list");
+            }
+        }else {
+            $this->setActionDefault("reg");
+        }
+        */
         $this->setActionDefault("list");
 
         $this->handleAction();
@@ -43,6 +53,10 @@ class UsuarioController extends Controller{
         $dados["lista"] = $usuarios;
 
         $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
+    }
+
+    protected function reg(){
+        $this->loadView("usuario/autoRegistro.php", []);
     }
 
     protected function update() {

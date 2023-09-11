@@ -5,7 +5,8 @@ function mostrar(){
 
     if(tipo = "V"){
         div.style.display='block';
-    } else {
+    } 
+    if(tipo = "C"){
         div.style.display='none';
     }
 }

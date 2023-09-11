@@ -15,7 +15,7 @@
 <header data-bs-theme="light">
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
         <div class="container-fluid">
-            <img src="../view/img/logo.png" class="logo m-1" alt="Logo" a class="navbar-brand" href="#"></a>
+            <img src="../view/img/logo.png" class="logo m-1" alt="Logo" class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

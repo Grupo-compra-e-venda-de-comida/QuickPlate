@@ -11,7 +11,7 @@ define('DB_PASSWORD', '');
 
 //Caminho para adionar imagens, scripts e chamar páginas no sistema
 //Deve ter o nome da pasta do projeto no servidor APACHE
-define('BASEURL', '/Codigos/QuickPlate5.1/app');
+define('BASEURL', '/codigos/QuickPlate6.0/app');
 
 //Nome do sistema
 define('APP_NAME', 'QuickPlate');

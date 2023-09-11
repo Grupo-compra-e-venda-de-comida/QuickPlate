@@ -42,15 +42,6 @@ class PedidoController extends Controller {
 
     }
 
-    public function incluirProdutoCarrinho() {
-        $produto = $this->findProdutoById();
-        if ($produto) {
-           echo json_encode($produto);
-        } else {
-            echo "Falha ao adicionar o produto no carrinho!";
-        }
-    }
-
     public function addPed() {
         $produto = $this->findProdutoById();
         if ($produto) {
