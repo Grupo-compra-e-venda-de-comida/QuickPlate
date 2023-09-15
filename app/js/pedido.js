@@ -1,6 +1,7 @@
-
 var QTD_ID = 'CAMPO_QTD_';
 var TOTAL_ID = 'CAMPO_TOTAL_';
+var TOTAL_PEDIDO = 0;
+var TOTAL_ANTERIOR = 0;
 
 function adicionarItem(idProduto) {
 
@@ -24,6 +25,7 @@ function adicionarItem(idProduto) {
 
                 var inputTotalProduto = document.querySelector('#' + TOTAL_ID + produto.id);
                 inputTotalProduto.value = inputQtdProduto.value * produto.precoProduto;
+                calcTotalPedido(produto.precoProduto);
             
             } else { //Senão, insere um novo produto
 
@@ -38,11 +40,11 @@ function adicionarItem(idProduto) {
                 criaColuna(linha, produto.categoriaDesc);
                 criaColuna(linha, produto.detalhes);
                 criaColuna(linha, produto.precoProduto);
-                criarColunaQtd(linha, produto.id);
+                criarColunaQtd(linha, produto.id, produto.precoProduto);
                 criarColunaTotal(linha, produto.id, produto.precoProduto);
-                criarBotaoRemover(linha);
+                criarBotaoRemover(linha, produto.id);
 
-                calcTotalPedido();
+                calcTotalPedido(produto.precoProduto);
             }
 
         } else { //Senão = exibe o erro
@@ -63,15 +65,37 @@ function criaColuna(elemLinha, texto) {
     col.innerHTML = texto;
 }
 
-function criarColunaQtd(elemLinha, idProduto) {
+function criarColunaQtd(elemLinha, idProduto, preco) {
+    TOTAL_ANTERIOR = preco;
     let input = document.createElement('input');
     input.setAttribute('type', 'number');
     input.setAttribute('class', 'form-control');
-    input.setAttribute('type', "number");
+    input.setAttribute('min', '1');
     input.setAttribute('id', QTD_ID+idProduto);
     input.style.width = "60px";
     input.value = 1;
-    
+
+    input.addEventListener("click", function(){
+        var quant = document.getElementById(QTD_ID+idProduto).value;
+        var total = document.getElementById(TOTAL_ID+idProduto);
+        var label = document.querySelector("#total");
+
+        /*
+        console.log(preco);
+        console.log(quant);
+        console.log(preco*quant);
+        */
+
+        //Adiciona ou Subtrai o valor Total baseado na Quantidade
+        total.value = preco*quant;
+
+        TOTAL_PEDIDO += parseFloat(total.value) - TOTAL_ANTERIOR;
+        TOTAL_ANTERIOR = parseFloat(total.value);
+
+        label.textContent = TOTAL_PEDIDO;
+
+    });
+
     var col = elemLinha.insertCell();
     col.appendChild(input);
 }
@@ -89,33 +113,31 @@ function criarColunaTotal(elemLinha, idProduto, preco) {
     col.appendChild(input);
 }
 
-function criarBotaoRemover(elemLinha) {
+function criarBotaoRemover(elemLinha, idProduto) {
     let btn = document.createElement('button');
     btn.setAttribute('type', 'button');
     btn.setAttribute('class', 'btn btn-danger');
     btn.innerHTML = 'Remover';
 
     btn.addEventListener("click", function() { 
-        elemLinha.remove(); 
+        var total = document.getElementById(TOTAL_ID+idProduto).value;
+
+        TOTAL_PEDIDO-=parseFloat(total);
+        
+        var label = document.querySelector("#total");
+        label.textContent = TOTAL_PEDIDO
+        
+        elemLinha.remove();
     });
     
     var col = elemLinha.insertCell();
     col.appendChild(btn);
 }
 
-function calcTotalPedido() {
+function calcTotalPedido(preco) {
+    TOTAL_PEDIDO+=parseFloat(preco);
 
-    var precoTotal = 0;
-    //var nodeTotal = document.querySelectorAll(TOTAL_ID);
-    var arraysTotal = document.querySelectorAll("[id^='CAMPO_TOTAL_']");
-
-    arraysTotal.forEach((p) => precoTotal = precoTotal + p.value);
-
-    //var precoTotal = 1 + 2;
-    console.log(arraysTotal);
-
-    //var precoT = precoT + preco;
     var label = document.querySelector("#total");
 
-    label.textContent = precoTotal;
-} 
+    label.textContent = TOTAL_PEDIDO;
+}
