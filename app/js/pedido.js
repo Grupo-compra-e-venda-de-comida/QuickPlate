@@ -1,7 +1,12 @@
+var NOME_ID = 'CAMPO_NOME_';
+var CATEGORIA_ID = 'CAMPO_CATEGORIA_';
+var DETALHES_ID = 'CAMPO_DETALHES_';
+var PRECO_ID = 'PRECO_TOTAL_';
 var QTD_ID = 'CAMPO_QTD_';
 var TOTAL_ID = 'CAMPO_TOTAL_';
+var HIDDEN_ID = 'CAMPO_ID_';
+
 var TOTAL_PEDIDO = 0;
-var TOTAL_ANTERIOR = 0;
 
 function adicionarItem(idProduto) {
 
@@ -25,7 +30,7 @@ function adicionarItem(idProduto) {
 
                 var inputTotalProduto = document.querySelector('#' + TOTAL_ID + produto.id);
                 inputTotalProduto.value = inputQtdProduto.value * produto.precoProduto;
-                calcTotalPedido(produto.precoProduto);
+                calcTotalPedido();
             
             } else { //Senão, insere um novo produto
 
@@ -36,15 +41,16 @@ function adicionarItem(idProduto) {
 
                 //Criar linha na tabela
                 var linha = tabelaBody.insertRow();
-                criaColuna(linha, produto.nomeProduto);
-                criaColuna(linha, produto.categoriaDesc);
-                criaColuna(linha, produto.detalhes);
-                criaColuna(linha, produto.precoProduto);
+                criarColunaNome(linha, produto.id, produto.nomeProduto);
+                criarColunaCat(linha, produto.id, produto.categoriaDesc);
+                criarColunaDet(linha, produto.id, produto.detalhes);
+                criarColunaPreco(linha, produto.id, produto.precoProduto);
                 criarColunaQtd(linha, produto.id, produto.precoProduto);
                 criarColunaTotal(linha, produto.id, produto.precoProduto);
                 criarBotaoRemover(linha, produto.id);
+                criarColunaId(linha, produto.id);
 
-                calcTotalPedido(produto.precoProduto);
+                calcTotalPedido();
             }
 
         } else { //Senão = exibe o erro
@@ -56,17 +62,62 @@ function adicionarItem(idProduto) {
 
     //Enviar a requisição
     xhttp.send();
-
 }
 
-//Funçao para criar as colunas
-function criaColuna(elemLinha, texto) {
+//Funções para criar as colunas
+function criarColunaNome(elemLinha, idProduto, nome) {
+    let input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('class', 'form-control');
+    input.setAttribute('readonly', "");
+    input.setAttribute('id', NOME_ID+idProduto);
+    input.style.width = "100px";
+    input.value = nome;
+    
     var col = elemLinha.insertCell();
-    col.innerHTML = texto;
+    col.appendChild(input);
+}
+
+function criarColunaCat(elemLinha, idProduto, texto) {
+    let input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('class', 'form-control');
+    input.setAttribute('readonly', "");
+    input.setAttribute('id', CATEGORIA_ID+idProduto);
+    input.style.width = "90px";
+    input.value = texto;
+    
+    var col = elemLinha.insertCell();
+    col.appendChild(input);
+}
+
+function criarColunaDet(elemLinha, idProduto, texto) {
+    let input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('class', 'form-control');
+    input.setAttribute('readonly', "");
+    input.setAttribute('id', DETALHES_ID+idProduto);
+    input.style.width = "200px";
+    input.value = texto;
+    
+    var col = elemLinha.insertCell();
+    col.appendChild(input);
+}
+
+function criarColunaPreco(elemLinha, idProduto, preco) {
+    let input = document.createElement('input');
+    input.setAttribute('type', 'number');
+    input.setAttribute('class', 'form-control');
+    input.setAttribute('readonly', "");
+    input.setAttribute('id', PRECO_ID+idProduto);
+    input.style.width = "90px";
+    input.value = preco;
+    
+    var col = elemLinha.insertCell();
+    col.appendChild(input);
 }
 
 function criarColunaQtd(elemLinha, idProduto, preco) {
-    TOTAL_ANTERIOR = preco;
     let input = document.createElement('input');
     input.setAttribute('type', 'number');
     input.setAttribute('class', 'form-control');
@@ -80,19 +131,18 @@ function criarColunaQtd(elemLinha, idProduto, preco) {
         var total = document.getElementById(TOTAL_ID+idProduto);
         var label = document.querySelector("#total");
 
-        /*
-        console.log(preco);
-        console.log(quant);
-        console.log(preco*quant);
-        */
-
         //Adiciona ou Subtrai o valor Total baseado na Quantidade
         total.value = preco*quant;
 
-        TOTAL_PEDIDO += parseFloat(total.value) - TOTAL_ANTERIOR;
-        TOTAL_ANTERIOR = parseFloat(total.value);
+        calcTotalPedido();
+
+        /*
+        var totais = document.querySelectorAll("[id^="+TOTAL_ID+"]");
+        var totalCompra = 0;
+        totais.forEach((t) => TOTAL_PEDIDO += parseFloat(t.value));
 
         label.textContent = TOTAL_PEDIDO;
+        */
 
     });
 
@@ -120,24 +170,71 @@ function criarBotaoRemover(elemLinha, idProduto) {
     btn.innerHTML = 'Remover';
 
     btn.addEventListener("click", function() { 
-        var total = document.getElementById(TOTAL_ID+idProduto).value;
-
-        TOTAL_PEDIDO-=parseFloat(total);
-        
-        var label = document.querySelector("#total");
-        label.textContent = TOTAL_PEDIDO
-        
         elemLinha.remove();
+        calcTotalPedido();
     });
     
     var col = elemLinha.insertCell();
     col.appendChild(btn);
 }
 
-function calcTotalPedido(preco) {
-    TOTAL_PEDIDO+=parseFloat(preco);
+function criarColunaId(elemLinha, idProduto) {
+    let input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('class', 'form-control');
+    input.setAttribute('id', HIDDEN_ID+idProduto);
+    input.style.width = "1px";
+    input.value = idProduto;
+    
+    var col = elemLinha.insertCell();
+    col.appendChild(input);
+}
+
+function calcTotalPedido() {
+    var totais = document.querySelectorAll("[id^="+TOTAL_ID+"]");
+    var totalCompra = 0;
+    totais.forEach((t) => totalCompra += parseFloat(t.value));
+
+    //TOTAL_PEDIDO+=parseFloat(preco);
 
     var label = document.querySelector("#total");
+    label.textContent = totalCompra;
 
-    label.textContent = TOTAL_PEDIDO;
+    //label.textContent = TOTAL_PEDIDO;
+}
+
+function finalizarPedido(idVendedor) {
+    //Criar a requisição
+    var url = "pedidoController.php?action=finishPed&idVendedor="+idVendedor;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+
+    let itens = [];
+
+    let ids = document.querySelectorAll("[id^='"+HIDDEN_ID+"']");
+    let precos = document.querySelectorAll("[id^='"+PRECO_ID+"']");
+    let qtds = document.querySelectorAll("[id^='"+QTD_ID+"']");
+    let totais = document.querySelectorAll("[id^='"+TOTAL_ID+"']");
+
+    for(let i=0; i<qtds.length; i++) {
+
+        const item = {idProduto: ids[i].value,
+                      valor: precos[i].value, //Valor unitário
+                      qtd: qtds[i].value, 
+                      total: totais[i].value}; //valor do item
+        itens.push(item);
+    }
+
+    const json = JSON.stringify(itens);
+
+    xhttp.onload = function() {
+        var retorno = xhttp.responseText;
+        console.log(retorno + " <- teste retorno");
+
+        //console.log('execução do onload');
+    };
+
+    //Enviar a requisição
+    xhttp.send(json);
 }

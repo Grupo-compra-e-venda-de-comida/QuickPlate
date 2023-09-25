@@ -46,7 +46,7 @@ require_once(__DIR__ . "/../include/header.php");
                 <label> Total da Compra: </label><label id="total"></label>
             </div>
             <div> 
-                <a class="btn btn-success" href="<?= BASEURL ?>/controller/pedidoController.php?action=finishPed"> Finalizar </a> 
+                <a class="btn btn-warning" onclick="finalizarPedido(<?= $dados['idVendedor'] ?>);"> Finalizar </a> 
             </div>
         </div>
     </div>
@@ -62,6 +62,7 @@ require_once(__DIR__ . "/../include/header.php");
                         <th>Preço</th>
                         <th>Quantidade</th>
                         <th>Total</th>
+                        <th></th>
                         <th></th>
                     </tr>
 

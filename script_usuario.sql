@@ -67,6 +67,18 @@ CREATE TABLE pedido
 ALTER TABLE pedido ADD CONSTRAINT fk_vendedor_pedido FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);
 ALTER TABLE pedido ADD CONSTRAINT fk_cliente_pedido FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente);
 
+/* Itens do Pedido */
+CREATE TABLE pedido_item 
+(
+	  id_item INT NOT NULL AUTO_INCREMENT,
+    id_produto INT NOT NULL,
+    id_pedido INT NOT NULL,
+    quantidade INT NOT NULL,
+    CONSTRAINT pk_pedido_item PRIMARY KEY (id_item)
+)
+ALTER TABLE pedido_item ADD CONSTRAINT fk_produto_pedido_item FOREIGN KEY (id_produto) REFERENCES produto (id_produto);
+ALTER TABLE pedido_item ADD CONSTRAINT fk_pedido_pedido_item FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido);
+
 /* Review */
 CREATE TABLE review
 (
@@ -77,3 +89,4 @@ CREATE TABLE review
     CONSTRAINT pk_review PRIMARY KEY (id_review)
 );
 ALTER TABLE review ADD CONSTRAINT fk_pedido_review FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido);
+

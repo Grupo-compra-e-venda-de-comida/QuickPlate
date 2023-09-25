@@ -61,7 +61,7 @@ class UsuarioController extends Controller{
 
     protected function update() {
 
-        //Captura os dados do form -- funciona
+        //Captura os dados do form
         $dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
         $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;
         $email = isset($_POST['email']) ? trim($_POST['email']) : NULL;
@@ -75,8 +75,6 @@ class UsuarioController extends Controller{
         $usuario->setNome($nome);
         $usuario->setEmail($email);
         $usuario->setAtivo($ativo);
-
-        //var_dump($usuario);
         
         //Validar os dados
         $erros = $this->usuarioService->validarDadosAdm($usuario);

@@ -3,8 +3,10 @@ require_once(__DIR__ . "/controller.php");
 require_once(__DIR__ . "/../dao/vendedorDAO.php");
 require_once(__DIR__ . "/../dao/produtoDAO.php");
 require_once(__DIR__ . "/../dao/clienteDAO.php");
+require_once(__DIR__ . "/../dao/pedidoDAO.php");
 require_once(__DIR__ . "/../model/produto.php");
 require_once(__DIR__ . "/../model/vendedor.php");
+require_once(__DIR__ . "/../model/pedido.php");
 require_once(__DIR__ . "/../model/enum/tipoProduto.php");
 
 class PedidoController extends Controller {
@@ -12,13 +14,21 @@ class PedidoController extends Controller {
     private ProdutoDAO $produtoDAO;
     private ClienteDAO $clienteDAO;
     private VendedorDAO $vendedorDAO;
+    private PedidoDAO $pedidoDAO;
+
 
     public function __construct() {
-        //$itens = [];
 
         $this->produtoDAO = new ProdutoDAO();
         $this->clienteDAO = new ClienteDAO();
         $this->vendedorDAO = new VendedorDAO();
+        $this->pedidoDAO = new PedidoDAO();
+
+        //Verificar se o usuário está logado
+        if (!$this->usuarioLogado()) {
+            echo "Usuário não está logado!";
+            exit;
+        }
 
         //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
         //$this->setActionDefault("list");
@@ -33,10 +43,14 @@ class PedidoController extends Controller {
             echo "falha ao encontrar vendedor";
             exit;
         }
+
+        $dados["idVendedor"] = $vendedor->getIdVendedor();
         
         $produtos = $this->produtoDAO->listProdByIdVendedor($vendedor->getIdVendedor());
         $dados["listProd"] = $produtos;
         //print_r($produtos);
+
+        
 
         $this->loadView("pedido/listProd.php", $dados,  $msgErro, $msgSucesso);
 
@@ -76,8 +90,51 @@ class PedidoController extends Controller {
     }
 
     public function finishPed() {
+        $itensPedidoJson = file_get_contents("php://input");
+        $itensPedido = json_decode($itensPedidoJson, true); //Converte um JSON para um array
 
+        //Captura os dados do pedido
+        //$dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
+        $idVendedor = $_GET['idVendedor'];
+        $idCliente = $this->pedidoDAO->findClientId(); 
+        $status = 'processando pedido';
+        $descricao = 'não finalizada';
+        
+        //Cria objeto Pedido
+        $pedido = new Pedido;
+        $pedido->setIdVendedor($idVendedor);
+        $pedido->setIdCliente($idCliente);
+        $pedido->setStatus($status);
+        $pedido->setDescricao($descricao);
+
+        //Insere na tabela pedido
+        $idPedido = $this->pedidoDAO->insertPed($pedido);
+
+
+        //Captura os dados dos itens
+        foreach($itensPedido as $item => $campo){
+        $idProduto = $campo['idProduto'];
+        $valor = $campo['valor'];
+        $qtd = $campo['qtd'];
+        $total = $campo['total'];
+
+        //echo '- id= '. $idProduto . ' valor= '. $valor . ' quantidade= '. $qtd . ' total= '. $total;
+        }
+
+        //Cria objeto PedidoItem
+        $pedidoItem = new PedidoItem;
+        $pedidoItem->setIdPedido($idPedido);
+        $pedidoItem->setIdProduto($idProduto);
+        $pedidoItem->setValor($valor);
+        $pedidoItem->setQtd($qtd);
+        $pedidoItem->setTotal($total);
+
+        //TODO - ARRUMAR O BANCO DE DADOS!!!
+        //Insere na tabela pedido_item
+        $this->pedidoDAO->insertPedItem($pedidoItem);
     }
+
+    
 
 }
 
