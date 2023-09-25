@@ -7,6 +7,7 @@ require_once(__DIR__ . "/../dao/pedidoDAO.php");
 require_once(__DIR__ . "/../model/produto.php");
 require_once(__DIR__ . "/../model/vendedor.php");
 require_once(__DIR__ . "/../model/pedido.php");
+require_once(__DIR__ . "/../model/pedidoItem.php");
 require_once(__DIR__ . "/../model/enum/tipoProduto.php");
 
 class PedidoController extends Controller {
@@ -118,9 +119,6 @@ class PedidoController extends Controller {
         $qtd = $campo['qtd'];
         $total = $campo['total'];
 
-        //echo '- id= '. $idProduto . ' valor= '. $valor . ' quantidade= '. $qtd . ' total= '. $total;
-        }
-
         //Cria objeto PedidoItem
         $pedidoItem = new PedidoItem;
         $pedidoItem->setIdPedido($idPedido);
@@ -129,9 +127,11 @@ class PedidoController extends Controller {
         $pedidoItem->setQtd($qtd);
         $pedidoItem->setTotal($total);
 
-        //TODO - ARRUMAR O BANCO DE DADOS!!!
         //Insere na tabela pedido_item
         $this->pedidoDAO->insertPedItem($pedidoItem);
+
+        }
+
     }
 
     

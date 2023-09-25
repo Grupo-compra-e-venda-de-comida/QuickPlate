@@ -71,11 +71,13 @@ ALTER TABLE pedido ADD CONSTRAINT fk_cliente_pedido FOREIGN KEY (id_cliente) REF
 CREATE TABLE pedido_item 
 (
 	  id_item INT NOT NULL AUTO_INCREMENT,
-    id_produto INT NOT NULL,
     id_pedido INT NOT NULL,
+    id_produto INT NOT NULL,
+    valor INT NOT NULL,
     quantidade INT NOT NULL,
+    total INT NOT NULL
     CONSTRAINT pk_pedido_item PRIMARY KEY (id_item)
-)
+);
 ALTER TABLE pedido_item ADD CONSTRAINT fk_produto_pedido_item FOREIGN KEY (id_produto) REFERENCES produto (id_produto);
 ALTER TABLE pedido_item ADD CONSTRAINT fk_pedido_pedido_item FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido);
 
