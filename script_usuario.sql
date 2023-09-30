@@ -60,7 +60,7 @@ CREATE TABLE pedido
     id_pedido INT NOT NULL AUTO_INCREMENT,
     id_vendedor INT NOT NULL,
     id_cliente INT NOT NULL,
-    status TEXT(25) NOT NULL,
+    status VARCHAR(1) NOT NULL,  /* P = PROCESSANDO PEDIDO C = PEDIDO CONCLUÌDO */
     descricao VARCHAR(200) NOT NULL,
     CONSTRAINT pk_pedido PRIMARY KEY (id_pedido)
 );
@@ -75,7 +75,7 @@ CREATE TABLE pedido_item
     id_produto INT NOT NULL,
     valor INT NOT NULL,
     quantidade INT NOT NULL,
-    total INT NOT NULL
+    total INT NOT NULL,
     CONSTRAINT pk_pedido_item PRIMARY KEY (id_item)
 );
 ALTER TABLE pedido_item ADD CONSTRAINT fk_produto_pedido_item FOREIGN KEY (id_produto) REFERENCES produto (id_produto);

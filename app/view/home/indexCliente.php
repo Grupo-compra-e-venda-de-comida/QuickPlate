@@ -1,5 +1,5 @@
-<?php 
-    require_once(__DIR__ . "/../include/header.php");
+<?php
+require_once(__DIR__ . "/../include/header.php");
 ?>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,9 +11,9 @@
 
   <!-- Navbar -->
   <div class="row">
-      <?php 
-          require_once(__DIR__ . "/../include/menu.php"); 
-      ?>
+    <?php
+    require_once(__DIR__ . "/../include/menu.php");
+    ?>
   </div>
 
   <!-- Texto -->
@@ -28,7 +28,7 @@
       </p>
     </div>
   </div>
-  
+
   <!-- Carrossel -->
   <div class="container d-flex justify-content-center align-items-center" style="position: absolute; top: 500px; bottom: 400px; left: 1px; right: 1px; font-size:25px">
     <div id="carouselExample" class="carousel slide" style="left: 70%">
@@ -65,19 +65,29 @@
     <div style="margin: auto; text-align: center;" class="m-2">
       <h2>VENDEDORES</h2>
     </div>
-    
-    <div style="margin:auto; text-align: center;">
-    <?php foreach ($dados['listaVendedores'] as $vend) : ?>
-      
-      <a class="btn btn-outline-success col-3 ml-3 mt-2" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>"> <?= $vend->getNome(); ?></a>
 
-    <?php endforeach; ?>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <?php foreach ($dados['listaVendedores'] as $vend) : ?>
+        <div class="col">
+          <div class="card h-100 w-100">
+            <div class="card-body">
+              <h4 class="card-title"><?= $vend->getNome() ?></h4>
+              <p class="card-text">*avaliação</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-body-secondary-center"><a class="btn btn-outline-success col-4 ml-3 mt-2" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>">Iniciar Pedido</a></small>              
+              <!-- <small class="text-body-secondary-center"><a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=reviewVendedor&idVendedor=<?= $vend->getIdVendedor(); ?>">Avaliar Vendedor</a></small> -->
+              <small class="text-body-secondary-center"><a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview">Avaliar Vendedor</a></small>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
     </div>
   </div>
 
   <!--Footer-->
-  <?php  
-    require_once(__DIR__ . "/../include/footer.php");
+  <?php
+  require_once(__DIR__ . "/../include/footer.php");
   ?>
 
 </div>
