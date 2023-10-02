@@ -31,7 +31,7 @@ include_once(__DIR__ . "/../include/header.php")
         </div>
 
         <button class="w-100 btn btn-lg btn-outline-success mb-2 mt-2" type="submit">Registrar</button>
-        <a href="../controller/homeController.php?action=homeCliente" class="btn btn-primary mb-4">Voltar</a>
+        <a href="../controller/homeController.php?action=homeCliente" class="btn btn-success mr-2 mb-4">Voltar</a>
 
         <?php
         include(__DIR__ . "/../include/msg.php");

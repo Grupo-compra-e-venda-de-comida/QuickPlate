@@ -67,4 +67,27 @@ class PedidoDAO {
         return $pedidos;
     }
 
+    /*public function listPed(){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM pedido ORDER BY pedido.id_pedido";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapPedidos($result);
+    }*/
+
+    public function joinPedidoItem(){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT P.id_pedido, P.id_vendedor, P.id_cliente, P.status, P.descricao, I.id_pedido, I.id_produto, I.quantidade, I.total as total FROM pedido P INNER JOIN pedido_item I ON P.id_pedido = I.id_pedido";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+
+    }
+
 }

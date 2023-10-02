@@ -24,6 +24,13 @@ require_once(__DIR__ . "/../include/header.php");
         <!-- PEDIDOS -->
         <div class="col-md-8">
             <h1>PEDIDOS PENDENTES</h1>
+
+            <?php 
+                include_once(__DIR__ . "/../../dao/pedidoDAO.php");
+                $pedidoController = new PedidoController();
+                $data = $pedidoController->joinTables();
+            ?>
+            
             <div class="row">
                 <!--  faz a listagem dos pedidos -->
                 <?php foreach ($dados["listPed"] as $ped) : ?>

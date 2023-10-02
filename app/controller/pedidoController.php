@@ -148,6 +148,11 @@ class PedidoController extends Controller {
         $this->loadView("pedido/listPed.php", $dados,  $msgErro, $msgSucesso);
     }
 
+    public function joinTables(){
+        $pedido = $this->pedidoDAO->joinPedidoItem();
+        $dados["listPed"] = $pedido;
+    }
+
 }
 
 $pedidoController = new PedidoController();
