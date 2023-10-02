@@ -38,7 +38,7 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
   <!-- Botão de Vendas -->
   <div id="botoes" class="container d-flex justify-content-left col-md-4" style="position: absolute;top: 55%; left: 20%; font-size:25px">
 
-    <a href="../controller/produtoController.php?action=listProd" class="btn btn-outline-success">Minhas Vendas</a>
+    <a href="../controller/pedidoController.php?action=listPed" class="btn btn-outline-success">Pedidos Pendentes</a>
 
   </div>
 

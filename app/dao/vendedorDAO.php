@@ -38,6 +38,22 @@ class VendedorDAO {
             die("Mais de um vendedor encontrado para o usuário " . $idUsuario);
     }
 
+    public function findVendId(){
+        $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+
+        $conn = Connection::getConn();
+
+        $sql = "SELECT id_vendedor FROM vendedor v" .
+            " WHERE v.id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idUsuario]);
+        $result = $stm->fetchAll();
+
+        $id = print_r($result[0]);
+
+        return $id;
+    }
+
     public function findVendedorById($idVendedor) {
         $conn = Connection::getConn();
 

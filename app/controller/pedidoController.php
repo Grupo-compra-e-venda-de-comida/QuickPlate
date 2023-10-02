@@ -97,16 +97,14 @@ class PedidoController extends Controller {
         //Captura os dados do pedido
         //$dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
         $idVendedor = $_GET['idVendedor'];
-        $idCliente = $this->pedidoDAO->findClientId(); 
+        $idCliente = $this->clienteDAO->findClientId(); 
         $status = 'processando pedido';
-        $descricao = 'não finalizada';
         
         //Cria objeto Pedido
         $pedido = new Pedido;
         $pedido->setIdVendedor($idVendedor);
         $pedido->setIdCliente($idCliente);
         $pedido->setStatus($status);
-        $pedido->setDescricao($descricao);
 
         //Insere na tabela pedido
         $idPedido = $this->pedidoDAO->insertPed($pedido);
@@ -129,12 +127,26 @@ class PedidoController extends Controller {
 
         //Insere na tabela pedido_item
         $this->pedidoDAO->insertPedItem($pedidoItem);
-
         }
-
     }
 
-    
+    protected function listPed(string $msgErro = "", string $msgSucesso = "") {
+
+        $idVendedor = $this->vendedorDAO->findVendId();
+        $vendedor = $this->vendedorDAO->findVendedorById($idVendedor);
+
+        if(! $vendedor) {
+            echo "falha ao encontrar vendedor";
+            exit;
+        }
+
+        $dados["idVendedor"] = $vendedor->getIdVendedor();
+        
+        $pedidos = $this->pedidoDAO->listPedByIdVendedor($vendedor->getIdVendedor());
+        $dados["listPed"] = $pedidos;
+
+        $this->loadView("pedido/listPed.php", $dados,  $msgErro, $msgSucesso);
+    }
 
 }
 

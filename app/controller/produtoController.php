@@ -35,9 +35,6 @@ class ProdutoController extends Controller
         $this->produtoDAO = new ProdutoDAO();
         $this->vendedorDAO = new VendedorDAO();
 
-        //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
-        $this->setActionDefault("formProd");
-
         $this->handleAction();
     }
 

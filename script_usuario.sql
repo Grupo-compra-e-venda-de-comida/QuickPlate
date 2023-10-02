@@ -61,7 +61,6 @@ CREATE TABLE pedido
     id_vendedor INT NOT NULL,
     id_cliente INT NOT NULL,
     status VARCHAR(1) NOT NULL,  /* P = PROCESSANDO PEDIDO C = PEDIDO CONCLUÌDO */
-    descricao VARCHAR(200) NOT NULL,
     CONSTRAINT pk_pedido PRIMARY KEY (id_pedido)
 );
 ALTER TABLE pedido ADD CONSTRAINT fk_vendedor_pedido FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);

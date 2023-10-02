@@ -28,4 +28,35 @@ class ClienteDAO {
         $stm->execute();
     }
 
+    public function findClientId(){
+        $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+
+        $conn = Connection::getConn();
+
+        $sql = "SELECT id_cliente FROM cliente c" .
+            " WHERE c.id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idUsuario]);
+        $result = $stm->fetchAll();
+
+        $id = print_r($result[0]);
+
+        return $id;
+    }
+
+    public function findClientName($idCliente){
+
+        $conn = Connection::getConn();
+
+        $sql = "SELECT nome FROM usuario u" .
+            " WHERE u.id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idCliente]);
+        $result = $stm->fetchAll();
+
+        $id = print_r($result[0]);
+
+        return $id;
+    }
+
 }

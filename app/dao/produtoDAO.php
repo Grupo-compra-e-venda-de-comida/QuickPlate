@@ -19,8 +19,6 @@ class ProdutoDAO
         $stm->bindValue("detalhes", $produto->getDetalhes());
         $stm->bindValue("idVendedor", $produto->getIdVendedor());
         $stm->execute();
-
-        //return $conn->lastInsertId();
     }
 
     public function listProd()

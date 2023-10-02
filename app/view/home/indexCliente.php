@@ -72,7 +72,7 @@ require_once(__DIR__ . "/../include/header.php");
           <div class="card h-100 w-100">
             <div class="card-body">
               <h4 class="card-title"><?= $vend->getNome() ?></h4>
-              <p class="card-text">*avaliação</p>
+              <p class="card-text">...</p>
             </div>
             <div class="card-footer">
               <small class="text-body-secondary-center"><a class="btn btn-outline-success col-4 ml-3 mt-2" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>">Iniciar Pedido</a></small>              

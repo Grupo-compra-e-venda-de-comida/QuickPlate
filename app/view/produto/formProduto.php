@@ -31,7 +31,7 @@ include_once(__DIR__ . "/../include/header.php")
     <div class="form mb-2 ">
       <input type="number" class="form-control" id="precoProd" name="precoProd" 
       value="<?php echo (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
-      <label for="nomeProduto">Preço:</label>
+      <label for="precoProd">Preço:</label>
     </div>
 
     <div class="form-floating">

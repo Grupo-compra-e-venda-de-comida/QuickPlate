@@ -5,6 +5,7 @@
 class TipoProduto {
 
     const PROCESSANDO_PEDIDO = "P";
+    const PREPARANDO_PEDIDO = "PP";
     const PEDIDO_CONCLUIDO = "C";
 
 }
