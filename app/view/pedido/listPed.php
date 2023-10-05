@@ -24,32 +24,33 @@ require_once(__DIR__ . "/../include/header.php");
         <!-- PEDIDOS -->
         <div class="col-md-8">
             <h1>PEDIDOS PENDENTES</h1>
-
-            <?php 
-                include_once(__DIR__ . "/../../dao/pedidoDAO.php");
-                $pedidoController = new PedidoController();
-                $data = $pedidoController->joinTables();
-            ?>
-            
             <div class="row">
                 <!--  faz a listagem dos pedidos -->
-                <?php foreach ($dados["listPed"] as $ped) : ?>
+                <?php 
+                include_once(__DIR__ . "/../../dao/pedidoDAO.php");
+
+                $pedidoDAO = new PedidoDAO();
+
+                foreach ($dados["listPed"] as $ped) : 
+                    $idPedido = $ped->getIdPedido();
+                    $data[] = $pedidoDAO->joinPedidoItem($idPedido);
+                ?>
                         <div class="card-header">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#name<?=$ped->getIdPedido()?>" role="tab" data-toggle="tab">Nome</a>
+                                    <a class="nav-link active" href="#name<?=$idPedido?>" role="tab" data-toggle="tab">Nome</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#itens<?=$ped->getIdPedido()?>" role="tab" data-toggle="tab">Itens</a>
+                                    <a class="nav-link" href="#itens<?=$idPedido?>" role="tab" data-toggle="tab">Itens</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#status<?=$ped->getIdPedido()?>" role="tab" data-toggle="tab">Status</a>
+                                    <a class="nav-link" href="#status<?=$idPedido?>" role="tab" data-toggle="tab">Status</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="name<?=$ped->getIdPedido()?>"> Nome </div>
-                                <div role="tabpanel" class="tab-pane" id="itens<?=$ped->getIdPedido()?>"> Itens </div>
-                                <div role="tabpanel" class="tab-pane" id="status<?=$ped->getIdPedido()?>"> Status </div>
+                                <div role="tabpanel" class="tab-pane active" id="name<?=$idPedido?>"> Nome </div>
+                                <div role="tabpanel" class="tab-pane" id="itens<?=$idPedido?>"> Itens </div>
+                                <div role="tabpanel" class="tab-pane" id="status<?=$idPedido?>"> <?  ?> </div>
                             </div>
                         </div>
                 <?php endforeach; ?>

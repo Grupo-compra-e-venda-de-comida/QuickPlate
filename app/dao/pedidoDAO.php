@@ -78,16 +78,20 @@ class PedidoDAO {
         return $this->mapPedidos($result);
     }*/
 
-    public function joinPedidoItem(){
+    public function joinPedidoItem($idPedido){
         $conn = Connection::getConn();
 
-        $sql = "SELECT P.id_pedido, P.id_vendedor, P.id_cliente, P.status, P.descricao, I.id_pedido, I.id_produto, I.quantidade, I.total as total FROM pedido P INNER JOIN pedido_item I ON P.id_pedido = I.id_pedido";
+        $sql = "SELECT P.id_pedido, P.id_vendedor, P.id_cliente, P.status, P.descricao, I.id_pedido, I.id_produto, I.quantidade, I.total as total 
+        FROM pedido P INNER JOIN pedido_item I ON P.id_pedido = I.id_pedido WHERE P.id_pedido = :id";
         $stm = $conn->prepare($sql);
+        $stm->bindValue("id", $idPedido);
         $stm->execute();
-        $result = $stm->fetchAll(PDO::FETCH_OBJ);
+        $result = $stm->fetchAll(PDO::FETCH_OBJ); <-----------
+/*echo "<pre>";
+print_r($result);
+echo "</pre>";*/
 
         return $result;
-
     }
 
 }

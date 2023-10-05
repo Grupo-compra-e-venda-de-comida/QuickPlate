@@ -25,12 +25,16 @@ require_once(__DIR__ . "/../include/header.php");
 
             <?php 
                 include_once(__DIR__ . "/../../dao/pedidoDAO.php");
-                $pedidoController = new PedidoController();
-                $data = $pedidoController->joinTables();
+
+                $pedidoDAO = new PedidoDAO();
+
+                foreach ($dados["listPed"] as $ped) : 
+                    $idPedido = $ped->getIdPedido();
+                    $data = $pedidoDAO->joinPedidoItem($idPedido);
             ?>
 
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <?php foreach ($dados['listaPedidos'] as $ped) : ?>
+                <?php foreach ($dados['listPed'] as $ped) : ?>
                     <div class="col">
                         <div class="card h-100 w-100">
                             <div class="card-body">
