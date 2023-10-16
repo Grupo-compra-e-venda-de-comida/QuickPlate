@@ -17,7 +17,6 @@ function adicionarItem(idProduto) {
 
     xhttp.onload = function() {
         var retorno = xhttp.responseText;
-        //console.log(retorno);
 
         if(retorno[0] == "{") { //Possui retorno JSON = produto encontrado
             //Converte o JSON em objeto JavaScript

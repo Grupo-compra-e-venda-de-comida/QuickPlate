@@ -64,6 +64,20 @@ class PedidoDAO
         return $conn->lastInsertId();
     }
 
+    //TODO - Trabalhando...
+    //Atualiza o status do pedido
+    public function updateStats($idPedido, $status) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE pedido SET status = :status" .
+        " WHERE id_pedido = :idPedido";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("status", $status);
+        $stm->bindValue("id_pedido", $idPedido);
+        $stm->execute();
+    }
+
     //Lista os pedidos de cada cliente
     public function listPedidosCliente($idUsuario)
     {
@@ -92,8 +106,12 @@ class PedidoDAO
             $pedido->setIdCliente($reg['id_cliente']);
             $pedido->setStatus($reg['status']);
 
-            if (isset($reg['nome_vend']))
+            if (isset($reg['nome_vend'])){
                 $pedido->setNomeVendedor($reg['nome_vend']);
+            }
+            else if (isset($reg['nome_cli'])){
+                $pedido->setNomeCliente($reg['nome_cli']);
+            }
 
             array_push($pedidos, $pedido);
         }
@@ -150,10 +168,10 @@ class PedidoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT p.*, u_cliente.nome AS nome_cliente FROM pedido p" .
+        $sql = "SELECT p.*, u_cli.nome AS nome_cli FROM pedido p" .
         " JOIN cliente c ON (c.id_cliente = p.id_cliente)" .
         " JOIN vendedor v ON (v.id_vendedor = p.id_vendedor)" .
-        " JOIN usuario u_cliente ON (u_cliente.id_usuario = v.id_usuario)" .
+        " JOIN usuario u_cli ON (u_cli.id_usuario = c.id_usuario)" .
         " WHERE v.id_usuario = ?" .
         " ORDER BY p.id_pedido DESC;";
         $stm = $conn->prepare($sql);
@@ -195,14 +213,4 @@ class PedidoDAO
         return $produto;
     }
 
-    /*public function listPed(){
-        $conn = Connection::getConn();
-
-        $sql = "SELECT * FROM pedido ORDER BY pedido.id_pedido";
-        $stm = $conn->prepare($sql);
-        $stm->execute();
-        $result = $stm->fetchAll();
-
-        return $this->mapPedidos($result);
-    }*/
 }

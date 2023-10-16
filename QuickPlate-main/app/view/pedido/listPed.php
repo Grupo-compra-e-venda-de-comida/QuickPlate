@@ -7,6 +7,8 @@ require_once(__DIR__ . "/../include/header.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 <link href="../css/sticky-footer.css" rel="stylesheet">
 
+<script src="../js/status.js"></script>
+
 <div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
 
     <!-- Navbar -->
@@ -26,40 +28,51 @@ require_once(__DIR__ . "/../include/header.php");
             <?php //print_r($dados['listPed']); ?>
 
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
-                    <?php foreach ($dados['listPed'] as $ped) : ?>
+                    <?php foreach ($dados['listPed'] as $ped) : 
+                        $id = $ped->getIdPedido() ?>
                         <div class="col">
                             <div class="card text-center h-100 w-100 mr-2">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#name<?= $ped->getIdPedido() ?>" role="tab" data-toggle="tab">Dados do Pedido</a>
+                                            <a class="nav-link active" href="#name<?= $id ?>" role="tab" data-toggle="tab">Dados do Pedido</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#itens<?= $ped->getIdPedido() ?>" role="tab" data-toggle="tab">Itens</a>
+                                            <a class="nav-link" href="#itens<?= $id ?>" role="tab" data-toggle="tab">Itens</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#status<?= $ped->getIdPedido() ?>" role="tab" data-toggle="tab">Status</a>
+                                            <a class="nav-link" href="#status<?= $id ?>" role="tab" data-toggle="tab">Status</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="name<?= $ped->getIdPedido() ?>">
+                                        <div role="tabpanel" class="tab-pane active" id="name<?= $id ?>">
                                             <h5 class="card-title">Dados do pedido: </h5>
-                                            <span>Vendedor: </span><span><?= $ped->getNomeVendedor() ?> </span><br>
+                                            <span>Cliente: </span><span><?= $ped->getNomeCliente() ?> </span><br>
                                             <span>Valor do Pedido: </span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane" id="status<?= $ped->getIdPedido() ?>">
-                                            <span>Status do Pedido: </span><span><?= $ped->getStatusDesc() ?></span><br>
-                                            <button>a</button> 
-                                            <button>b</button>
+                                        <div role="tabpanel" class="tab-pane" id="status<?= $id ?>">
+                                            <span>Status do Pedido: </span><span id="labelStatus<?= $id ?>"><?= $ped->getStatusDesc() ?></span><br>
                                             </br>
-                                            <button>c</button> 
-                                            <button>d</button>
+
+                                            <button class="btn btn-success" onclick="changeStatus(<?= $id ?>, 'PP')">
+                                            Preparando</button>
+
+                                            <button class="btn btn-success" onclick="changeStatus(<?= $id ?>, 'C')">
+                                            Concluido</button>
+
+                                            </br></br>
+
+                                            <button class="btn btn-success" onclick="changeStatus(<?= $id ?>, 'E')">
+                                            Entregue</button> 
+
+                                            <button class="btn btn-danger" onclick="changeStatus(<?= $id ?>, 'CC')">
+                                            Cancelar</button>
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane" id="itens<?= $ped->getIdPedido() ?>">
+                                        <div role="tabpanel" class="tab-pane" id="itens<?= $id ?>">
 
                                             <table id="tabUsuarios" class='table table-striped table-bordered'>
                                                 <thead>

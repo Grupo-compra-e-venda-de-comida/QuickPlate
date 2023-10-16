@@ -10,7 +10,8 @@ require_once(__DIR__ . "/../model/pedido.php");
 require_once(__DIR__ . "/../model/pedidoItem.php");
 require_once(__DIR__ . "/../model/enum/tipoProduto.php");
 
-class PedidoController extends Controller {
+class PedidoController extends Controller
+{
 
     private ProdutoDAO $produtoDAO;
     private ClienteDAO $clienteDAO;
@@ -18,7 +19,8 @@ class PedidoController extends Controller {
     private PedidoDAO $pedidoDAO;
 
 
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->produtoDAO = new ProdutoDAO();
         $this->clienteDAO = new ClienteDAO();
@@ -37,34 +39,26 @@ class PedidoController extends Controller {
         $this->handleAction();
     }
 
-    protected function listProdVend(string $msgErro = "", string $msgSucesso = "") {
-
-        $vendedor = $this->findVendedorById();
-        if(! $vendedor) {
-            echo "falha ao encontrar vendedor";
-            exit;
-        }
-
-        $dados["idVendedor"] = $vendedor->getIdVendedor();
-        
-        $produtos = $this->produtoDAO->listProdByIdVendedor($vendedor->getIdVendedor());
-        $dados["listProd"] = $produtos;
-
-        $this->loadView("pedido/listProd.php", $dados,  $msgErro, $msgSucesso);
-
+    public function openPage()
+    {
+        $idVendedor = $_GET['idVendedor'];
+        $this->loadView("pedido/pagPedido.php", []);
     }
 
-    public function addPed() {
+
+
+    public function addPed()
+    {
         $produto = $this->findProdutoById();
         if ($produto) {
             echo json_encode($produto);
         } else {
             echo "Falha ao adicionar o Produto";
         }
-
     }
 
-    private function findProdutoById() {
+    private function findProdutoById()
+    {
         $id = 0;
         if (isset($_GET['id']))
             $id = $_GET['id'];
@@ -73,7 +67,8 @@ class PedidoController extends Controller {
         return $produto;
     }
 
-    private function findVendedorById() {
+    private function findVendedorById()
+    {
         $id = 0;
         if (isset($_GET['idVendedor']))
             $id = $_GET['idVendedor'];
@@ -82,20 +77,16 @@ class PedidoController extends Controller {
         return $vend;
     }
 
-    public function openPage() {
-        $idVendedor = $_GET['idVendedor'];
-        $this->loadView("pedido/pagPedido.php", []);
-    }
-
-    public function finishPed() {
+    public function finishPed()
+    {
         $itensPedidoJson = file_get_contents("php://input");
         $itensPedido = json_decode($itensPedidoJson, true); //Converte um JSON para um array
 
         //Captura os dados do pedido
         $idVendedor = $_GET['idVendedor'];
-        $idCliente = $this->clienteDAO->findClientId(); 
+        $idCliente = $this->clienteDAO->findClientId();
         $status = 'P';
-        
+
         //Cria objeto Pedido
         $pedido = new Pedido;
         $pedido->setIdVendedor($idVendedor);
@@ -107,54 +98,82 @@ class PedidoController extends Controller {
 
 
         //Captura os dados dos itens
-        foreach($itensPedido as $item => $campo){
-        $idProduto = $campo['idProduto'];
-        $valor = $campo['valor'];
-        $qtd = $campo['qtd'];
-        $total = $campo['total'];
+        foreach ($itensPedido as $item => $campo) {
+            $idProduto = $campo['idProduto'];
+            $valor = $campo['valor'];
+            $qtd = $campo['qtd'];
+            $total = $campo['total'];
 
-        //Cria objeto PedidoItem
-        $pedidoItem = new PedidoItem;
-        $pedidoItem->setIdPedido($idPedido);
-        $pedidoItem->setIdProduto($idProduto);
-        $pedidoItem->setValor($valor);
-        $pedidoItem->setQtd($qtd);
-        $pedidoItem->setTotal($total);
+            //Cria objeto PedidoItem
+            $pedidoItem = new PedidoItem;
+            $pedidoItem->setIdPedido($idPedido);
+            $pedidoItem->setIdProduto($idProduto);
+            $pedidoItem->setValor($valor);
+            $pedidoItem->setQtd($qtd);
+            $pedidoItem->setTotal($total);
 
-        //Insere na tabela pedido_item
-        $this->pedidoDAO->insertPedItem($pedidoItem);
+            //Insere na tabela pedido_item
+            $this->pedidoDAO->insertPedItem($pedidoItem);
         }
     }
 
-    //Faz a listagem dos pedidos do cliente
-    protected function listPedVendedor() {
+    //Atualiza o status do pedido
+    public function updateStatus(){
+        $idPedido = $_GET["idPedido"];
+        $status = $_GET["status"];
+
+        $this->pedidoDAO->updateStats($idPedido, $status);
+    }
+
+    //Faz a listagem dos produtos do vendedor
+    protected function listProdVend(string $msgErro = "", string $msgSucesso = "")
+    {
+
+        $vendedor = $this->findVendedorById();
+        if (!$vendedor) {
+            echo "falha ao encontrar vendedor";
+            exit;
+        }
+
+        $dados["idVendedor"] = $vendedor->getIdVendedor();
+
+        $produtos = $this->produtoDAO->listProdByIdVendedor($vendedor->getIdVendedor());
+        $dados["listProd"] = $produtos;
+
+        $this->loadView("pedido/listProd.php", $dados,  $msgErro, $msgSucesso);
+    }
+
+
+    //Faz a listagem dos pedidos do vendedor
+    protected function listPedVendedor()
+    {
 
         //Carrega a lista de Pedidos do cliente (usuário logado)
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
         $pedidos = $this->pedidoDAO->listPedidosVend($idUsuario);
-        
+
         //Carregando os itens de cada pedido
-        foreach($pedidos as $ped) {
+        foreach ($pedidos as $ped) {
             $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
         }
 
         $dados["listPed"] = $pedidos;
 
         $this->loadView("pedido/listPed.php", $dados);
-
     }
 
-    public function listPedCliente() {
-        
+    public function listPedCliente()
+    {
+
         //Carrega a lista de Pedidos do cliente (usuário logado)
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
         $pedidos = $this->pedidoDAO->listPedidosCliente($idUsuario);
-        
+
         //Carregando os itens de cada pedido
-        foreach($pedidos as $ped) {
+        foreach ($pedidos as $ped) {
             $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
 
-            //TODO - Verificar se o pedido foi avaiado
+            //TODO - Verificar se o pedido foi avaliado
             $ped->setReview(null);
         }
 
@@ -162,7 +181,6 @@ class PedidoController extends Controller {
 
         $this->loadView("review/listPed.php", $dados);
     }
-
 }
 
 $pedidoController = new PedidoController();

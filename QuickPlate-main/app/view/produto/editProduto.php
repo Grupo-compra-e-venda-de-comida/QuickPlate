@@ -61,8 +61,7 @@ include_once(__DIR__ . "/../include/header.php")
 </main>
 </form>
 
-<?php //include(__DIR__ . "/../include/msg.php"); 
-?>
+<?php //include(__DIR__ . "/../include/msg.php"); ?>
 </div>
 
 </div>
