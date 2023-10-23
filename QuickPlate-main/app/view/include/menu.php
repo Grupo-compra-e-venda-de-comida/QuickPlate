@@ -19,17 +19,26 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <div class="text" style="position: absolute; top: 40%; bottom: 400px; left: 48%; font-size:25px; font-style:oblique; font-style: bold;">
-                        Cliente
-                    </div>
+          <li class="nav-item" style="margin-left: 500px;">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
         </ul>
+        <div class="row">
+    <div class="col-6" style="margin-top: 10px; margin-right: 100px">
+      <a class="btn btn-success" href="pedidoController.php?action=listPedCliente">Pedidos</a>
+    </div>
+  </div>
         <div class="col-4">
-        <ul class="cont navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link mr-2" href="loginController.php?action=logout">Sair</a>
-                        </li>
-                        <li class="nav-item active" style="position: absolute; top:25%; left:20%;"><?php echo $nome; ?></li>
-                    </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item active me-auto mb-2 mb-md-0">
+              <li class="nav-item active" style="margin-top: 8px;"><?php echo $nome; ?></li>
+              <form class="d-flex" role="search">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="loginController.php?action=logout">Sair</a>
+                  </li>
+                  
+                </ul>
               </form>
             </li>
           </ul>
