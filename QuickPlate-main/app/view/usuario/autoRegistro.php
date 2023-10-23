@@ -19,7 +19,7 @@ require_once("../util/config.php");
 
 <main class="form-signin">
 
-  <h1 class="h3">Registre-se aqui</h1>
+  <h1 class="h3" style="color:black">Registre-se aqui</h1>
 
   <form method="POST" action="<?= BASEURL ?>/controller/usuarioController.php?action=save">
 

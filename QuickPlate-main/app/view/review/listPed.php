@@ -7,13 +7,10 @@ require_once(__DIR__ . "/../include/header.php");
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 <link href="../css/sticky-footer.css" rel="stylesheet">
 
+<script src="../js/status.js"></script>
+
 <div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
     <div class="row">
-
-        <!-- Botão de Voltar -->
-        <div class="col-6" style="position: absolute; margin-left: 95%; margin-top: 0.5%">
-            <a class="btn btn-success" href="homeController.php?action=homeCliente">Voltar</a>
-        </div>
 
         <!-- Navbar -->
         <div class="row">
@@ -25,6 +22,20 @@ require_once(__DIR__ . "/../include/header.php");
             <div class="col-12">
                 <div style="margin: auto; text-align: center;" class="m-2">
                     <h2>PEDIDOS</h2>
+                </div>
+<button onclick="statusOptions()"> teste </button>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="statusOptions">Status</label>
+                    </div>
+                    <select class="custom-select" id="statusOptions" onchange="statusOptions()">
+                        <option selected>Todos</option>
+                        <option value="P">Processando</option>
+                        <option value="PP">Preparando</option>
+                        <option value="C">Concluido</option>
+                        <option value="E">Entregue</option>
+                        <option value="CC">Cancelado</option>
+                    </select>
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
@@ -48,7 +59,6 @@ require_once(__DIR__ . "/../include/header.php");
                                             <span>Vendedor: </span><span><?= $ped->getNomeVendedor() ?> </span><br>
                                             <span>Status do Pedido: </span><span><?= $ped->getStatusDesc() ?></span><br>
                                             <span>Valor do Pedido: </span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
-
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane" id="itens<?= $ped->getIdPedido() ?>">
@@ -89,7 +99,6 @@ require_once(__DIR__ . "/../include/header.php");
 
                                         <?php else : ?>
                                             pedido já avaliado
-
                                         <?php endif; ?>
 
                                     </small>
@@ -105,7 +114,10 @@ require_once(__DIR__ . "/../include/header.php");
 
 
 
-
+    <!-- Botão de Voltar -->
+    <div class="col-2" style="margin-left: 95%; margin-top: 0.5%">
+        <a class="btn btn-success" href="homeController.php?action=homeCliente">Voltar</a>
+    </div>
 
 
 

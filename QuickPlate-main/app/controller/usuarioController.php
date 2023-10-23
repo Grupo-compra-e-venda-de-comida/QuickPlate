@@ -70,6 +70,7 @@ class UsuarioController extends Controller{
         $this->list();
     }
 
+    //Carrega a página de edição de usuarios
     protected function edit() {
         $usuario = $this->findUsuarioById();
         if($usuario) {
@@ -100,7 +101,7 @@ class UsuarioController extends Controller{
         $usuario->setSenha($senha);
         $usuario->setTipo($tipo);
 
-        $ativo = "I";
+        $ativo = "A";
         $usuario->setAtivo($ativo);
 
         //Validar os dados
@@ -142,6 +143,7 @@ class UsuarioController extends Controller{
         $this->loadView("usuario/autoRegistro.php", $dados, $msgsErro);
     }
 
+    //Deleta o usuario
     protected function delete() {
         $usuario = $this->findUsuarioById();
         if($usuario) {
@@ -166,10 +168,12 @@ class UsuarioController extends Controller{
         return $usuario;
     }
 
+    //Carrega a página para regristro de novos usuários
     protected function autoReg() {
         $this->loadView("usuario/autoRegistro.php", []);
     }
 
+    //Salva o cliente
     private function saveClient($idUsuario, $documento){
         $cliente = new Cliente();
         $cliente->setIdUsuario($idUsuario);
@@ -178,6 +182,7 @@ class UsuarioController extends Controller{
         $this->clienteDAO->insertClient($cliente);
     }
 
+    //Salva o Vendedor
     private function saveVend($idUsuario, $documento, $tipoPessoa) {
         $vendedor = new Vendedor();
         $vendedor->setIdUsuario($idUsuario);

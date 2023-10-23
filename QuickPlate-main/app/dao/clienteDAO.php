@@ -1,6 +1,9 @@
 <?php
+//session_start();
+
 include_once(__DIR__ . "/../connection/connection.php");
 include_once(__DIR__ . "/../model/cliente.php");
+include_once(__DIR__ . "/../util/config.php");
 
 class ClienteDAO {
 
@@ -30,7 +33,9 @@ class ClienteDAO {
 
     //Método para encontrar o Cliente pelo seu ID
     public function findClientId(){
+
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+
 
         $conn = Connection::getConn();
 

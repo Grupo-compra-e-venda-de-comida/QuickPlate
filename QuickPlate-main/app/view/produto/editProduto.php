@@ -22,24 +22,24 @@ include_once(__DIR__ . "/../include/header.php")
 
     <form method="POST" action="<?= BASEURL ?>/controller/produtoController.php?action=updateProd">
 
-        <div class="form-floating mb-2 ">
-            <input type="hidden" class="form-control" id="id" name="id" value="<?php echo (isset($dados['produto']) ? $dados['produto']->getIdProduto() : ''); ?>" />
+        <div class="form mb-2 ">
+            <input type="hidden" class="form-control" id="id" name="id" value="<?= (isset($dados['produto']) ? $dados['produto']->getIdProduto() : ''); ?>" />
             <label for="nome">ID</label>
         </div>
 
-        <div class="form-floating mb-2 ">
-            <input type="text" class="form-control" id="nomeProd" name="nomeProd" value="<?php echo (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>" />
+        <div class="form mb-2 ">
+            <input type="text" class="form-control" placeholder="Titulo:" id="nomeProd" name="nomeProd" value="<?= (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>" />
             <label for="nomeProduto">Titulo do Produto</label>
         </div>
 
-        <div class="form-floating mb-2 ">
-            <input type="number" class="form-control" id="precoProd" name="precoProd" value="<?php echo (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>" />
+        <div class="form mb-2 ">
+            <input type="number" class="form-control" placeholder="Preço:" id="precoProd" name="precoProd" value="<?= (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>" />
             <label for="precoProd">Preço:</label>
         </div>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="detalhes" name="detalhes" value="<?php echo (isset($dados['produto']) ? $dados['produto']->getDetalhes() : ''); ?>" />
-            <label for="detalhes">Descrição do Produro</label>
+        <div class="form">
+            <input type="text" class="form-control" placeholder="Detalhes:" id="detalhes" name="detalhes" value="<?= (isset($dados['produto']) ? $dados['produto']->getDetalhes() : ''); ?>" />
+            <label for="detalhes">Descrição do Produto</label>
         </div>
 
         <label class="selectlabel mb-2">Categoria</label>
@@ -49,7 +49,7 @@ include_once(__DIR__ . "/../include/header.php")
             <option value="B">Bebida</option>
         </select>
 
-        <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo $dados['idVendedor']; ?>" />
+        <input type="hidden" id="idVendedor" name="idVendedor" value="<?= $dados['idVendedor']; ?>" />
 
         <button class="w-100 btn btn-lg btn-outline-success mt-2 mb-2" type="submit">Atualizar</button>
 

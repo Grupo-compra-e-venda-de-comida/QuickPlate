@@ -64,9 +64,8 @@ class PedidoDAO
         return $conn->lastInsertId();
     }
 
-    //TODO - Trabalhando...
     //Atualiza o status do pedido
-    public function updateStats($idPedido, $status) {
+    public function updateStats($status, $idPedido) {
         $conn = Connection::getConn();
 
         $sql = "UPDATE pedido SET status = :status" .
@@ -74,8 +73,9 @@ class PedidoDAO
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("status", $status);
-        $stm->bindValue("id_pedido", $idPedido);
+        $stm->bindValue("idPedido", $idPedido);
         $stm->execute();
+
     }
 
     //Lista os pedidos de cada cliente
@@ -91,6 +91,24 @@ class PedidoDAO
             " ORDER BY p.id_pedido DESC";
         $stm = $conn->prepare($sql);
         $stm->execute([$idUsuario]);
+        $result = $stm->fetchAll();
+
+        return $this->mapPedidos($result);
+    }
+
+    //Lista os pedidos (filtrados) de cada cliente
+    public function listPedidosClienteByOption($idUsuario, $option)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT p.*, u_vend.nome AS nome_vend FROM pedido p " .
+            " JOIN cliente c ON (c.id_cliente = p.id_cliente)" .
+            " JOIN vendedor v ON (v.id_vendedor = p.id_vendedor)" .
+            " JOIN usuario u_vend ON (u_vend.id_usuario = v.id_usuario)" .
+            " WHERE c.id_usuario = ? AND p.status = ?" .
+            " ORDER BY p.id_pedido DESC";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idUsuario, $option]);
         $result = $stm->fetchAll();
 
         return $this->mapPedidos($result);
@@ -165,6 +183,24 @@ class PedidoDAO
     //Lista os pedidos de cada vendedor
     //Não funcionando!
     public function listPedidosVend($idUsuario)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT p.*, u_cli.nome AS nome_cli FROM pedido p" .
+        " JOIN cliente c ON (c.id_cliente = p.id_cliente)" .
+        " JOIN vendedor v ON (v.id_vendedor = p.id_vendedor)" .
+        " JOIN usuario u_cli ON (u_cli.id_usuario = c.id_usuario)" .
+        " WHERE v.id_usuario = ?" .
+        " ORDER BY p.id_pedido DESC;";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idUsuario]);
+        $result = $stm->fetchAll();
+
+        return $this->mapPedidos($result);
+    }
+
+    //TODO - terminar
+    public function listPedidosVendByOption($idUsuario, )
     {
         $conn = Connection::getConn();
 

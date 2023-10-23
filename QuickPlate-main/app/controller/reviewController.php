@@ -83,6 +83,10 @@ class ReviewController extends Controller{
                     //Inserindo
                     $this->reviewDAO->insertReview($review);
                 }
+                $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+                $pedidos = $this->pedidoDAO->listPedidosVend($idUsuario);
+
+                $dados["listPed"] = $pedidos;
 
                 $this->loadView("review/listPed.php", $dados, "", "Avaliação salva com sucesso.");
                 exit;

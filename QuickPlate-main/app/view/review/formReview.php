@@ -18,7 +18,7 @@ include_once(__DIR__ . "/../include/header.php")
 
     <h1 class="h2">Avaliar Pedido</h1>
 
-    <form method="POST" action="<?= BASEURL ?>/controller/reviewController.php?action=createReview?action=listPedCliente">
+    <form method="POST" action="<?= BASEURL ?>/controller/reviewController.php?action=createReview">
 
         <div class="form-floating mb-2">
             <input type="hidden" class="form-control" id="idPedido" name="idPedido" readonly value="<?php echo($_GET['idPedido']) ?>" />

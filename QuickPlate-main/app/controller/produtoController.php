@@ -133,8 +133,9 @@ class ProdutoController extends Controller
 
                 //Atualizar
                 $this->produtoDAO->updateProd($produto);
+                $dados["listProd"] = $this->produtoDAO->listProdByIdVendedor($idVendedor);
 
-                $this->loadView("home/indexVendedor.php", [], "", "Produto salvo com sucesso.");
+                $this->loadView("home/indexVendedor.php", $dados);
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar o produto na base de dados." . $e];
@@ -179,7 +180,10 @@ class ProdutoController extends Controller
         $produto = $this->findProdutoById();
         if ($produto) {
             $this->produtoDAO->deleteProdById($produto->getIdProduto());
-            $this->listProd("", "Produto excluído com sucesso!");
+            $dados["listProd"] = $this->produtoDAO->listProdByIdVendedor($produto->getIdVendedor());
+
+            $this->loadView("home/indexVendedor.php", $dados);
+            
         } else
             $this->listProd("Produto não econtrado!");
     }

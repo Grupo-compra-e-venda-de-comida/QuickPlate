@@ -9,6 +9,7 @@ require_once(__DIR__ . "/../include/header.php");
 
 <div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
 
+
   <!-- Navbar -->
   <div class="row">
     <?php

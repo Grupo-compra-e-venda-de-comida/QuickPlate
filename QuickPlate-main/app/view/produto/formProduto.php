@@ -22,32 +22,32 @@ include_once(__DIR__ . "/../include/header.php")
 
   <form method="POST" action="<?= BASEURL ?>/controller/produtoController.php?action=createProd">
 
-    <div class="form-floating mb-2 ">
-      <input type="text" class="form-control" id="nomeProd" name="nomeProd" 
-      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>"/>
-      <label for="nomeProduto">Titulo:</label>
+    <div class="form mb-2 ">
+      <input type="text" class="form-control" placeholder="Titulo:" id="nomeProd" name="nomeProd" 
+      value="<?= (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>"/>
+      <label for="nomeProduto"></label>
     </div>
 
     <div class="form mb-2 ">
-      <input type="number" class="form-control" id="precoProd" name="precoProd" 
-      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
-      <label for="precoProd">Preço:</label>
+      <input type="number" class="form-control" placeholder="Preço:" id="precoProd" name="precoProd" 
+      value="<?= (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
+      <label for="precoProd"></label>
     </div>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="detalhes" name="detalhes" 
-      value="<?php echo (isset($dados['produto']) ? $dados['produto']->getDetalhes() : ''); ?>"/>
-      <label for="detalhes">Descrição do Produro:</label>
+    <div class="form">
+      <input type="text" class="form-control" placeholder="Detalhes:" id="detalhes" name="detalhes" 
+      value="<?= (isset($dados['produto']) ? $dados['produto']->getDetalhes() : ''); ?>"/>
+      <label for="detalhes"></label>
     </div>
 
     <label class="selectlabel mb-2">Categoria:</label>
     <select class="select" id="catProd" name="catProd">
-      <option value="S" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'S')  ? 'selected' : ''); ?> >Salgado</option>
-      <option value="D" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'D')  ? 'selected' : ''); ?>>Doce</option>
-      <option value="B" <?php echo ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'B')  ? 'selected' : ''); ?>>Bebida</option>
+      <option value="S" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'S')  ? 'selected' : ''); ?> >Salgado</option>
+      <option value="D" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'D')  ? 'selected' : ''); ?>>Doce</option>
+      <option value="B" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'B')  ? 'selected' : ''); ?>>Bebida</option>
     </select>
 
-    <input type="hidden" id="idVendedor" name="idVendedor" value="<?php echo $dados['idVendedor']; ?>" />
+    <input type="hidden" id="idVendedor" name="idVendedor" value="<?= $dados['idVendedor']; ?>" />
 
     <button class="w-100 btn btn-lg btn-outline-success mb-2 mt-2" type="submit">Registrar</button>
     <a href="../controller/homeController.php?action=homeVendedor" class="btn btn-primary mb-4">Voltar</a>

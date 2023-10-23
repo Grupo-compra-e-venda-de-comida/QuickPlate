@@ -79,6 +79,8 @@ class PedidoController extends Controller
 
     public function finishPed()
     {
+        //print_r ($_SESSION); die;
+
         $itensPedidoJson = file_get_contents("php://input");
         $itensPedido = json_decode($itensPedidoJson, true); //Converte um JSON para um array
 
@@ -119,10 +121,11 @@ class PedidoController extends Controller
 
     //Atualiza o status do pedido
     public function updateStatus(){
-        $idPedido = $_GET["idPedido"];
         $status = $_GET["status"];
+        $idPedido = $_GET["idPedido"];
+        
+        $this->pedidoDAO->updateStats($status, $idPedido);
 
-        $this->pedidoDAO->updateStats($idPedido, $status);
     }
 
     //Faz a listagem dos produtos do vendedor
@@ -181,6 +184,39 @@ class PedidoController extends Controller
 
         $this->loadView("review/listPed.php", $dados);
     }
+
+    public function statusFilter() {
+        //Carrega a lista de Pedidos do cliente (usuário logado)
+        $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+        $tipoUsuario = $_SESSION[SESSAO_USUARIO_TIPO];
+        $option = $_GET["option"];
+
+        if($tipoUsuario == "C"){
+            //$pedidos = $this->pedidoDAO->listPedidosClienteByOption($idUsuario, $option);
+            echo "cliente detectado no statusFilter";
+        } else if ($tipoUsuario == "V"){
+            $pedidos = $this->pedidoDAO->listPedidosVendByOption($idUsuario, $option);
+        }
+        
+
+        //Carregando os itens de cada pedido
+        foreach ($pedidos as $ped) {
+            $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
+
+            //TODO - Verificar se o pedido foi avaliado
+            $ped->setReview(null);
+        }
+
+        $dados["listPed"] = $pedidos;
+
+        if($tipoUsuario == "C"){
+            //$this->loadView("review/listPed.php", $dados);
+        } else if ($tipoUsuario == "V"){
+           // $this->loadView("pedido/listPed.php", $dados);
+        }
+
+    }
+
 }
 
 $pedidoController = new PedidoController();
