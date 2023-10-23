@@ -19,8 +19,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item" style="margin-left: 500px;">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+       <li class="nav-item" style="margin-left: 500px; margin-top: 10px">
+            <a class="btn btn-success" aria-current="page" href="#">Home</a>
           </li>
         </ul>
         <div class="row">
