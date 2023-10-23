@@ -9,7 +9,6 @@ require_once(__DIR__ . "/../include/header.php");
 
 <div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
 
-
   <!-- Navbar -->
   <div class="row">
     <?php
@@ -17,30 +16,13 @@ require_once(__DIR__ . "/../include/header.php");
     ?>
   </div>
 
-  <!-- Texto -->
-  <div class="row">
-    <div class="col-6">
-      <p>
-
-        Vendedores variados <br>
-        Com o produto que <b>você</b> precisa <br>
-        Faça seu pedido agora!
-
-      </p>
-    </div>
-
-  <div class="row">
-    <div class="col-6">
-      <a class="btn btn-success" href="pedidoController.php?action=listPedCliente">Pedidos</a>
-    </div>
-  </div>
 
   <!-- Linha Preta -->
   <div id="linha-horizontal2" style=" position: absolute; width: 100%; border: 1px solid #000; bottom: 24%; left:0px"></div>
 
   <!-- Botões de Vendedores -->
   <div>
-    <div class="text-lg-start bg-light text-muted" style="position: absolute; top:76%; width:100%; height:100%; left:1px">
+    <div class="text-lg-start bg-light text-muted" style="position: absolute; top:25%; width:100%; height:100%; left:1px">
 
       <div style="margin: auto; text-align: center;" class="m-2">
         <h2>VENDEDORES</h2>
@@ -63,7 +45,7 @@ require_once(__DIR__ . "/../include/header.php");
       </div>
     </div>
   </div>
-
+  <div id="linha-horizontal2" style=" position: fixed; width: 100%; border: 1px solid #000; bottom: 8%; left:0px"></div>
   <!--Footer-->
   <?php
   require_once(__DIR__ . "/../include/footer.php");
