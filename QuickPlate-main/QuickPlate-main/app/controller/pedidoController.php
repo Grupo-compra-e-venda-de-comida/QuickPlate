@@ -192,10 +192,10 @@ class PedidoController extends Controller
         $option = $_GET["option"];
 
         if($tipoUsuario == "C"){
-            //$pedidos = $this->pedidoDAO->listPedidosClienteByOption($idUsuario, $option);
-            echo "cliente detectado no statusFilter";
+            $pedidos = $this->pedidoDAO->listPedidosClienteByOption($idUsuario, $option);
         } else if ($tipoUsuario == "V"){
             $pedidos = $this->pedidoDAO->listPedidosVendByOption($idUsuario, $option);
+            echo "vendedor detectado no statusFilter";
         }
         
 
@@ -204,15 +204,15 @@ class PedidoController extends Controller
             $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
 
             //TODO - Verificar se o pedido foi avaliado
-            $ped->setReview(null);
+            //$ped->setReview(null);
         }
 
         $dados["listPed"] = $pedidos;
 
         if($tipoUsuario == "C"){
-            //$this->loadView("review/listPed.php", $dados);
+            $this->loadView("review/listPed.php", $dados);
         } else if ($tipoUsuario == "V"){
-           // $this->loadView("pedido/listPed.php", $dados);
+           $this->loadView("pedido/listPed.php", $dados);
         }
 
     }

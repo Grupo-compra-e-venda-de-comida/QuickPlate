@@ -27,20 +27,20 @@ function changeStatus(idPedido, status){
 }
 
 function statusOptions() {
-    console.log("teste statusOptions");
-            //Criar a requisição
-            /*var url = "pedidoController.php?action=statusFilter&option=" + option;
+    //Criar a requisição
+            var option = document.getElementById("statusOptions").value;
+            var url = "pedidoController.php?action=statusFilter&option=" + option;
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", url, true);
     
-            var option = document.getElementById("statusOptions").value;
         
             xhttp.onload = function() {
+                var retorno = xhttp.responseText;
 
+                console.log("aa");
             };
     
             //Enviar a requisição
-            window.location(url);
-            //xhttp.send();*/
-    
+            xhttp.send();
+
 }
