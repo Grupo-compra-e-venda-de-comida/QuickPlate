@@ -79,8 +79,6 @@ class PedidoController extends Controller
 
     public function finishPed()
     {
-        //print_r ($_SESSION); die;
-
         $itensPedidoJson = file_get_contents("php://input");
         $itensPedido = json_decode($itensPedidoJson, true); //Converte um JSON para um array
 

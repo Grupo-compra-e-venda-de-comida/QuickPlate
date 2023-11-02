@@ -49,7 +49,7 @@ class UsuarioService
         return $erros;
     }
 
-    public function validarDadosAdm(Usuario $usuario)
+    /*public function validarDadosAdm(Usuario $usuario)
     {
         $erros = array();
 
@@ -61,5 +61,5 @@ class UsuarioService
             array_push($erros, "O campo [Email] é obrigatório.");
 
         return $erros;
-    }
+    }*/
 }

@@ -231,9 +231,8 @@ function finalizarPedido(idVendedor) {
 
     xhttp.onload = function() {
         var retorno = xhttp.responseText;
-        if( retorno != 0){
+        if(retorno != 0){
             div.style.display='none';
-            
         }
 
     };

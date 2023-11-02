@@ -19,7 +19,7 @@ require_once("../util/config.php");
   
   <h1 class="h3" style="color:black">Editar Perfil</h1>
   
-  <form method="POST" action="<?= BASEURL ?>/controller/usuarioController.php?action=save&formType=1">
+  <form method="POST" action="<?= BASEURL ?>/controller/usuarioController.php?action=update">
     
   <div>
     <label class="selectlabel mb-1">Tipo de Usuário</label>
@@ -50,7 +50,7 @@ require_once("../util/config.php");
   </div>
   
   <div class="form-floating mb-2 ">
-    <input type="text" class="form-control" id="documento" name="documento" value="<?= $dados['documento']->getDocumento(); ?>" />
+    <input type="text" class="form-control" id="documento" name="documento" value="<?= $dados['documento']; ?>" />
     <label for="documento">CPF ou CNPJ</label>
   </div>
   

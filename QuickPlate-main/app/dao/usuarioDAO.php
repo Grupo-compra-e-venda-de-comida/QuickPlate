@@ -110,19 +110,33 @@ class UsuarioDAO {
         return $id;
     }
 
+    //Atualiza o perfil do usuario
     public function update(Usuario $usuario) {
+        //echo($usuario->getIdUsuario());
+        
         $conn = Connection::getConn();
 
-        $sql = "UPDATE usuario SET nome = :nome, email_usuario = :email_usuario," .  
-               " ativo = :ativo" .  
+        $sql = "UPDATE usuario SET nome = :nome, email_usuario = :email_usuario, senha_usuario = :senha_usuario" .   
                " WHERE id_usuario = :id_usuario";
         
         $stm = $conn->prepare($sql);
         $stm->bindValue("nome", $usuario->getNome());
         $stm->bindValue("email_usuario", $usuario->getEmail());
-        $stm->bindValue("ativo", $usuario->getAtivo());
+        $stm->bindValue("senha_usuario", $usuario->getSenha());
         $stm->bindValue("id_usuario", $usuario->getIdUsuario());
         $stm->execute();
+    }
+
+    //Método para Inativar um Usuario pelo ID
+    public function inativar(int $id) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE usuario SET ativo = 'I' WHERE id_usuario = :id_usuario";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id_usuario", $id);
+        $stm->execute();
+
     }
 
     //Método para excluir um Usuario pelo seu ID

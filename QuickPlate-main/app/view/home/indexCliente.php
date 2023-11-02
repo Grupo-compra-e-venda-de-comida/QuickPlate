@@ -59,13 +59,7 @@ require_once(__DIR__ . "/../include/header.php");
 
 
   </div>
-<<<<<<< HEAD
 
-
-
-=======
-  <div id="linha-horizontal2" style=" position: fixed; width: 100%; border: 1px solid #000; bottom: 8%; left:0px"></div>
->>>>>>> 4dcc0eb284727a28be3115f8e7c8e1e6f43325a8
   <!--Footer-->
   <?php
   require_once(__DIR__ . "/../include/footer.php");

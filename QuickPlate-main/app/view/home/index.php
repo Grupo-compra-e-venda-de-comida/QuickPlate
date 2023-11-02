@@ -38,7 +38,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
                             <th>Tipo</th>
                             <th>Ativo</th>
                             <th>Alterar</th>
-                            <th>Excluir</th>
+                            <th>Inativar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +54,8 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
                             <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/usuarioController.php?action=edit&id=<?= $usu->getIdUsuario() ?>">
                                     Alterar</a>
                             </td>
-                            <td><a class="btn btn-danger" onclick="return confirm('Confirma a exclusão do usuário?');" href="<?= BASEURL ?>/controller/usuarioController.php?action=delete&id=<?= $usu->getIdUsuario() ?>">
-                                    Excluir</a>
+                            <td><a class="btn btn-danger" onclick="return confirm('Deseja INATIVAR o usuário?');" href="<?= BASEURL ?>/controller/usuarioController.php?action=inativar&id=<?= $usu->getIdUsuario() ?>">
+                                    Inativar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
