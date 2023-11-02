@@ -1,5 +1,4 @@
 Funcionalidade:
--‌Usuário poder editar nome e senha X
 -Usuario poder ler os comentarios
 
 Tela ADM:
