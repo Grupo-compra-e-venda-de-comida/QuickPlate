@@ -2,16 +2,9 @@ Funcionalidade:
 -‌Usuário poder editar nome e senha X
 -Usuario poder ler os comentarios
 
-Tela de registro:
-‌-Service para o tipo de usuário e tipo de vendedor ?
-
 Tela ADM:
-‌-Adm aparece para ser alterado;
-‌-Formatação da tabela;
-‌-Excluir usuário (pensar em alguma alternativa);
 -‌Service para alteração da usuários;
-‌-Retirar botão de excluir
-‌-Botão Voltar do formulário de editar
+‌-Botão Voltar do formulário de editar;
 
 Tela vendedor:
 ‌-Excluir produto não funciona;
