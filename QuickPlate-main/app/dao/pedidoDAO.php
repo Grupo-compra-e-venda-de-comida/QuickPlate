@@ -199,7 +199,6 @@ class PedidoDAO
         return $this->mapPedidos($result);
     }
 
-    //TODO - terminar
     public function listPedidosVendByStatus($idUsuario, $status)
     {
         $conn = Connection::getConn();

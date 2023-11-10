@@ -52,6 +52,25 @@ class Vendedor extends Usuario {
         return $this;
     }
 
+    public function getTipoPessoaoDesc() {
+        $tipoPes = "";
+
+        switch($this->tipoPessoa) {
+            case 'F':
+                $tipoPes = "Física";
+                break;
+
+            case 'J':
+                $tipoPes = "Jurídica";
+                break;
+
+        };
+
+
+        return $tipoPes;
+        
+    }
+
 
     /**
      * Get the value of documento

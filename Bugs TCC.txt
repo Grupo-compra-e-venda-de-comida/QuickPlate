@@ -1,5 +1,5 @@
 Funcionalidade:
--Usuario poder ler os comentarios
+-Nota do vendedor
 
 Tela ADM:
 -‌Service para alteração da usuários;
@@ -34,6 +34,7 @@ Tela pedido (vendedor):
 Outros:
 ‌-Menu cliente e menu pedido estão diferentes
 ‌-Requisição Ajax do status.js
+-Arrumar o SESSION
 
 Menu
 ‌-Nas telas de item pendente ‌e nas telas de adicionar produto

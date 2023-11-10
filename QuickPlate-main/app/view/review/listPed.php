@@ -97,7 +97,8 @@ require_once(__DIR__ . "/../include/header.php");
                                 <div class="card-footer">
                                     <small class="text-body-secondary-center">
                                         <?php if (!$ped->getReview()) : ?>
-                                            <a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido(); ?>">Avaliar Pedido</a>
+                                            <a class="btn btn-outline-success col-4 ml-3 mt-2" 
+                                            href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido();?>&idVendedor=<?= $ped->getIdVendedor();?>">Avaliar Pedido</a>
                                         <?php else : ?>
                                             Pedido já Avaliado
                                         <?php endif; ?>

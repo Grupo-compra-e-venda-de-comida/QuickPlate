@@ -35,7 +35,7 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                     foreach ($dados['listProd'] as $prod) :
                     ?>
                         <tr>
-                            <td><?php echo $prod->getIdProduto(); ?></td>
+                            <td><?= $prod->getIdProduto(); ?></td>
                             <td><?= $prod->getNomeProduto(); ?></td>
                             <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><?= $prod->getCategoriaDesc(); ?></td>

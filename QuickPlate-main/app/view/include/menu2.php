@@ -38,6 +38,10 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
                             <a class="nav-link mr-2" href="loginController.php?action=logout">Sair</a>
                         </li>
                         <li class="nav-item active" style="position: absolute; top:25%; left:20%;"><?php echo $nome; ?></li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarioController.php?action=pagEdit&id=<?= $_SESSION[SESSAO_USUARIO_ID] ?>"><i class="bi bi-person"></i>Perfil</a>
+                        </li>
                     </ul>
                     </form>
                 </div>

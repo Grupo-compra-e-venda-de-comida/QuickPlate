@@ -46,7 +46,9 @@ class UsuarioController extends Controller
     //Atualiza o perfil do usuario
     protected function update()
     {
-        session_start();
+        //Inicia o session
+        $this->usuarioLogado();
+
         //Captura os dados do formulário
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
         $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;

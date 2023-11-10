@@ -1,5 +1,15 @@
 <?php
 require_once("../util/config.php");
+
+//Define o home do botão voltar
+$tipoUsuario = $this->getTipoUsuarioLogado();
+
+if($tipoUsuario == "V"){
+  $home = "homeVendedor";
+}
+else if($tipoUsuario == "C"){
+  $home = "homeCliente";
+}
 ?>
 
 <link rel="stylesheet" type="text/css" href="../css/autoReg.css">
@@ -23,10 +33,7 @@ require_once("../util/config.php");
     
   <div>
     <label class="selectlabel mb-1">Tipo de Usuário</label>
-    <select class="select" id="tipo" name="tipo">
-      <option value="C" <?php echo (isset($dados['usuario']) && $dados['usuario']->getTipo() == 'C' ? 'selected' : ''); ?>>Cliente</option>
-      <option value="V" <?php echo (isset($dados['usuario']) && $dados['usuario']->getTipo() == 'V' ? 'selected' : ''); ?>>Vendedor</option>
-    </select>
+    <input type="text" class="form-control" id="tipoUsuario" name="tipoUsuario" value="<?= $dados['usuario']->getTipoUsuarioDesc(); ?>"/>
   </div>
 
     <div id="divTipoVend" class="form-group" style="display: none;">
@@ -50,7 +57,7 @@ require_once("../util/config.php");
   </div>
   
   <div class="form-floating mb-2 ">
-    <input type="text" class="form-control" id="documento" name="documento" value="<?= $dados['documento']; ?>" />
+    <input type="text" class="form-control" id="documento" name="documento" readonly value="<?= $dados['documento']; ?>" />
     <label for="documento">CPF ou CNPJ</label>
   </div>
   
@@ -68,7 +75,7 @@ require_once("../util/config.php");
 
     <!-- Botão de Voltar -->
     <div class="col-2" style="margin-left: 95%; margin-top: 0.5%">
-        <a class="btn btn-success" href="homeController.php?action=homeCliente">Voltar</a>
+        <a class="btn btn-success" href="homeController.php?action=<?=$home?>">Voltar</a>
     </div>
     
     <br><br>

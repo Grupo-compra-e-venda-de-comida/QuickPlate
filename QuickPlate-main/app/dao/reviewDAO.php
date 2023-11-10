@@ -9,13 +9,14 @@ class ReviewDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO review (avaliacao, comentario, id_pedido)" .
-               " VALUES (:avaliacao, :comentario, :id_pedido)";
+        $sql = "INSERT INTO review (avaliacao, comentario, id_pedido, id_vendedor)" .
+            " VALUES (:avaliacao, :comentario, :id_pedido, :id_vendedor)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("avaliacao", $review->getAvaliacao());
         $stm->bindValue("comentario", $review->getComentario());
         $stm->bindValue("id_pedido", $review->getIdPedido());
+        $stm->bindValue("id_vendedor", $review->getIdVendedor());
         $stm->execute();
     }
 
@@ -24,7 +25,7 @@ class ReviewDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM review WHERE id_pedido = :id ORDER BY review.id_review";
+        $sql = "SELECT * FROM review r WHERE id_pedido = :id ORDER BY r.id_review";
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $idPedido);
         $stm->execute();
@@ -84,9 +85,9 @@ class ReviewDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE review SET avaliacao = :avaliacao, comentario = :comentario" .  
-                       " WHERE id_review = :id_review";
-                
+        $sql = "UPDATE review SET avaliacao = :avaliacao, comentario = :comentario" .
+            " WHERE id_review = :id_review";
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("avaliacao", $review->getAvaliacao());
         $stm->bindValue("comentario", $review->getComentario());
@@ -104,5 +105,38 @@ class ReviewDAO
         $stm = $conn->prepare($sql);
         $stm->bindValue("id_review", $id);
         $stm->execute();
+    }
+
+    //Listagem das reviews
+    public function listReview($idVendedor)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM review WHERE id_vendedor = :id_vendedor ORDER BY id_review";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id_vendedor", $idVendedor);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapReviews($result);
+    }
+
+    //Listagem das reviews filtrada
+    public function listReviewByAval($idVendedor, $avaliacao)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM review r " .
+        " WHERE r.id_vendedor = :id_vendedor AND r.avaliacao = :avaliacao" .
+        " ORDER BY id_review";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id_vendedor", $idVendedor);
+        $stm->bindValue("avaliacao", $avaliacao);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapReviews($result);
     }
 }

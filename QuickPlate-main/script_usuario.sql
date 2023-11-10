@@ -85,9 +85,10 @@ CREATE TABLE review
 (
     id_review INT NOT NULL AUTO_INCREMENT,
     id_pedido INT NOT NULL,
+    id_vendedor INT NOT NULL,
     avaliacao INT NOT NULL,
     comentario VARCHAR(120),
     CONSTRAINT pk_review PRIMARY KEY (id_review)
 );
 ALTER TABLE review ADD CONSTRAINT fk_pedido_review FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido);
-
+ALTER TABLE review ADD CONSTRAINT fk_vendedor_review FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);

@@ -38,6 +38,7 @@ class ReviewController extends Controller
         }
 
         $dados['idPedido'] = $ped->getIdPedido();
+        $dados['idVendedor'] = $ped->getIdVendedor();
         $dados['pedido'] = $ped;
 
         $this->loadView("review/formReview.php", $dados);
@@ -53,10 +54,6 @@ class ReviewController extends Controller
         return $ped;
     }
 
-    protected function listAvalByIdCliente()
-    {
-    }
-
     protected function createReview()
     {
 
@@ -65,14 +62,18 @@ class ReviewController extends Controller
         $avaliacao = isset($_POST['avaliacao']) ? trim($_POST['avaliacao']) : '';
         $comentario = isset($_POST['comentario']) ? trim($_POST['comentario']) : '';
         $idPedido = isset($_POST['idPedido']) ? trim($_POST['idPedido']) : NULL;
+        $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
 
         $dados['idPedido'] = $idPedido;
+        $dados['idVendedor'] = $idVendedor;
 
         //Cria objeto Pedido
         $review = new Review();
         $review->setAvaliacao($avaliacao);
         $review->setComentario($comentario);
         $review->setIdPedido($idPedido);
+        $review->setIdVendedor($idVendedor);
+        $review->setIdVendedor($idVendedor);
 
         //Validar os dados
         $erros = $this->reviewService->validarDadosReview($review);
@@ -100,7 +101,45 @@ class ReviewController extends Controller
         $dados["review"] = $review;
 
         $msgsErro = implode("<br>", $erros);
-        $this->loadView("pedido/listProd.php", $dados, $msgsErro);
+        $this->loadView("review/formReview.php", $dados, $msgsErro);
+    }
+
+    public function listReview(){
+
+        $idVendedor = $_GET["id"];
+        //$avaliacao = 0;
+
+        /*if(isset($_GET["aval"]))
+            $avaliacao = $_GET["aval"];*/
+        
+        $reviews = [];
+
+        //if($avaliacao)
+        //$reviews = $this->reviewDAO->listReviewByAval($idVendedor, $avaliacao);
+        //else
+            $reviews = $this->reviewDAO->listReview($idVendedor);
+
+
+        $dados["listRev"] = $reviews;
+        //$dados["aval"] = $avaliacao;
+
+        $this->loadView("review/listReview.php", $dados);
+    }
+
+    public function calcularNota($idVendedor){
+        $reviews = $this->reviewDAO->listReview($idVendedor);
+        $contador = 0;
+        $nota = 0;
+        $notaMedia = 0;
+
+        foreach($reviews as $rev){
+            $contador ++;
+            $nota += $rev->getAvaliacao;
+
+            $notaMedia = round($nota / $contador);
+        }
+
+        return $notaMedia;
     }
 }
 

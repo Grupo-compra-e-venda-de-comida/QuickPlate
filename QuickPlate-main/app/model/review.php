@@ -3,14 +3,20 @@
 class Review implements JsonSerializable {
     public $idReview;
     public $idPedido;
+    public $idVendedor;
     public $avaliacao;
     public $comentario;
+
+    //Cliente
+    public $nomeCliente;
 
     public function jsonSerialize(): array {
         return ['idReview' => $this->idReview,
                 'idPedido' => $this->idPedido,
+                'idVendedor' => $this->idVendedor,
                 'avaliacao' => $this->avaliacao,
-                'comentario' => $this->comentario];
+                'comentario' => $this->comentario,
+                'nomeCliente' => $this->nomeCliente];
     }
 
     /**
@@ -81,6 +87,46 @@ class Review implements JsonSerializable {
     public function setComentario($comentario): self
     {
         $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idVendedor
+     */ 
+    public function getIdVendedor()
+    {
+        return $this->idVendedor;
+    }
+
+    /**
+     * Set the value of idVendedor
+     *
+     * @return  self
+     */ 
+    public function setIdVendedor($idVendedor) : self
+    {
+        $this->idVendedor = $idVendedor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nomeCliente
+     */ 
+    public function getNomeCliente()
+    {
+        return $this->nomeCliente;
+    }
+
+    /**
+     * Set the value of nomeCliente
+     *
+     * @return  self
+     */ 
+    public function setNomeCliente($nomeCliente) : self
+    {
+        $this->nomeCliente = $nomeCliente;
 
         return $this;
     }

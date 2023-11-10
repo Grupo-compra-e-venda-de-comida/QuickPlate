@@ -38,8 +38,9 @@ require_once(__DIR__ . "/../include/header.php");
 
                 <div id="rating" class="star-rating">
 
-                  <!-- ALTERAR O VALOR 3 PARA A VARIÁVEL DE AVALIAÇÃO DO VENDEDOR -->
-                  <?php for ($i = 0; $i < 3; $i++) : ?>
+                  <!-- ALTERAR O VALOR PARA A VARIÁVEL DE AVALIAÇÃO DO VENDEDOR -->
+                  <?php 
+                  for ($i = 0; $i < $nota; $i++) : ?>
                     <span class="rating-star">&#9733;</span>
                   <?php endfor; ?>
                 </div>
@@ -48,6 +49,7 @@ require_once(__DIR__ . "/../include/header.php");
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary-center"><a class="btn btn-outline-success" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>">Iniciar Pedido</a></small>
+                <small class="text-body-secondary-center"><a class="btn btn-outline-success" href="reviewController.php?action=listReview&id=<?= $vend->getIdVendedor(); ?>">Comentários</a></small>
               </div>
             </div>
 

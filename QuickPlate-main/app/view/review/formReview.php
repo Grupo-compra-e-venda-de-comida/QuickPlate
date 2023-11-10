@@ -21,17 +21,22 @@ include_once(__DIR__ . "/../include/header.php")
     <form method="POST" action="<?= BASEURL ?>/controller/reviewController.php?action=createReview">
 
         <div class="form-floating mb-2">
-            <input type="hidden" class="form-control" id="idPedido" name="idPedido" readonly value="<?php echo($_GET['idPedido']) ?>" />
+            <input type="hidden" class="form-control" id="idPedido" name="idPedido" readonly value="<?= ($_GET['idPedido']) ?>" />
             <label for="idPedido">ID: </label>
+        </div>
+
+        <div class="form-floating mb-2">
+            <input type="hidden" class="form-control" id="idVendedor" name="idVendedor" readonly value="<?= ($_GET['idVendedor']) ?>" />
+            <label for="idVendedor">ID Vendedor: </label>
         </div>
     
         <div class="form-floating mb-2">
-            <input type="number" min="1" max="5" class="form-control" id="avaliacao" name="avaliacao" value="<?php echo (isset($dados['review']) ? $dados['review']->getAvaliacao() : ''); ?>" />
+            <input type="number" min="1" max="5" class="form-control" id="avaliacao" name="avaliacao" value="<?= (isset($dados['review']) ? $dados['review']->getAvaliacao() : ''); ?>" />
             <label for="avaliacao">Avaliação: </label>
         </div>
 
         <div class="form-floating">
-            <input type="text" maxlength="150" class="form-control" id="comentario" name="comentario" value="<?php echo (isset($dados['review']) ? $dados['review']->getComentario() : ''); ?>" />
+            <input type="text" maxlength="150" class="form-control" id="comentario" name="comentario" value="<?= (isset($dados['review']) ? $dados['review']->getComentario() : ''); ?>" />
             <label for="comentario">Comentário: </label>
         </div>
 
