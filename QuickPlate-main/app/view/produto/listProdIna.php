@@ -1,9 +1,7 @@
 <?php
-#Nome do arquivo: usuario/list.php
-#Objetivo: listar os usuarios para o administrador
 
 require_once(__DIR__ . "/../include/header.php");
-//require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
+require_once(__DIR__ . "/../../model/enum/tipoProduto.php");
 require_once(__DIR__ . "/../../controller/produtoController.php");
 
 ?>
@@ -26,13 +24,12 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                         <th>Preço</th>
                         <th>Categorias</th>
                         <th>Detalhes</th>
-                        <th>Alterar</th>
-                        <th>Excluir</th>
+                        <th>Ativar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($dados['listProd'] as $prod) :
+                    foreach ($dados['listProdIna'] as $prod) :
                     ?>
                         <tr>
                             <td><?= $prod->getIdProduto(); ?></td>
@@ -40,11 +37,8 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                             <td><?= $prod->getPrecoProduto(); ?></td>
                             <td><?= $prod->getCategoriaDesc(); ?></td>
                             <td><?= $prod->getDetalhes(); ?></td>
-                            <td><a class="btn btn-primary" href="../controller/produtoController.php?action=editProd&id=<?= $prod->getIdProduto() ?>">
-                                    Alterar</a>
-                            </td>
-                            <td><a class="btn btn-danger" onclick="return confirm('Confirma a exclusão do produto?');" href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $prod->getIdProduto() ?>">
-                                    Excluir</a>
+                            <td><a class="btn btn-success" onclick="return confirm('Confirma a ativação do produto?');" href="<?= BASEURL ?>/controller/produtoController.php?action=ativarProd&id=<?= $prod->getIdProduto() ?>">
+                                    Ativar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -62,6 +62,7 @@ class ProdutoController extends Controller
         $detalhes = isset($_POST['detalhes']) ? trim($_POST['detalhes']) : NULL;
         $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
 
+        $ativoProduto = "A";
         $dados['idVendedor'] = $idVendedor;
 
         //Cria objeto Produto
@@ -71,6 +72,7 @@ class ProdutoController extends Controller
         $produto->setCategoriaProduto($catProd);
         $produto->setDetalhes($detalhes);
         $produto->setIdVendedor($idVendedor);
+        $produto->setAtivoProduto($ativoProduto);
 
         //Validar os dados
         $erros = $this->produtoService->validarDadosProd($produto);
@@ -106,6 +108,15 @@ class ProdutoController extends Controller
         $this->loadView("produto/listProd.php", $dados,  $msgErro, $msgSucesso);
     }
 
+    protected function listProdIna(string $msgErro = "", string $msgSucesso = "") {
+        $idVendedor = $this->vendedorDAO->findVendId();
+
+        $produtos = $this->produtoDAO->listProdByIdVendedorIna($idVendedor);
+        $dados["listProdIna"] = $produtos;
+
+        $this->loadView("produto/listProdIna.php", $dados,  $msgErro, $msgSucesso);
+    }
+
     protected function updateProd() {
         
         //Captura os dados do formulário
@@ -116,6 +127,8 @@ class ProdutoController extends Controller
         $detalhes = isset($_POST['detalhes']) ? trim($_POST['detalhes']) : NULL;
         $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
 
+        $ativoProduto = "A";
+
         //Cria objeto Produto
         $produto = new Produto();
         $produto->setIdProduto($dados["id"]);
@@ -124,6 +137,7 @@ class ProdutoController extends Controller
         $produto->setPrecoProduto($precoProd);
         $produto->setDetalhes($detalhes);
         $produto->setIdVendedor($idVendedor);
+        $produto->setAtivoProduto($ativoProduto);
 
         //Validar os dados
         $erros = $this->produtoService->validarDadosProd($produto);
@@ -175,7 +189,7 @@ class ProdutoController extends Controller
         return $produto;
     }
 
-    protected function deleteProd()
+    protected function inativarProd()
     {
         $produto = $this->findProdutoById();
         if ($produto) {

@@ -90,7 +90,7 @@ class ReviewController extends Controller
                 $vendedores = $this->vendedorDAO->list();
                 $dados['listaVendedores'] = $vendedores;
 
-                $this->loadView("home/indexCliente.php", $dados, "", "Avaliação salva com sucesso.");
+                header("location: ../controller/homeController.php?action=homeCliente");
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar a avaliação na base de dados." . $e];

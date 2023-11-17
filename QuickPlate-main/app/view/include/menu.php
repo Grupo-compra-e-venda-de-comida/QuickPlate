@@ -4,9 +4,15 @@ require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 
 $nome = "(Sessão expirada)";
 
+if(session_status() != PHP_SESSION_ACTIVE)
+  session_start();
+
 if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
   $nome = $_SESSION[SESSAO_USUARIO_NOME];
 }
+
+$home = "";
+
 
 ?>
 

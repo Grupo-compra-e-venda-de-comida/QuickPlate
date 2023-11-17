@@ -64,7 +64,7 @@ class HomeController extends Controller
         $dados['listaVendedores'] = $vendedores;
 
         //Calcula a nota do vendedor
-        foreach ($dados['listaVendedores'] as $vend) {
+        foreach ($vendedores as $vend) {
             $contador = 0;
             $nota = 0;
             $notaMedia = 0;

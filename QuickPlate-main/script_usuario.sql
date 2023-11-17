@@ -50,6 +50,7 @@ CREATE TABLE produto
     categoria_produto varchar(1) NOT NULL,
     detalhes text(120) NOT NULL,
     id_vendedor INT NOT NULL,
+    ativo_produto VARCHAR(1) NOT NULL, /* I=INATIVO, A=ATIVO */
     CONSTRAINT pk_produto PRIMARY KEY (id_produto)
 );
 ALTER TABLE produto ADD CONSTRAINT fk_vendedor_produto FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);

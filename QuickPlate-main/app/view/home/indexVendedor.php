@@ -35,6 +35,13 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
 
 <div class="container">
 
+<!-- Botão de Produtos Inativos -->
+<div id="botoes" class="container d-flex justify-content-left col-md-4" style="position: absolute;top: 45%; left: 20%; font-size:25px">
+
+<a href="../controller/produtoController.php?action=listProdIna" class="btn btn-outline-success">Produtos Inativos</a>
+
+</div>
+
   <!-- Botão de Vendas -->
   <div id="botoes" class="container d-flex justify-content-left col-md-4" style="position: absolute;top: 55%; left: 20%; font-size:25px">
 
@@ -46,6 +53,7 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
   <div class="container d-flex justify-content-left col-md-4" style="position: absolute; top: 65%; left: 20%; font-size:25px">
     <a href="../controller/produtoController.php?action=formProd" class="btn btn-outline-success">Adicionar Produto</a>
   </div>
+
   
   <!-- Listagem de Produtos -->
   <div class="container d-flex justify-content-left col-md-4" style="position: absolute; top: 25%; left: 50%; font-size:25px;">
@@ -83,8 +91,8 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                 </td>
                 <td>
                   <a class="btn btn-danger" onclick="return confirm('Confirma a exclusão do produto?');" 
-                  href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $prod->getIdProduto() ?>">
-                    Excluir
+                  href="<?= BASEURL ?>/controller/produtoController.php?action=inativarProd&id=<?= $prod->getIdProduto() ?>">
+                    Inativar
                   </a>
                 </td>
               </tr>

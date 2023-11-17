@@ -47,7 +47,7 @@ require_once(__DIR__ . "/../include/header.php");
                     ?>
                         <tr>
                             <td><?= "nome do cliente" ?></td>
-                            <td><?= $rev->getAvaliacao(); ?></td>
+                            <td><?= $rev->getAvaliacao(); ?><span class="rating-star">&#9733;</span></td>
                             <td><?= $rev->getComentario(); ?></td>
                         </tr>
                     <?php endforeach; ?>

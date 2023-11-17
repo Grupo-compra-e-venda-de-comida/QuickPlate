@@ -8,6 +8,7 @@ class Review implements JsonSerializable {
     public $comentario;
 
     //Cliente
+    public $idCliente;
     public $nomeCliente;
 
     public function jsonSerialize(): array {
@@ -127,6 +128,26 @@ class Review implements JsonSerializable {
     public function setNomeCliente($nomeCliente) : self
     {
         $this->nomeCliente = $nomeCliente;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idCliente
+     */ 
+    public function getIdCliente()
+    {
+        return $this->idCliente;
+    }
+
+    /**
+     * Set the value of idCliente
+     *
+     * @return  self
+     */ 
+    public function setIdCliente($idCliente)
+    {
+        $this->idCliente = $idCliente;
 
         return $this;
     }

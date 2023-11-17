@@ -1,5 +1,4 @@
 Tela vendedor:
-‌-Mudar função excluir produto
 -‌Formatação da tabela
 ‌-Colocar os botões pra cima
 -‌Puxar tudo os meus produtos pro centro da tela
@@ -11,14 +10,14 @@ Tela carrinho (Cliente)
 
 Tela pedido(Cliente)
 ‌-Aba itens dos cards não funcinando
-‌-Funcionalidade de pedidos já avaliado
+‌-Funcionalidade de pedidos já avaliado X
 
 Tela editar produto:
 ‌Formatação da tela;
 
 Tela pedido (vendedor):
 ‌-Formatação da tabela itens (valor total)
-‌-Botão cancelar (mudar a função) 
+‌-Botão cancelar (mudar a função) X
 ‌-Colocar um modal para adicionar pedidos
 
 Menu
@@ -26,9 +25,9 @@ Menu
 
 Outros:
 ‌-Menu cliente e menu pedido estão diferentes
-‌-Requisição Ajax do status.js
--Arrumar o SESSION
--Arrumar a tabela de comentários (puxar valores pelo pedido)
+‌-Requisição Ajax do status.js X
+-Arrumar o SESSION X
+-Arrumar a tabela de comentários (puxar valores pelo pedido) X
 -Atualizar o Bootstrap
 
 

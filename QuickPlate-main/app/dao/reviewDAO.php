@@ -52,6 +52,11 @@ class ReviewDAO
             $review->setAvaliacao($reg['avaliacao']);
             $review->setComentario($reg['comentario']);
             $review->setIdPedido($reg['id_pedido']);
+
+            if(isset($reg['id_cliente'])) {
+                //Setar o nome e o id do cliente no objeto    
+
+            }
             array_push($reviews, $review);
         }
 
@@ -112,7 +117,13 @@ class ReviewDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM review WHERE id_vendedor = :id_vendedor ORDER BY id_review";
+        $sql = "SELECT r.*, c.id_cliente, uc.nome
+                FROM review r
+                JOIN pedido p ON (p.id_pedido = r.id_pedido)
+                JOIN cliente c ON (c.id_cliente = p.id_cliente)
+                JOIN usuario uc ON (uc.id_usuario = c.id_usuario)
+                WHERE p.id_vendedor = :id_vendedor
+                ORDER BY r.id_review";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("id_vendedor", $idVendedor);
