@@ -11,6 +11,9 @@ class Vendedor extends Usuario {
     private $tipoPessoa;
     private $documento;
 
+    //TODO - Teste
+    private $nota;
+
 
     /**
      * Get the value of idVendedor
@@ -88,6 +91,26 @@ class Vendedor extends Usuario {
     public function setDocumento($documento)
     {
         $this->documento = $documento;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nota
+     */ 
+    public function getNota()
+    {
+        return $this->nota;
+    }
+
+    /**
+     * Set the value of nota
+     *
+     * @return  self
+     */ 
+    public function setNota($nota)
+    {
+        $this->nota = $nota;
 
         return $this;
     }

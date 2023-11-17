@@ -19,7 +19,6 @@ class UsuarioController extends Controller
 
     public function __construct()
     {
-
         $this->usuarioService = new UsuarioService();
         $this->usuarioDAO = new UsuarioDAO();
         $this->clienteDAO = new ClienteDAO();
@@ -72,7 +71,7 @@ class UsuarioController extends Controller
         $erros = $this->usuarioService->validarDados($usuario, $confSenha, $documento, $tipoPessoa);
 
         if (empty($erros))
-        $this->usuarioDAO->update($usuario);
+            $this->usuarioDAO->update($usuario);
 
         //Carregar os valores recebidos por POST de volta para o formulário
         $dados["usuario"] = $usuario;
@@ -84,14 +83,26 @@ class UsuarioController extends Controller
         $this->loadView("usuario/perfilEdit.php", $dados, $msgsErro);
     }
 
-    //Carrega a página de edição de usuarios
+    //Carrega a página de edição de perfil
     protected function pagEdit()
-    {
-        $usuario = $this->findUsuarioById();
+    { 
+        session_start();
+        $id = $_SESSION[SESSAO_USUARIO_ID];
+        $usuario = $this->usuarioDAO->findById($id);
+
+        //Define o home do botão voltar
+        $tipoUsuario = $this->getTipoUsuarioLogado();
+
+        if ($tipoUsuario == "V") {
+            $home = "homeVendedor";
+        } else if ($tipoUsuario == "C") {
+            $home = "homeCliente";
+        }
 
         if ($usuario) {
             $idUsuario = $usuario->getIdUsuario();
             $dados["usuario"] = $usuario;
+            $dados["home"] = $home;
 
             if ($dados['usuario']->getTipo() == "V") {
                 $vendedor = $this->vendedorDAO->findVendedorByIdUsuario($idUsuario);
@@ -182,6 +193,18 @@ class UsuarioController extends Controller
         }
     }
 
+    //Ativa o usuario
+    protected function ativar()
+    {
+        $usuario = $this->findUsuarioById();
+        if ($usuario) {
+            $this->usuarioDAO->ativar($usuario->getIdUsuario());
+            $this->list("", "Usuário inativado com sucesso!");
+        } else {
+            $this->list("Usuario não encontrado!");
+        }
+    }
+
     //Deleta o usuario
     protected function delete()
     {
@@ -233,6 +256,25 @@ class UsuarioController extends Controller
 
         $this->vendedorDAO->insertVend($vendedor);
     }
+
+    //Calcula a nota do vendedor
+    /*
+    public function calcularNotaVend($idVendedor){
+        $reviews = $this->reviewDAO->listReview($idVendedor);
+        $contador = 0;
+        $nota = 0;
+        $notaMedia = 0;
+
+        foreach($reviews as $rev){
+            $contador ++;
+            $nota += $rev->getAvaliacao;
+
+            $notaMedia = round($nota / $contador);
+        }
+
+        return $notaMedia;
+    }*/
+
 }
 
 #Criar objeto da classe

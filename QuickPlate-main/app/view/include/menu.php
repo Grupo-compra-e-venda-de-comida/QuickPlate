@@ -36,7 +36,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="usuarioController.php?action=pagEdit&id=<?=$_SESSION[SESSAO_USUARIO_ID]?>"><i class="bi bi-person"></i>Perfil</a>
+            <a class="nav-link" href="usuarioController.php?action=pagEdit"><i class="bi bi-person"></i>Perfil</a>
           </li>
 
           <li class="nav-item active">

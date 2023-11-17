@@ -126,21 +126,6 @@ class ReviewController extends Controller
         $this->loadView("review/listReview.php", $dados);
     }
 
-    public function calcularNota($idVendedor){
-        $reviews = $this->reviewDAO->listReview($idVendedor);
-        $contador = 0;
-        $nota = 0;
-        $notaMedia = 0;
-
-        foreach($reviews as $rev){
-            $contador ++;
-            $nota += $rev->getAvaliacao;
-
-            $notaMedia = round($nota / $contador);
-        }
-
-        return $notaMedia;
-    }
 }
 
 $reviewController = new ReviewController();

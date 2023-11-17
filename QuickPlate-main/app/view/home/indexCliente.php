@@ -40,7 +40,7 @@ require_once(__DIR__ . "/../include/header.php");
 
                   <!-- ALTERAR O VALOR PARA A VARIÁVEL DE AVALIAÇÃO DO VENDEDOR -->
                   <?php 
-                  for ($i = 0; $i < $nota; $i++) : ?>
+                  for ($i = 0; $i < $dados["nota" . $vend->getIdVendedor()]; $i++) : ?>
                     <span class="rating-star">&#9733;</span>
                   <?php endfor; ?>
                 </div>

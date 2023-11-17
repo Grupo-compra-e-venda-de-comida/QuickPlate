@@ -1,15 +1,5 @@
 <?php
 require_once("../util/config.php");
-
-//Define o home do botão voltar
-$tipoUsuario = $this->getTipoUsuarioLogado();
-
-if($tipoUsuario == "V"){
-  $home = "homeVendedor";
-}
-else if($tipoUsuario == "C"){
-  $home = "homeCliente";
-}
 ?>
 
 <link rel="stylesheet" type="text/css" href="../css/autoReg.css">
@@ -75,7 +65,7 @@ else if($tipoUsuario == "C"){
 
     <!-- Botão de Voltar -->
     <div class="col-2" style="margin-left: 95%; margin-top: 0.5%">
-        <a class="btn btn-success" href="homeController.php?action=<?=$home?>">Voltar</a>
+        <a class="btn btn-success" href="homeController.php?action=<?=$dados["home"]?>">Voltar</a>
     </div>
     
     <br><br>

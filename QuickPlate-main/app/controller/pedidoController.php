@@ -93,37 +93,38 @@ class PedidoController extends Controller
         $pedido->setIdCliente($idCliente);
         $pedido->setStatus($status);
 
-        //Insere na tabela pedido
-        $idPedido = $this->pedidoDAO->insertPed($pedido);
+        if($itensPedido != null) {
+            //Insere na tabela pedido
+            $idPedido = $this->pedidoDAO->insertPed($pedido);
 
+            //Captura os dados dos itens
+            foreach ($itensPedido as $item => $campo) {
+                $idProduto = $campo['idProduto'];
+                $valor = $campo['valor'];
+                $qtd = $campo['qtd'];
+                $total = $campo['total'];
 
-        //Captura os dados dos itens
-        foreach ($itensPedido as $item => $campo) {
-            $idProduto = $campo['idProduto'];
-            $valor = $campo['valor'];
-            $qtd = $campo['qtd'];
-            $total = $campo['total'];
+                //Cria objeto PedidoItem
+                $pedidoItem = new PedidoItem;
+                $pedidoItem->setIdPedido($idPedido);
+                $pedidoItem->setIdProduto($idProduto);
+                $pedidoItem->setValor($valor);
+                $pedidoItem->setQtd($qtd);
+                $pedidoItem->setTotal($total);
 
-            //Cria objeto PedidoItem
-            $pedidoItem = new PedidoItem;
-            $pedidoItem->setIdPedido($idPedido);
-            $pedidoItem->setIdProduto($idProduto);
-            $pedidoItem->setValor($valor);
-            $pedidoItem->setQtd($qtd);
-            $pedidoItem->setTotal($total);
-
-            //Insere na tabela pedido_item
-            $this->pedidoDAO->insertPedItem($pedidoItem);
-        }
+                //Insere na tabela pedido_item
+                $this->pedidoDAO->insertPedItem($pedidoItem);
+            }
+        } 
     }
 
     //Atualiza o status do pedido
-    public function updateStatus(){
+    public function updateStatus()
+    {
         $status = $_GET["status"];
         $idPedido = $_GET["idPedido"];
-        
-        $this->pedidoDAO->updateStats($status, $idPedido);
 
+        $this->pedidoDAO->updateStats($status, $idPedido);
     }
 
     //Faz a listagem dos produtos do vendedor
@@ -149,14 +150,14 @@ class PedidoController extends Controller
     protected function listPedVendedor()
     {
         $status = "";
-        if(isset($_GET["status"]))
+        if (isset($_GET["status"]))
             $status = $_GET["status"];
 
         //Carrega a lista de Pedidos do cliente (usuário logado)
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
 
         $pedidos = [];
-        if($status)
+        if ($status)
             $pedidos = $this->pedidoDAO->listPedidosVendByStatus($idUsuario, $status);
         else
             $pedidos = $this->pedidoDAO->listPedidosVend($idUsuario);
@@ -175,14 +176,14 @@ class PedidoController extends Controller
     public function listPedCliente()
     {
         $status = "";
-        if(isset($_GET["status"]))
+        if (isset($_GET["status"]))
             $status = $_GET["status"];
 
         //Carrega a lista de Pedidos do cliente (usuário logado)
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
-        
+
         $pedidos = [];
-        if($status)
+        if ($status)
             $pedidos = $this->pedidoDAO->listPedidosClienteByStatus($idUsuario, $status);
         else
             $pedidos = $this->pedidoDAO->listPedidosCliente($idUsuario);
@@ -196,11 +197,10 @@ class PedidoController extends Controller
         }
 
         $dados["listPed"] = $pedidos;
-        $dados["status"] = $status; 
+        $dados["status"] = $status;
 
         $this->loadView("review/listPed.php", $dados);
     }
-
 }
 
 $pedidoController = new PedidoController();

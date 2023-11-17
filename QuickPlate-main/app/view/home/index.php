@@ -51,8 +51,8 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
                             <td><?= $usu->getEmail(); ?></td>
                             <td><?= $usu->getTipoUsuarioDesc(); ?></td>
                             <td><?= $usu->getAtivoDesc(); ?></td>
-                            <td><a class="btn btn-primary" href="<?= BASEURL ?>/controller/usuarioController.php?action=edit&id=<?= $usu->getIdUsuario() ?>">
-                                    Alterar</a>
+                            <td><a class="btn btn-success" onclick="return confirm('Deseja ATIVAR o usuário?');" href="<?= BASEURL ?>/controller/usuarioController.php?action=ativar&id=<?= $usu->getIdUsuario() ?>">
+                                    Ativar</a>
                             </td>
                             <td><a class="btn btn-danger" onclick="return confirm('Deseja INATIVAR o usuário?');" href="<?= BASEURL ?>/controller/usuarioController.php?action=inativar&id=<?= $usu->getIdUsuario() ?>">
                                     Inativar</a>

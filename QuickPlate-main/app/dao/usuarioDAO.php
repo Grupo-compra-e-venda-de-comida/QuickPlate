@@ -30,7 +30,7 @@ class UsuarioDAO {
     public function list() {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM usuario u" . 
+        $sql = "SELECT * FROM usuario u WHERE tipo_usuario != 'A'" . 
         " ORDER BY u.id_usuario";
         $stm = $conn->prepare($sql);    
         $stm->execute();
@@ -112,8 +112,7 @@ class UsuarioDAO {
 
     //Atualiza o perfil do usuario
     public function update(Usuario $usuario) {
-        //echo($usuario->getIdUsuario());
-        
+
         $conn = Connection::getConn();
 
         $sql = "UPDATE usuario SET nome = :nome, email_usuario = :email_usuario, senha_usuario = :senha_usuario" .   
@@ -132,6 +131,18 @@ class UsuarioDAO {
         $conn = Connection::getConn();
 
         $sql = "UPDATE usuario SET ativo = 'I' WHERE id_usuario = :id_usuario";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue("id_usuario", $id);
+        $stm->execute();
+
+    }
+
+    //Método para Ativar um Usuario pelo ID
+    public function ativar(int $id) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE usuario SET ativo = 'A' WHERE id_usuario = :id_usuario";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("id_usuario", $id);

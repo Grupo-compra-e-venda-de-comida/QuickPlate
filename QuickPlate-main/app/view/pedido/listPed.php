@@ -64,6 +64,7 @@ require_once(__DIR__ . "/../include/header.php");
                                             <span>Cliente: </span><span><?= $ped->getNomeCliente() ?> </span><br>
                                             <span>Status do Pedido: </span><span><?= $ped->getStatusDesc() ?></span><br>
                                             <span>Valor do Pedido: </span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
+                                            <span>Status do Pedido: </span><span><?= $ped->getStatusDesc() ?></span>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane" id="status<?= $id ?>">
