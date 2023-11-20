@@ -20,36 +20,41 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 
 <!-- Navbar -->
 <header data-bs-theme="light">
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <div class="container-fluid">
-            <img src="../view/img/logo.png" class="logo m-1" alt="Logo" style="height:20%; width:20%" class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <div class="text" style="position: absolute; top: 40%; bottom: 400px; left: 48%; font-size:25px; font-style:oblique; font-style: bold;">
-                        Vendedor
-                    </div>
-                </ul>
-                <div class="col-4">
-                    <ul class="cont navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link mr-2" href="loginController.php?action=logout">Sair</a>
-                        </li>
-                        <li class="nav-item active" style="position: absolute; top:25%; left:20%;"><?php echo $nome; ?></li>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="usuarioController.php?action=pagEdit&id=<?= $_SESSION[SESSAO_USUARIO_ID] ?>"><i class="bi bi-person"></i>Perfil</a>
-                        </li>
+    <div class="container-fluid">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="homeController.php?action=homeVendedor"><i class="bi bi-house"></i>Home</a>
-                        </li>
-                    </ul>
-                    </form>
-                </div>
-                <div id="linha-horizontal" style=" position: absolute; width: 100%; border: 1px solid #000; top: 100%; left:0%"></div>
-            </div>
+      <img src="../view/img/logo.png" class="navbar-brand m-1" alt="Logo" style="height:10%; width:9%" href="#"></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+            <a class="navbar-brand" href="#">  <a class="nav-link" href="#" style="margin-left: 50%;"><span> <?php echo $nome; ?></span></a>
+          
+</div>
+
+        
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#"><i class="bi bi-house"></i></i>Home</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="pedidoController.php?action=listPedCliente"><i class="bi bi-bag-check"></i>Pedidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../controller/produtoController.php?action=formProd"><i class="bi bi-bag-plus"></i></i>Produtos</a>
+          </li>
+         
+
+          <li class="nav-item active">
+            <a class="nav-link" href="loginController.php?action=logout"><i class="bi bi-escape"></i>Sair</a>
+          </li>
+          <span class="border-bottom"></span>
+        </ul>
+        <header class="text-center fixed-bottom text-lg-start bg-light bb-bold">
     </nav>
+    
 </header>

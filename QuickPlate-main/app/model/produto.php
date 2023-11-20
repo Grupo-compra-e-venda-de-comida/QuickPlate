@@ -10,7 +10,6 @@ class Produto implements JsonSerializable
     private $categoriaProduto;
     private $detalhes;
     private $idVendedor;
-    private $ativoProduto;
 
 
     public function jsonSerialize(): array {
@@ -20,8 +19,7 @@ class Produto implements JsonSerializable
                 'categoriaProduto' => $this->categoriaProduto,
                 'categoriaDesc' => $this->getCategoriaDesc(),
                 'detalhes' => $this->detalhes,
-                'idVendedor' => $this->idVendedor,
-                'ativoProduto' => $this->ativoProduto];
+                'idVendedor' => $this->idVendedor];
     }
 
     /**
@@ -148,6 +146,12 @@ class Produto implements JsonSerializable
         return $this;
     }
 
+    public function getPrecoProdutoFormatado() {
+        $precoProduto = $this->getPrecoProduto();
+
+        return number_format($precoProduto, 2, ',', '.');
+    }
+
     /**
      * Get the value of precoProduto
      */ 
@@ -164,26 +168,6 @@ class Produto implements JsonSerializable
     public function setPrecoProduto($precoProduto)
     {
         $this->precoProduto = $precoProduto;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of ativoProduto
-     */ 
-    public function getAtivoProduto()
-    {
-        return $this->ativoProduto;
-    }
-
-    /**
-     * Set the value of ativoProduto
-     *
-     * @return  self
-     */ 
-    public function setAtivoProduto($ativoProduto)
-    {
-        $this->ativoProduto = $ativoProduto;
 
         return $this;
     }

@@ -14,7 +14,7 @@ require_once(__DIR__ . "/../include/header.php");
     <!-- Navbar -->
     <div class="row">
         <?php
-        require_once(__DIR__ . "/../include/menu2.php");
+        require_once(__DIR__ . "/../include/menu.php");
         ?>
     </div>
 

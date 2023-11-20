@@ -3,6 +3,7 @@ include_once(__DIR__ . "/../include/header.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="../css/estiloLog.css">
+<link href="../css/app.css" rel="stylesheet">
 
 <div class="container">
 
@@ -37,10 +38,10 @@ include_once(__DIR__ . "/../include/header.php");
                     <!-- Botões de Logar e Cadastro -->
                     <div>
                         <button type="button" class="btn btn-success" onclick="logar();">Logar</button>
-                        <a href="../controller/usuarioController.php?action=autoReg" class="link">Cadastre-se aqui!</a>
+                        <a href="../controller/usuarioController.php?action=autoReg" class="link" style=" margin-top:-3%">Cadastre-se aqui!</a>
                     </div>
                 </form>
-                <br><br>
+                <br>
                 <?php require_once(__DIR__ . "/../include/msg.php"); ?>
                 <div class="col-12 mb-5">
                     <div id="divMsgErroExtra" class="alert alert-danger" style="display: none;"></div>

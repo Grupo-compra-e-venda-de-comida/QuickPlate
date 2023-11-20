@@ -2,3 +2,6 @@
     height: 10%;
     width: 10%;
 }
+.navbar {
+    border-bottom: solid 2px #ccc;
+}

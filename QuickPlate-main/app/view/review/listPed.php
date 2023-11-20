@@ -11,7 +11,7 @@ require_once(__DIR__ . "/../include/header.php");
 
 <script src="../js/status.js"></script>
 
-<div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
+<div class="container-fluid pb-5" style="margin-top: 150px; margin-bottom: 75px;">
 
     <!-- Navbar -->
     <div class="row">
@@ -46,29 +46,31 @@ require_once(__DIR__ . "/../include/header.php");
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+
                     <?php foreach ($dados['listPed'] as $ped) : ?>
-                        <div class="col">
-                            <div class="card text-center h-100 w-100 mr-2">
+
+                        <div class="col-md-4">
+
+                            <div class="card text-center">
                                 <div class="card-header">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#name<?= $ped->getIdPedido() ?>" role="tab" data-toggle="tab">Dados do Pedido</a>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane<?= $ped->getIdPedido() ?>" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Dados do Pedido</button>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#itens<?= $ped->getIdPedido() ?>" role="tab" data-toggle="tab">Itens</a>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane<?= $ped->getIdPedido() ?>" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Itens do Pedido</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="name<?= $ped->getIdPedido() ?>">
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="home-tab" tabindex="0">  
                                             <h5 class="card-title">Dados do pedido: </h5>
-                                            <span>Vendedor: </span><span><?= $ped->getNomeVendedor() ?> </span><br>
-                                            <span>Status do Pedido: </span><span><?= $ped->getStatusDesc() ?></span><br>
-                                            <span>Valor do Pedido: </span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
+                                            <span><b>Vendedor: </b></span><span><?= $ped->getNomeVendedor() ?> </span><br>
+                                            <span><b>Status do Pedido: </b></span><span><?= $ped->getStatusDesc() ?></span><br>
+                                            <span><b>Valor do Pedido: </b></span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br> 
                                         </div>
-
-                                        <div role="tabpanel" class="tab-pane" id="itens<?= $ped->getIdPedido() ?>">
+                                        <div class="tab-pane fade" id="profile-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                             <table id="tabUsuarios" class='table table-striped table-bordered'>
                                                 <thead>
                                                     <tr>
@@ -86,7 +88,7 @@ require_once(__DIR__ . "/../include/header.php");
                                                             <td><?= $item->getProduto()->getCategoriaDesc(); ?></td>
                                                             <td><?= $item->getQtd(); ?></td>
                                                             <td><?= $item->getValorFormatado(); ?></td>
-                                                            <td><?= $item->getTotal(); ?></td>
+                                                            <td><?= $item->getTotalFormatado(); ?></td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -97,8 +99,7 @@ require_once(__DIR__ . "/../include/header.php");
                                 <div class="card-footer">
                                     <small class="text-body-secondary-center">
                                         <?php if (!$ped->getReview()) : ?>
-                                            <a class="btn btn-outline-success col-4 ml-3 mt-2" 
-                                            href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido();?>&idVendedor=<?= $ped->getIdVendedor();?>">Avaliar Pedido</a>
+                                            <a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido(); ?>">Avaliar Pedido</a>
                                         <?php else : ?>
                                             Pedido já Avaliado
                                         <?php endif; ?>

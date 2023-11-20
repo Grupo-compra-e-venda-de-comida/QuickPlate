@@ -28,7 +28,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
                 <h2><span>Tabela de Usuários</span></h2>
             </div>
 
-            <div class="row">
+            <div class="row" style="text-align: center;">
                 <table id="tabUsuarios" class='table table-striped table-bordered'>
                     <thead>
                         <tr>
@@ -37,7 +37,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
                             <th>Email</th>
                             <th>Tipo</th>
                             <th>Ativo</th>
-                            <th>Alterar</th>
+                            <th>Ativar</th>
                             <th>Inativar</th>
                         </tr>
                     </thead>

@@ -4,15 +4,9 @@ require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 
 $nome = "(Sessão expirada)";
 
-if(session_status() != PHP_SESSION_ACTIVE)
-  session_start();
-
 if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
   $nome = $_SESSION[SESSAO_USUARIO_NOME];
 }
-
-$home = "";
-
 
 ?>
 
@@ -28,9 +22,9 @@ $home = "";
       </button>
 
       <div class="navbar-collapse collapse" id="navbarCollapse">
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="margin-left: 1150%;"><span> <?php echo $nome; ?></span></a>
-        </li>
+     
+          <a class="nav-link" href="#" style="margin-left: 45%;"><span> <?php echo $nome; ?></span></a>
+       
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -46,15 +40,10 @@ $home = "";
           </li>
 
           <li class="nav-item active">
-            <a class="nav-link" href="loginController.php?action=logout">Sair</a>
+            <a class="nav-link" href="loginController.php?action=logout"><b><i class="bi bi-escape"></i> Sair</b></a>
           </li>
 
         </ul>
-
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
 
       </div>
     </div>

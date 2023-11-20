@@ -2,3 +2,10 @@
     height: 10%;
     width: 10%;
 }
+.navbar-brand {
+    display: block;
+    max-width: 160px;
+}
+.navbar {
+    border-bottom: solid 2px #ccc;
+}

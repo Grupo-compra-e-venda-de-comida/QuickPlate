@@ -48,7 +48,7 @@ require_once(__DIR__ . "/../include/header.php");
 
               </div>
               <div class="card-footer">
-                <small class="text-body-secondary-center"><a class="btn btn-outline-success" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>">Iniciar Pedido</a></small>
+                <small class="text-body-secondary-center"><a class="btn btn-outline-success mr-3" href="pedidoController.php?action=listProdVend&idVendedor=<?= $vend->getIdVendedor(); ?>">Iniciar Pedido</a></small>
                 <small class="text-body-secondary-center"><a class="btn btn-outline-success" href="reviewController.php?action=listReview&id=<?= $vend->getIdVendedor(); ?>">Comentários</a></small>
               </div>
             </div>

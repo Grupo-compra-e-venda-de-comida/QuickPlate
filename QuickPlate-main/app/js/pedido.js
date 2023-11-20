@@ -217,6 +217,7 @@ function finalizarPedido(idVendedor) {
     let totais = document.querySelectorAll("[id^='"+TOTAL_ID+"']");
 
     var modal = document.getElementById("modal");
+    var btn = document.getElementById("btnFinalizar")
 
     for(let i=0; i<qtds.length; i++) {
 
@@ -231,8 +232,10 @@ function finalizarPedido(idVendedor) {
 
     xhttp.onload = function() {
         var retorno = xhttp.responseText;
-        if(retorno != 0){
-            div.style.display='none';
+
+        if(totais==0){
+            btn.removeAttribute("data-bs-target");
+            btn.setAttribute("data-bs-target", "#exampleModal");
         }
 
     };

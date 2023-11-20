@@ -9,8 +9,8 @@ class ProdutoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO produto (nome_produto, preco_produto, categoria_produto, detalhes, id_vendedor, ativo_produto)" .
-            " VALUES (:nomeProd, :precoProd , :catProd, :detalhes, :idVendedor, :ativo_produto)";
+        $sql = "INSERT INTO produto (nome_produto, preco_produto, categoria_produto, detalhes, id_vendedor)" .
+            " VALUES (:nomeProd, :precoProd , :catProd, :detalhes, :idVendedor)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("nomeProd", $produto->getNomeProduto());
@@ -18,7 +18,6 @@ class ProdutoDAO
         $stm->bindValue("catProd", $produto->getCategoriaProduto());
         $stm->bindValue("detalhes", $produto->getDetalhes());
         $stm->bindValue("idVendedor", $produto->getIdVendedor());
-        $stm->bindValue("ativo_produto", $produto->getAtivoProduto());
         $stm->execute();
     }
 
@@ -26,7 +25,7 @@ class ProdutoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM produto p WHERE ativo_produto = 'A' ORDER BY p.id_produto";
+        $sql = "SELECT * FROM produto ORDER BY produto.id_produto";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
@@ -38,20 +37,7 @@ class ProdutoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM produto p WHERE id_vendedor = :id AND ativo_produto = 'A' ORDER BY p.id_produto";
-        $stm = $conn->prepare($sql);
-        $stm->bindValue("id", $idVendedor);
-        $stm->execute();
-        $result = $stm->fetchAll();
-
-        return $this->mapProdutos($result);
-    }
-
-    public function listProdByIdVendedorIna(int $idVendedor)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "SELECT * FROM produto p WHERE id_vendedor = :id AND ativo_produto = 'I' ORDER BY p.id_produto";
+        $sql = "SELECT * FROM produto WHERE id_vendedor = :id ORDER BY produto.id_produto";
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $idVendedor);
         $stm->execute();
@@ -121,10 +107,10 @@ class ProdutoDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE produto SET ativo_produto = 'I' WHERE id_produto = :id_produto";
+        $sql = "DELETE FROM produto WHERE id_produto = :idProduto";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue("id_produto", $id);
+        $stm->bindValue("idProduto", $id);
         $stm->execute();
     }
 }

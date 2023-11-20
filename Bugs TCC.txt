@@ -26,8 +26,6 @@ Menu
 Outros:
 ‌-Menu cliente e menu pedido estão diferentes
 ‌-Requisição Ajax do status.js X
--Arrumar o SESSION X
--Arrumar a tabela de comentários (puxar valores pelo pedido) X
 -Atualizar o Bootstrap
 
 

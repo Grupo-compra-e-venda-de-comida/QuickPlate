@@ -257,6 +257,24 @@ class UsuarioController extends Controller
         $this->vendedorDAO->insertVend($vendedor);
     }
 
+    //Calcula a nota do vendedor
+    /*
+    public function calcularNotaVend($idVendedor){
+        $reviews = $this->reviewDAO->listReview($idVendedor);
+        $contador = 0;
+        $nota = 0;
+        $notaMedia = 0;
+
+        foreach($reviews as $rev){
+            $contador ++;
+            $nota += $rev->getAvaliacao;
+
+            $notaMedia = round($nota / $contador);
+        }
+
+        return $notaMedia;
+    }*/
+
 }
 
 #Criar objeto da classe

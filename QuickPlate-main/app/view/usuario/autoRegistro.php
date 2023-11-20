@@ -3,19 +3,17 @@ require_once("../util/config.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="../css/autoReg.css">
+<link href="../css/app.css" rel="stylesheet">
 
-<div class="col-4">
+<div class="col-4" style="margin-top: 5%; margin-left: 8%">
   <img src="../view/img/logo.png" class="logo" alt="logo">
+  <?php include(__DIR__ . "/../include/msg.php"); ?>
 </div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<div class="bg">
-  
 
-</div>
-
-<main class="form-signin">
+<main class="form-signin" style="margin-top: 5%; margin-left: 18%">
   
   <h1 class="h3" style="color:black">Registre-se aqui</h1>
   
@@ -70,9 +68,7 @@ require_once("../util/config.php");
     
     <br><br>
     
-    <?php 
-    include(__DIR__ . "/../include/msg.php"); 
-    ?>
+    
 
 </form>
 

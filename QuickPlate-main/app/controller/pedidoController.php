@@ -145,6 +145,7 @@ class PedidoController extends Controller
         $this->loadView("pedido/listProd.php", $dados,  $msgErro, $msgSucesso);
     }
 
+
     //Faz a listagem dos pedidos do vendedor
     protected function listPedVendedor()
     {
