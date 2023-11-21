@@ -49,9 +49,7 @@ class VendedorDAO {
         $stm->execute([$idUsuario]);
         $result = $stm->fetchAll();
 
-        $id = print_r($result[0]);
-
-        return $id;
+        return $result[0][0];
     }
 
     public function findVendedorById($idVendedor) {

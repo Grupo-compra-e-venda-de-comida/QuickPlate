@@ -90,7 +90,7 @@ class ReviewController extends Controller
                 $vendedores = $this->vendedorDAO->list();
                 $dados['listaVendedores'] = $vendedores;
 
-                $this->loadView("home/indexCliente.php", $dados, "", "Avaliação salva com sucesso.");
+                header("location: ../controller/homeController.php?action=homeCliente");
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar a avaliação na base de dados." . $e];
@@ -105,23 +105,15 @@ class ReviewController extends Controller
     }
 
     public function listReview(){
+        session_start();
 
         $idVendedor = $_GET["id"];
-        //$avaliacao = 0;
-
-        /*if(isset($_GET["aval"]))
-            $avaliacao = $_GET["aval"];*/
         
         $reviews = [];
-
-        //if($avaliacao)
-        //$reviews = $this->reviewDAO->listReviewByAval($idVendedor, $avaliacao);
-        //else
-            $reviews = $this->reviewDAO->listReview($idVendedor);
+        $reviews = $this->reviewDAO->listReview($idVendedor);
 
 
         $dados["listRev"] = $reviews;
-        //$dados["aval"] = $avaliacao;
 
         $this->loadView("review/listReview.php", $dados);
     }

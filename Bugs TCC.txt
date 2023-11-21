@@ -1,31 +1,23 @@
-Tela vendedor:
--‌Formatação da tabela
-‌-Colocar os botões pra cima
--‌Puxar tudo os meus produtos pro centro da tela
+*Menu da tela de perfil buga após atualizar
 
-Tela carrinho (Cliente)
-‌-Padronizar cards e título com a tela inicial
--‌Formatar os valores dos cards, tabela e total da compra
--Modal não funciona
+Vendedor ->
 
-Tela pedido(Cliente)
-‌-Aba itens dos cards não funcinando
-‌-Funcionalidade de pedidos já avaliado X
+	Tela de Editar Produto -> Sem menu
+			       -> Formatar página toda
+			       -> Sem Service
 
-Tela editar produto:
-‌Formatação da tela;
+	Tela de Ativar Produto -> Formatar página toda
 
-Tela pedido (vendedor):
-‌-Formatação da tabela itens (valor total)
-‌-Botão cancelar (mudar a função) X
-‌-Colocar um modal para adicionar pedidos
+Cliente ->
 
-Menu
-‌-Nas telas de item pendente ‌e nas telas de adicionar produto
+	Tela de Review -> Sessão expirada
+		       -> Formatar itens do menu
 
-Outros:
-‌-Menu cliente e menu pedido estão diferentes
-‌-Requisição Ajax do status.js X
--Atualizar o Bootstrap
+	Tela de Editar Perfil -> Formatar itens do menu
 
+	Tela de Iniciar Pedido -> Formatar itens do menu
+			       -> Adicionar funcionabilidade de 'segundo modal'
+				informando o usuário que o carrinho está vazio 
+                                                  ao apertar 'finalizar pedido'
 
+	Tela de Comentários -> Não aparece o nome do cliente

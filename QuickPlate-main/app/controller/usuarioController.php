@@ -79,6 +79,14 @@ class UsuarioController extends Controller
         $dados["documento"] = $documento;
         $dados["tipoPessoa"] = $tipoPessoa;
 
+        if($_SESSION[SESSAO_USUARIO_TIPO] = "V"){
+            $home = "homeVendedor"; 
+        } else if($_SESSION[SESSAO_USUARIO_TIPO] = "C"){
+            $home = "homeCliente"; 
+        }
+        
+        $dados["home"] = $home;
+
         $msgsErro = implode("<br>", $erros);
         $this->loadView("usuario/perfilEdit.php", $dados, $msgsErro);
     }

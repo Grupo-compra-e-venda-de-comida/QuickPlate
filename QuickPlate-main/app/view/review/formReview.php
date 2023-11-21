@@ -26,12 +26,10 @@ include_once(__DIR__ . "/../include/header.php")
                     <form method="POST" action="<?= BASEURL ?>/controller/reviewController.php?action=createReview">
                         <div class="form-floating mb-2">
                             <input type="hidden" class="form-control" id="idPedido" name="idPedido" readonly value="<?= ($_GET['idPedido']) ?>" />
-                            <label for="idPedido">ID: </label>
                         </div>
 
                         <div class="form-floating mb-2">
                             <input type="hidden" class="form-control" id="idVendedor" name="idVendedor" readonly value="<?= ($_GET['idVendedor']) ?>" />
-                            <label for="idVendedor">ID Vendedor: </label>
                         </div>
                                         
                         <div class="form-floating mb-2">

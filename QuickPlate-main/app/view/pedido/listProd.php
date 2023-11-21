@@ -38,7 +38,7 @@ require_once(__DIR__ . "/../include/header.php");
                                         <h4 class="card-title"><?= $prod->getNomeProduto(); ?></h4>
                                         <p class="card-text"><b>Categoria:</b> <?= $prod->getCategoriaDesc(); ?></p>
                                         <p class="card-text"><b>Descrição: </b> <?= $prod->getDetalhes(); ?></p>
-                                        <p class="card-text"><b>Preço:</b> R$ <?= $prod->getPrecoProdutoFormatado(); ?></p>
+                                        <p class="card-text"><b>Preço:</b> R$ <?= $prod->getPrecoProduto(); ?></p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-body-secondary-center"><button class="btn btn-outline-success" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);">Adicionar</button></small>

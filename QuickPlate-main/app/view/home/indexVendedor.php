@@ -66,9 +66,9 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
                   </a>
                 </td>
                 <td>
-                  <a class="btn btn-danger" onclick="return confirm('Confirma a exclusão do produto?');" 
-                  href="<?= BASEURL ?>/controller/produtoController.php?action=deleteProd&id=<?= $prod->getIdProduto() ?>">
-                    Excluir
+                  <a class="btn btn-danger" onclick="return confirm('Confirma a inativação do produto?');" 
+                  href="<?= BASEURL ?>/controller/produtoController.php?action=inativarProd&id=<?= $prod->getIdProduto() ?>">
+                    Inativar
                   </a>
                 </td>
               </tr>

@@ -112,28 +112,16 @@ class ReviewDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM review WHERE id_vendedor = :id_vendedor ORDER BY id_review";
+        $sql = "SELECT r.*, c.id_cliente, uc.nome
+                FROM review r
+                JOIN pedido p ON (p.id_pedido = r.id_pedido)
+                JOIN cliente c ON (c.id_cliente = p.id_cliente)
+                JOIN usuario uc ON (uc.id_usuario = c.id_usuario)
+                WHERE p.id_vendedor = :id_vendedor
+                ORDER BY r.id_review";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("id_vendedor", $idVendedor);
-        $stm->execute();
-        $result = $stm->fetchAll();
-
-        return $this->mapReviews($result);
-    }
-
-    //Listagem das reviews filtrada
-    public function listReviewByAval($idVendedor, $avaliacao)
-    {
-        $conn = Connection::getConn();
-
-        $sql = "SELECT * FROM review r " .
-        " WHERE r.id_vendedor = :id_vendedor AND r.avaliacao = :avaliacao" .
-        " ORDER BY id_review";
-
-        $stm = $conn->prepare($sql);
-        $stm->bindValue("id_vendedor", $idVendedor);
-        $stm->bindValue("avaliacao", $avaliacao);
         $stm->execute();
         $result = $stm->fetchAll();
 

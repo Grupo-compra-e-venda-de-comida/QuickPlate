@@ -20,7 +20,7 @@ require_once(__DIR__ . "/../include/header.php");
 
     <div class="container-fluid">
 
-        <!-- Tabela de Usuarios -->
+        <!-- Tabela de Reviews -->
         <div class="text-lg-start text-muted">
 
             <div class="page-title m-4">
@@ -42,12 +42,11 @@ require_once(__DIR__ . "/../include/header.php");
                     </thead>
                     <tbody>
                     <?php
-                    //print_r($dados['listRev']);
                     foreach ($dados['listRev'] as $rev) :
                     ?>
                         <tr>
-                            <td><?= "nome do cliente" ?></td>
-                            <td><?= $rev->getAvaliacao(); ?></td>
+                            <td><?= $rev->getNomeCliente(); ?></td>
+                            <td><?= $rev->getAvaliacao(); ?><span class="rating-star">&#9733;</span></td>
                             <td><?= $rev->getComentario(); ?></td>
                         </tr>
                     <?php endforeach; ?>

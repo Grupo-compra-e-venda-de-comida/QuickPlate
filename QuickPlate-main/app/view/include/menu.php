@@ -22,9 +22,9 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
       </button>
 
       <div class="navbar-collapse collapse" id="navbarCollapse">
-     
-          <a class="nav-link" href="#" style="margin-left: 45%;"><span> <?php echo $nome; ?></span></a>
-       
+
+        <a class="nav-link" href="#" style="margin-left: 45%;"><span> <?php echo $nome; ?></span></a>
+
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -36,7 +36,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="usuarioController.php?action=pagEdit"><i class="bi bi-person"></i>Perfil</a>
+            <a class="nav-link" href="usuarioController.php?action=pagEdit&id=<?= $_SESSION[SESSAO_USUARIO_ID] ?>"><i class="bi bi-person"></i>Perfil</a>
           </li>
 
           <li class="nav-item active">

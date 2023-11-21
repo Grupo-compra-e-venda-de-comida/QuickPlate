@@ -63,6 +63,7 @@ class ProdutoController extends Controller
         $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
 
         $dados['idVendedor'] = $idVendedor;
+        $ativoProduto = "A";
 
         //Cria objeto Produto
         $produto = new Produto();
@@ -71,6 +72,7 @@ class ProdutoController extends Controller
         $produto->setCategoriaProduto($catProd);
         $produto->setDetalhes($detalhes);
         $produto->setIdVendedor($idVendedor);
+        $produto->setAtivoProduto($ativoProduto);
 
         //Validar os dados
         $erros = $this->produtoService->validarDadosProd($produto);
@@ -106,6 +108,15 @@ class ProdutoController extends Controller
         $this->loadView("produto/listProd.php", $dados,  $msgErro, $msgSucesso);
     }
 
+    protected function listProdIna(string $msgErro = "", string $msgSucesso = "") {
+        $idVendedor = $this->vendedorDAO->findVendId();
+
+        $produtos = $this->produtoDAO->listProdByIdVendedorIna($idVendedor);
+        $dados["listProdIna"] = $produtos;
+
+        $this->loadView("produto/listProdIna.php", $dados,  $msgErro, $msgSucesso);
+    }
+
     protected function updateProd() {
         
         //Captura os dados do formulário
@@ -115,6 +126,7 @@ class ProdutoController extends Controller
         $precoProd = isset($_POST['precoProd']) ? trim($_POST['precoProd']) : 0;
         $detalhes = isset($_POST['detalhes']) ? trim($_POST['detalhes']) : NULL;
         $idVendedor = isset($_POST['idVendedor']) ? trim($_POST['idVendedor']) : NULL;
+        $ativoProduto = "A";
 
         //Cria objeto Produto
         $produto = new Produto();
@@ -124,6 +136,7 @@ class ProdutoController extends Controller
         $produto->setPrecoProduto($precoProd);
         $produto->setDetalhes($detalhes);
         $produto->setIdVendedor($idVendedor);
+        $produto->setAtivoProduto($ativoProduto);
 
         //Validar os dados
         $erros = $this->produtoService->validarDadosProd($produto);
@@ -175,14 +188,27 @@ class ProdutoController extends Controller
         return $produto;
     }
 
-    protected function deleteProd()
+    protected function inativarProd()
     {
         $produto = $this->findProdutoById();
         if ($produto) {
-            $this->produtoDAO->deleteProdById($produto->getIdProduto());
+            $this->produtoDAO->inativarProdById($produto->getIdProduto());
             $dados["listProd"] = $this->produtoDAO->listProdByIdVendedor($produto->getIdVendedor());
 
             $this->loadView("home/indexVendedor.php", $dados);
+            
+        } else
+            $this->listProd("Produto não econtrado!");
+    }
+
+    protected function ativarProd()
+    {
+        $produto = $this->findProdutoById();
+        if ($produto) {
+            $this->produtoDAO->ativarProdById($produto->getIdProduto());
+            $dados["listProdIna"] = $this->produtoDAO->listProdByIdVendedorIna($produto->getIdVendedor());
+
+            $this->loadView("produto/listProdIna.php", $dados);
             
         } else
             $this->listProd("Produto não econtrado!");

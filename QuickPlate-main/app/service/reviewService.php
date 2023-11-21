@@ -14,7 +14,9 @@ class ReviewService
         //Validar campos vazios
         if (!$review->getAvaliacao())
             array_push($erros, "O campo [Avaliação] é obrigatório.");
-            
+        if (!$review->getComentario())
+            array_push($erros, "O campo [Comentário] é obrigatório.");
+
         return $erros;
     }
 }

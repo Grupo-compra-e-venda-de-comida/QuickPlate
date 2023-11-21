@@ -1,0 +1,12 @@
+.navbar-brand {
+    display: block;
+    max-width: 160px;
+}
+
+
+/* 25/10 */
+
+.navbar {
+    border-bottom: solid 2px #ccc;
+}
+
