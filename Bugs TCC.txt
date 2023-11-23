@@ -1,23 +1,8 @@
-*Menu da tela de perfil buga após atualizar
+Geral:
+- Perfil edit n funciona (service buga por conta do tipoUsuario)
 
-Vendedor ->
-
-	Tela de Editar Produto -> Sem menu
-			       -> Formatar página toda
-			       -> Sem Service
-
-	Tela de Ativar Produto -> Formatar página toda
-
-Cliente ->
-
-	Tela de Review -> Sessão expirada
-		       -> Formatar itens do menu
-
-	Tela de Editar Perfil -> Formatar itens do menu
-
-	Tela de Iniciar Pedido -> Formatar itens do menu
-			       -> Adicionar funcionabilidade de 'segundo modal'
-				informando o usuário que o carrinho está vazio 
-                                                  ao apertar 'finalizar pedido'
-
-	Tela de Comentários -> Não aparece o nome do cliente
+Cliente:
+- Limitar a 1 review por cliente
+- Quando realiza o pedido o idCliente é sempre = 1
+- Botão de finalizar pedido n desaparece caso exclua todos os itens
+- Sessão expirada na tela de review

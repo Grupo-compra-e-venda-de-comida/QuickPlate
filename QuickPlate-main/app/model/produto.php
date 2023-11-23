@@ -148,6 +148,12 @@ class Produto implements JsonSerializable
         return $this;
     }
 
+    public function getPrecoProdutoFormatado() {
+        $precoProduto = $this->getPrecoProduto();
+
+        return number_format($precoProduto, 2, ',', '.');
+    }
+
     /**
      * Get the value of precoProduto
      */ 

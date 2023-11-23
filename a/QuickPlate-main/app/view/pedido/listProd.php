@@ -6,7 +6,6 @@ require_once(__DIR__ . "/../include/header.php");
 
 <link href="../css/estiloMenu.css" rel="stylesheet">
 <link href="../css/app.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="container-fluid pb-5" style="margin-top: 150px; margin-bottom: 75px;">
 
@@ -39,10 +38,10 @@ require_once(__DIR__ . "/../include/header.php");
                                         <h4 class="card-title"><?= $prod->getNomeProduto(); ?></h4>
                                         <p class="card-text"><b>Categoria:</b> <?= $prod->getCategoriaDesc(); ?></p>
                                         <p class="card-text"><b>Descrição: </b> <?= $prod->getDetalhes(); ?></p>
-                                        <p class="card-text"><b>Preço:</b> R$ <?= $prod->getPrecoProdutoFormatado(); ?></p>
+                                        <p class="card-text"><b>Preço:</b> R$ <?= $prod->getPrecoProduto(); ?></p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-body-secondary-center"><button class="btn btn-outline-success" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);validarBtn();">Adicionar</button></small>
+                                        <small class="text-body-secondary-center"><button class="btn btn-outline-success" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);">Adicionar</button></small>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +60,7 @@ require_once(__DIR__ . "/../include/header.php");
                         <div class="col d-flex justify-content-end">
                             <a href="../controller/homeController.php?action=homeCliente" class="btn btn-success mr-2 ">Voltar</a>
                             <!-- Botão para acionar o modal -->
-                            <button type="button" id="btnFinalizar" class="btn btn-success mr-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled onclick="finalizarPedido(<?= $dados['idVendedor'] ?>);">
+                            <button type="button" id="btnFinalizar" class="btn btn-success mr-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="finalizarPedido(<?= $dados['idVendedor'] ?>);">
                                 Finalizar Pedido
                             </button>
 
@@ -71,6 +70,7 @@ require_once(__DIR__ . "/../include/header.php");
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">PEDIDO CONCLUIDO COM SUCESSO!</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             Seu pedido foi concluído com sucesso!<br>
@@ -82,6 +82,27 @@ require_once(__DIR__ . "/../include/header.php");
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- Modal 2 -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

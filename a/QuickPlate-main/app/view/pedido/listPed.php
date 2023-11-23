@@ -6,12 +6,10 @@ require_once(__DIR__ . "/../include/header.php");
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 <link href="../css/sticky-footer.css" rel="stylesheet">
-<link href="../css/estiloMenu2.css" rel="stylesheet">
-<link href="../css/app.css" rel="stylesheet">
 
 <script src="../js/status.js"></script>
 
-<div class="container-fluid pb-5" style="margin-top: 150px; margin-bottom: 75px;">
+<div class="container-fluid pb-5" style="margin-top: 270px; margin-bottom: 75px;">
 
     <!-- Navbar -->
     <div class="row">
@@ -68,7 +66,7 @@ require_once(__DIR__ . "/../include/header.php");
 
                                     <div class="tab-pane fade show active" id="home-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                         <h5 class="card-title">Dados do pedido: </h5>
-                                        <span><b>Cliente: </b></span><span><?= $ped->getNomeCliente() ?> </span><br>
+                                        <span><b>Vendedor: </b></span><span><?= $ped->getNomeVendedor() ?> </span><br>
                                         <span><b>Status do Pedido: </b></span><span><?= $ped->getStatusDesc() ?></span><br>
                                         <span><b>Valor do Pedido: </b></span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
                                     </div>
@@ -119,7 +117,13 @@ require_once(__DIR__ . "/../include/header.php");
                                 </div>
                             </div>
                             <div class="card-footer">
-
+                                <small class="text-body-secondary-center">
+                                    <?php if (!$ped->getReview()) : ?>
+                                        <a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido(); ?>">Avaliar Pedido</a>
+                                    <?php else : ?>
+                                        Pedido já Avaliado
+                                    <?php endif; ?>
+                                </small>
                             </div>
                         </div>
                     </div>

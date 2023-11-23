@@ -25,13 +25,13 @@ include_once(__DIR__ . "/../include/header.php")
 
         <form method="POST" action="<?= BASEURL ?>/controller/produtoController.php?action=createProd">
 
-          <div class="form mb-2">
+          <div class="form mb-2 ">
             <input type="text" class="form-control" placeholder="Titulo:" id="nomeProd" name="nomeProd" 
             value="<?= (isset($dados['produto']) ? $dados['produto']->getNomeProduto() : ''); ?>"/>
             <label for="nomeProduto"></label>
           </div>
 
-          <div class="form mb-2">
+          <div class="form mb-2 ">
             <input type="number" class="form-control" placeholder="Preço:" id="precoProd" name="precoProd" 
             value="<?= (isset($dados['produto']) ? $dados['produto']->getPrecoProduto() : ''); ?>"/>
             <label for="precoProd"></label>

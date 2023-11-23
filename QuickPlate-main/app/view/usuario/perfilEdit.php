@@ -3,6 +3,8 @@ require_once("../util/config.php");
 include_once(__DIR__ . "/../include/header.php")
 ?>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../css/autoReg.css">
 <link href="../css/estiloMenu.css" rel="stylesheet">
 <link href="../css/app.css" rel="stylesheet">
@@ -23,53 +25,36 @@ include_once(__DIR__ . "/../include/header.php")
   </div>
 
   <div class="container-fluid">
-    <div class="text-lg-start text-muted">
-      <div class="page-title m-4">
-        <h2><span>Editar Perfil</span></h2>
-      </div>
-      <div class="row" style="margin-left: 45.5%; margin-top: 2%">
+
+    <main class="form-signin" style= "top: 80%; left: 50%;">
+
+      <h1 class="h3" style= "top: 40%; left: 50%; font-size:25px;">Editar Perfil</h1>
 
         <form method="POST" action="<?= BASEURL ?>/controller/usuarioController.php?action=update">
 
-          <div>
-            <label class="selectlabel mb-1">Tipo de Usuário</label>
-            <select class="select" id="tipo" name="tipo" onchange="mostrar()">
-              <option value="C" <?php echo (isset($dados['usuario']) && $dados['usuario']->getTipo() == 'C' ? 'selected' : ''); ?>>Cliente</option>
-              <option value="V" <?php echo (isset($dados['usuario']) && $dados['usuario']->getTipo() == 'V' ? 'selected' : ''); ?>>Vendedor</option>
-            </select>
+          <div class="form mb-2 ">
+            <label for="nome">Nome:</label>
+            <input class="form-control" type="text" id="nome" name="nome" value="<?= $dados['usuario']->getNome(); ?>">
+            
           </div>
 
-
-          <div id="divTipoVend" class="form-group" style="display: none;">
-            <label class="selectlabel mb-1">Tipo de Vendedor</label>
-            <select class="select" id="tipoPessoa" name="tipoPessoa">
-              <option value="F" <?php echo (isset($dados['tipoPessoa']) && $dados['tipoPessoa'] == 'F' ? 'selected' : ''); ?>>Física</option>
-              <option value="J" <?php echo (isset($dados['tipoPessoa']) && $dados['tipoPessoa'] == 'J' ? 'selected' : ''); ?>>Jurídica</option>
-            </select>
-          </div>
-
-          <div class="form-floating mb-2 ">
-            <label for="nome">Nome</label>
-            <input type="nome" class="form-control" id="nome" name="nome" value="<?= $dados['usuario']->getNome(); ?>" />
-          </div>
-
-          <div class="form-floating mb-2 ">
-            <label for="email">E-mail</label>
+          <div class="form mb-2 ">
+            <label for="email">E-mail:</label>
             <input type="email" class="form-control" id="email" name="email" value="<?= $dados['usuario']->getEmail(); ?>" />
           </div>
 
-          <div class="form-floating mb-2 ">
-            <label for="documento">CPF ou CNPJ</label>
+          <div class="form mb-2 ">
+            <label for="documento">CPF ou CNPJ:</label>
             <input type="text" class="form-control" id="documento" name="documento" readonly value="<?= $dados['documento']; ?>" />
           </div>
 
-          <div class="form-floating">
-            <label for="senha">Senha</label>
+          <div class="form mb-2">
+            <label for="senha">Senha:</label>
             <input type="text" class="form-control" id="senha" name="senha" value="<?= $dados['usuario']->getSenha(); ?>" />
           </div>
 
-          <div class="form-floating">
-            <label for="senha">Confirmar Senha</label>
+          <div class="form mb-2">
+            <label for="senha">Confirmar Senha:</label>
             <input type="password" class="form-control" id="confSenha" name="confSenha" />
           </div>
 
@@ -79,10 +64,9 @@ include_once(__DIR__ . "/../include/header.php")
 
           <?php include(__DIR__ . "/../include/msg.php"); ?>
 
-        </form>
-      </div>
-    </div>
-  </div>
+        </form> 
+
+    </main>
 </div>
 </div>
 

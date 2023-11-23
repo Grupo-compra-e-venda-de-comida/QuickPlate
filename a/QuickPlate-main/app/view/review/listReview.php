@@ -1,8 +1,10 @@
 <?php
+#Nome do arquivo: home/index.php
+#Objetivo: interface com a página inicial do sistema do Administrador
+
 require_once(__DIR__ . "/../include/header.php");
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="../js/review.js"></script>
 <link href="../css/estiloMenu.css" rel="stylesheet">
 <link href="../css/app.css" rel="stylesheet">

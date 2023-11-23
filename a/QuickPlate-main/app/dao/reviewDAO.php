@@ -125,7 +125,7 @@ class ReviewDAO
         $stm->bindValue("id_vendedor", $idVendedor);
         $stm->execute();
         $result = $stm->fetchAll();
-
+        
         return $this->mapReviews($result);
     }
 }

@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS vendedor (
 );
 ALTER TABLE vendedor ADD CONSTRAINT fk_usuario_vendedor FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario);
 
+
 /* CLIENTE */
 CREATE TABLE IF NOT EXISTS cliente (
   id_cliente INT NOT NULL AUTO_INCREMENT,
@@ -28,6 +29,8 @@ CREATE TABLE IF NOT EXISTS cliente (
 );
 ALTER TABLE cliente ADD CONSTRAINT fk_usuario_cliente FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario);
 
+
+
 INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("admin@gmail.com", "senhaADM", "A", "Adminsitrador", 'A');
 
 INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("cliente@gmail.com", "senhaCLI", "C", "Cliente", 'A');
@@ -35,6 +38,8 @@ INSERT INTO cliente (cpf, id_usuario) VALUES ("11111111111", (SELECT id_usuario 
 
 INSERT INTO usuario (email_usuario, senha_usuario, tipo_usuario, nome, ativo) VALUES ("vendedor@gmail.com", "senhaVEN", "V", "Vendedor", 'A');
 INSERT INTO vendedor (tipo_pessoa, cpf_cnpj, id_usuario) VALUES ("F", "22222222222", (SELECT id_usuario FROM usuario WHERE email_usuario = 'vendedor@gmail.com'));
+
+
 
 /* Produto */
 CREATE TABLE produto
@@ -45,7 +50,6 @@ CREATE TABLE produto
     categoria_produto varchar(1) NOT NULL,
     detalhes text(120) NOT NULL,
     id_vendedor INT NOT NULL,
-    ativo_produto VARCHAR(1) NOT NULL, /* I=INATIVO, A=ATIVO */
     CONSTRAINT pk_produto PRIMARY KEY (id_produto)
 );
 ALTER TABLE produto ADD CONSTRAINT fk_vendedor_produto FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);
@@ -56,7 +60,7 @@ CREATE TABLE pedido
     id_pedido INT NOT NULL AUTO_INCREMENT,
     id_vendedor INT NOT NULL,
     id_cliente INT NOT NULL,
-    status VARCHAR(2) NOT NULL,  /* P = PROCESSANDO PEDIDO / PP = PREPARANDO PEDIDO / C = PEDIDO CONCLUÌDO / CC = PEDIDO CANCELADO / E = PEDIDO ENTREGUE */
+    status VARCHAR(1) NOT NULL,  /* P = PROCESSANDO PEDIDO C = PEDIDO CONCLUÌDO */
     CONSTRAINT pk_pedido PRIMARY KEY (id_pedido)
 );
 ALTER TABLE pedido ADD CONSTRAINT fk_vendedor_pedido FOREIGN KEY (id_vendedor) REFERENCES vendedor (id_vendedor);
@@ -81,6 +85,7 @@ CREATE TABLE review
 (
     id_review INT NOT NULL AUTO_INCREMENT,
     id_pedido INT NOT NULL,
+    id_vendedor INT NOT NULL,
     avaliacao INT NOT NULL,
     comentario VARCHAR(120),
     CONSTRAINT pk_review PRIMARY KEY (id_review)

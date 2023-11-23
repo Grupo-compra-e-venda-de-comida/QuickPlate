@@ -1,0 +1,30 @@
+.logo {
+    float: left;
+    max-width: 20%;
+    max-height: 150px;
+    margin-left: 50px;
+    margin-top: 15px;
+    
+}
+
+.chat {
+    max-width: 35px;
+    margin-top: 60px;
+    margin-left: 900px;
+}
+
+.sair {
+    font-weight: bold;
+    float: right;
+    margin-top: 70px;
+    margin-right: 20px;
+    color: #76D44A; 
+} 
+
+.navbar-brand {
+    display: block;
+    max-width: 160px;
+}
+.navbar {
+    border-bottom: solid 10px #ccc;    
+}

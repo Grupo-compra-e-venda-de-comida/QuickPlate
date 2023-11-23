@@ -202,15 +202,7 @@ function calcTotalPedido() {
     //label.textContent = TOTAL_PEDIDO;
 }
 
-function validarBtn() {
-    var total = document.getElementById("total");
-    var btn = document.getElementById("btnFinalizar");
-
-    btn.removeAttribute("disabled");
-}
-
 function finalizarPedido(idVendedor) {
-
     //Criar a requisição
     var url = "pedidoController.php?action=finishPed&idVendedor="+idVendedor;
     var xhttp = new XMLHttpRequest();
@@ -225,13 +217,14 @@ function finalizarPedido(idVendedor) {
     let totais = document.querySelectorAll("[id^='"+TOTAL_ID+"']");
 
     var modal = document.getElementById("modal");
+    var btn = document.getElementById("btnFinalizar")
 
     for(let i=0; i<qtds.length; i++) {
 
         const item = {idProduto: ids[i].value,
-                    valor: precos[i].value, //Valor unitário
-                    qtd: qtds[i].value, 
-                    total: totais[i].value}; //valor do item
+                      valor: precos[i].value, //Valor unitário
+                      qtd: qtds[i].value, 
+                      total: totais[i].value}; //valor do item
         itens.push(item);
     }
 
@@ -239,6 +232,12 @@ function finalizarPedido(idVendedor) {
 
     xhttp.onload = function() {
         var retorno = xhttp.responseText;
+
+        if(totais==0){
+            btn.removeAttribute("data-bs-target");
+            btn.setAttribute("data-bs-target", "#exampleModal");
+        }
+
     };
 
     //Enviar a requisição

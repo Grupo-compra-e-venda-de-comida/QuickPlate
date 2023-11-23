@@ -1,4 +1,5 @@
 <?php
+
 require_once(__DIR__ . "/../../controller/produtoController.php");
 ?>
 
@@ -31,16 +32,13 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
 <div class="container-fluid">
 
   <!-- Listagem de Produtos -->
-  <!-- style="position: absolute; top: 20%; left: 42%; font-size:25px;" -->
-  <div class="text-lg-start text-muted">
+  <div class="container d-flex justify-content-left" style="position: absolute; top: 20%; left: 42%; font-size:25px;">
 
-    <div class="page-title">
-      <h2><span>Meus Produtos</span></h2>
-    </div>
-    
-    <div class="row mt-5">
+  <h2 style="left:90px">Meus Produtos</h2>
+
+    <div class="row mt-5" style="position: absolute;">
       <div class="col">
-        <table id="tabUsuarios" class='table table-striped table-bordered' style="text-align: center;">
+        <table id="tabUsuarios" class='table table-striped table-bordered'>
           <thead>
             <tr>
               <th>ID</th>
@@ -49,7 +47,7 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
               <th>Categorias</th>
               <th>Detalhes</th>
               <th>Alterar</th>
-              <th>Inativar</th>
+              <th>Excluir</th>
             </tr>
           </thead>
           <tbody>
@@ -59,7 +57,7 @@ require_once(__DIR__ . "/../../controller/produtoController.php");
               <tr>
                 <td><?php echo $prod->getIdProduto(); ?></td>
                 <td><?= $prod->getNomeProduto(); ?></td>
-                <td><?= $prod->getPrecoProdutoFormatado(); ?></td>
+                <td><?= $prod->getPrecoProduto(); ?></td>
                 <td><?= $prod->getCategoriaDesc(); ?></td>
                 <td><?= $prod->getDetalhes(); ?></td>
                 <td>

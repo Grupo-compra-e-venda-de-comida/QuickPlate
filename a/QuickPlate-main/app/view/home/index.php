@@ -7,12 +7,11 @@ require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 require_once(__DIR__ . "/../../controller/usuarioController.php")
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="../js/login.js"></script>
-<link href="../css/estiloMenu3.css" rel="stylesheet">
+<link href="../css/estiloMenu.css" rel="stylesheet">
 <link href="../css/app.css" rel="stylesheet">
 
-<div class="container-fluid pb-5" style="padding-top: 70px; margin-bottom: 75px;">
+<div class="container-fluid pb-5" style="padding-top: 120px; margin-bottom: 75px;">
     <!-- Navbar -->
     <div class="row">
         <?php
@@ -20,7 +19,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
         ?>
     </div>
 
-    <div class="container-fluid mt-3">
+    <div class="container-fluid">
 
         <!-- Tabela de Usuarios -->
         <div class="text-lg-start text-muted">
