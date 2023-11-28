@@ -199,6 +199,12 @@ function calcTotalPedido() {
     var label = document.querySelector("#total");
     label.textContent = totalCompra;
 
+    if(totalCompra != 0){
+        validarBtn();
+    }else {
+        invalidarBtn();
+    }
+
     //label.textContent = TOTAL_PEDIDO;
 }
 
@@ -207,6 +213,11 @@ function validarBtn() {
     var btn = document.getElementById("btnFinalizar");
 
     btn.removeAttribute("disabled");
+}
+function invalidarBtn() {
+    var btn = document.getElementById("btnFinalizar");
+
+    btn.setAttribute("disabled", "");
 }
 
 function finalizarPedido(idVendedor) {
@@ -239,6 +250,7 @@ function finalizarPedido(idVendedor) {
 
     xhttp.onload = function() {
         var retorno = xhttp.responseText;
+        //console.log(retorno);
     };
 
     //Enviar a requisição

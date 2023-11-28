@@ -3,6 +3,7 @@ require_once(__DIR__ . "/controller.php");
 require_once(__DIR__ . "/../dao/vendedorDAO.php");
 require_once(__DIR__ . "/../dao/produtoDAO.php");
 require_once(__DIR__ . "/../dao/clienteDAO.php");
+require_once(__DIR__ . "/../dao/reviewDAO.php");
 require_once(__DIR__ . "/../dao/pedidoDAO.php");
 require_once(__DIR__ . "/../model/produto.php");
 require_once(__DIR__ . "/../model/vendedor.php");
@@ -17,6 +18,7 @@ class PedidoController extends Controller
     private ClienteDAO $clienteDAO;
     private VendedorDAO $vendedorDAO;
     private PedidoDAO $pedidoDAO;
+    private ReviewDAO $reviewDAO;
 
 
     public function __construct()
@@ -26,6 +28,7 @@ class PedidoController extends Controller
         $this->clienteDAO = new ClienteDAO();
         $this->vendedorDAO = new VendedorDAO();
         $this->pedidoDAO = new PedidoDAO();
+        $this->reviewDAO = new ReviewDAO();
 
         //Verificar se o usuário está logado
         if (!$this->usuarioLogado()) {
@@ -38,14 +41,6 @@ class PedidoController extends Controller
 
         $this->handleAction();
     }
-
-    public function openPage()
-    {
-        $idVendedor = $_GET['idVendedor'];
-        $this->loadView("pedido/pagPedido.php", []);
-    }
-
-
 
     public function addPed()
     {
@@ -188,12 +183,12 @@ class PedidoController extends Controller
         else
             $pedidos = $this->pedidoDAO->listPedidosCliente($idUsuario);
 
-        //Carregando os itens de cada pedido
         foreach ($pedidos as $ped) {
+            //Carregando os itens de cada pedido
             $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
 
-            //TODO - Verificar se o pedido foi avaliado
-            $ped->setReview(null);
+            //Carregar a revisão de cada pedido
+            $ped->setReview($this->reviewDAO->findReviewByIdPedido($ped->getIdPedido()));
         }
 
         $dados["listPed"] = $pedidos;

@@ -8,6 +8,8 @@ class Pedido implements JsonSerializable
     public static $PROCESSANDO = "P";
     public static $PREPARANDO = "PP";
     public static $CONCLUIDO = "C";
+    public static $CANCELADO = "CC";
+    public static $ENTREGUE = "E";
 
     //Pedido
     private $idPedido;
@@ -49,6 +51,10 @@ class Pedido implements JsonSerializable
 
             case 'C':
                 $statusDesc = "Concluído";
+                break;
+
+            case 'CC':
+                $statusDesc = "Cancelado";
                 break;
 
             case 'E':
@@ -220,9 +226,6 @@ class Pedido implements JsonSerializable
 
         return number_format($precoPedido, 2, ',', '.');
     }
-
-
-    
 
     /**
      * Get the value of review

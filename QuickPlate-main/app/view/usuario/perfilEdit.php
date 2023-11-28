@@ -54,11 +54,11 @@ include_once(__DIR__ . "/../include/header.php")
           </div>
 
           <div class="form mb-2">
-            <label for="senha">Confirmar Senha:</label>
+            <label class="form-label" for="confSenha">Confirmar Senha:</label>
             <input type="password" class="form-control" id="confSenha" name="confSenha" />
           </div>
 
-          <button class="w-100 btn btn-lg btn-success mb-2" type="submit">Atualizar</button>
+          <button class="w-100 btn btn-lg btn-success mb-2 mt-2" type="submit">Atualizar</button>
           <a class="w-100 btn btn-lg btn-success" href="homeController.php?action=<?= $dados["home"] ?>">Voltar</a>
           <br><br>
 

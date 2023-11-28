@@ -31,6 +31,12 @@ class UsuarioController extends Controller
 
     protected function list(string $msgErro = "", string $msgSucesso = "")
     {
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+        
         $usuarios = $this->usuarioDAO->list();
         $dados["listaUsuarios"] = $usuarios;
 
@@ -45,9 +51,12 @@ class UsuarioController extends Controller
     //Atualiza o perfil do usuario
     protected function update()
     {
-        //Inicia o session
-        $this->usuarioLogado();
-
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+        
         //Captura os dados do formulário
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
         $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;
@@ -68,7 +77,7 @@ class UsuarioController extends Controller
         $usuario->setIdUsuario($idUsuario);
 
         //Validar os dados
-        $erros = $this->usuarioService->validarDados($usuario, $confSenha, $documento, $tipoPessoa);
+        $erros = $this->usuarioService->validarDadosPefil($usuario, $confSenha);
 
         if (empty($erros))
             $this->usuarioDAO->update($usuario);
@@ -79,9 +88,9 @@ class UsuarioController extends Controller
         $dados["documento"] = $documento;
         $dados["tipoPessoa"] = $tipoPessoa;
 
-        if($_SESSION[SESSAO_USUARIO_TIPO] = "V"){
+        if($_SESSION[SESSAO_USUARIO_TIPO] == "V"){
             $home = "homeVendedor"; 
-        } else if($_SESSION[SESSAO_USUARIO_TIPO] = "C"){
+        } else if($_SESSION[SESSAO_USUARIO_TIPO] == "C"){
             $home = "homeCliente"; 
         }
         
@@ -94,7 +103,12 @@ class UsuarioController extends Controller
     //Carrega a página de edição de perfil
     protected function pagEdit()
     { 
-        session_start();
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+
         $id = $_SESSION[SESSAO_USUARIO_ID];
         $usuario = $this->usuarioDAO->findById($id);
 
@@ -192,6 +206,12 @@ class UsuarioController extends Controller
     //Inativa o usuario
     protected function inativar()
     {
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+        
         $usuario = $this->findUsuarioById();
         if ($usuario) {
             $this->usuarioDAO->inativar($usuario->getIdUsuario());
@@ -204,6 +224,12 @@ class UsuarioController extends Controller
     //Ativa o usuario
     protected function ativar()
     {
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+
         $usuario = $this->findUsuarioById();
         if ($usuario) {
             $this->usuarioDAO->ativar($usuario->getIdUsuario());

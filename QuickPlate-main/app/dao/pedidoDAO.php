@@ -1,6 +1,7 @@
 <?php
 
 require_once("../model/pedido.php");
+require_once("../model/produto.php");
 require_once("../model/pedidoItem.php");
 
 
@@ -30,6 +31,31 @@ class PedidoDAO
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM pedido p WHERE id_pedido = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idPedido]);
+        $result = $stm->fetchAll();
+
+        $pedidos = $this->mapPedidos($result);
+
+        if (count($pedidos) == 1)
+            return $pedidos[0];
+        elseif (count($pedidos) == 0)
+            return null;
+
+        die("pedidoDAO.findPedidoById()" .
+            " - Erro: mais de um pedido encontrado.");
+    }
+
+    public function findPedidoByIdCompleto(int $idPedido)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT p.*, u_vend.nome AS nome_vend " . 
+                " FROM pedido p " .
+                " JOIN cliente c ON (c.id_cliente = p.id_cliente)" .
+                " JOIN vendedor v ON (v.id_vendedor = p.id_vendedor)" .
+                " JOIN usuario u_vend ON (u_vend.id_usuario = v.id_usuario)" . 
+                " WHERE p.id_pedido = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$idPedido]);
         $result = $stm->fetchAll();

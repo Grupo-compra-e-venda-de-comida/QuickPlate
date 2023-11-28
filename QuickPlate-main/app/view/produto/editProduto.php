@@ -56,10 +56,13 @@ include_once(__DIR__ . "/../include/header.php")
 
                     <input type="hidden" id="idVendedor" name="idVendedor" value="<?= $dados['idVendedor']; ?>" />
 
-                    <button class="w-100 btn btn-lg btn-success mt-2 mb-2" type="submit">Atualizar</button>
+                    <button class="w-100 btn btn-lg btn-success mt-4 mb-2" type="submit">Atualizar</button>
 
                     <a href="../controller/homeController.php?action=homeVendedor" class="w-100 btn btn-lg btn-success">Voltar</a>
                 </form>
+
+                <?php include(__DIR__ . "/../include/msg.php"); ?>
+
             </div>
         </main>
 

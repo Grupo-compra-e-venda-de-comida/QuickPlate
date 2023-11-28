@@ -8,16 +8,16 @@ function changeStatus(idPedido, status){
     
         xhttp.onload = function() {
             if (status == "PP"){
-                label.innerHTML = "preparando";
+                label.innerHTML = "Preparando";
             }
             else if (status == "C"){
-                label.innerHTML = "concluido";
+                label.innerHTML = "Concluido";
             }
             else if (status == "E"){
-                label.innerHTML = "entregue";
+                label.innerHTML = "Entregue";
             }
             else if (status == "CC"){
-                label.innerHTML = "cancelado";
+                label.innerHTML = "Cancelado";
             }
         };
 

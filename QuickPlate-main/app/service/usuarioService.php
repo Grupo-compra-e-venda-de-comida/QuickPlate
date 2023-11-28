@@ -29,9 +29,6 @@ class UsuarioService
         if (!$confSenha)
             array_push($erros, "O campo [Confirmação da senha] é obrigatório.");
 
-        /*if (!$usuario->getTipo())
-            array_push($erros, "Selecion um tipo de usuario no campo [Tipos do usuário].");*/
-
         //Validar se a senha é igual a contra senha
         if ($usuario->getSenha() && $confSenha && $usuario->getSenha() != $confSenha)
             array_push($erros, "O campo [Senha] deve ser igual ao [Confirmação da senha].");
@@ -49,7 +46,7 @@ class UsuarioService
         return $erros;
     }
 
-    /*public function validarDadosAdm(Usuario $usuario)
+    public function validarDadosPefil(Usuario $usuario, string $confSenha)
     {
         $erros = array();
 
@@ -60,6 +57,12 @@ class UsuarioService
         if (!$usuario->getEmail())
             array_push($erros, "O campo [Email] é obrigatório.");
 
+        if (!$usuario->getSenha())
+            array_push($erros, "O campo [Senha] é obrigatório.");
+
+        if (!$confSenha)
+            array_push($erros, "O campo [Confirmação da senha] é obrigatório.");
+
         return $erros;
-    }*/
+    }
 }

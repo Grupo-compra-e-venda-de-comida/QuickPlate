@@ -36,7 +36,6 @@ class ClienteDAO {
 
         $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
 
-
         $conn = Connection::getConn();
 
         $sql = "SELECT id_cliente FROM cliente c" .
@@ -45,9 +44,10 @@ class ClienteDAO {
         $stm->execute([$idUsuario]);
         $result = $stm->fetchAll();
 
-        $id = print_r($result[0]);
+        if($result)
+            return $result[0]['id_cliente'];
 
-        return $id;
+        return 0; //Retorna 0, pois nao ha cliente com este ID
     }
 
     public function findClienteByIdUsuario($idUsuario) {

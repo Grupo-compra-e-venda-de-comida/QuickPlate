@@ -1,6 +1,5 @@
 <?php
 #Objetivo: listar os produtos para o cliente
-
 require_once(__DIR__ . "/../include/header.php");
 ?>
 
@@ -20,6 +19,7 @@ require_once(__DIR__ . "/../include/header.php");
 
             <div class="page-title m-4">
                 <h2><span>Produtos Disponíveis</span></h2>
+                <h2><span><?php  ?></span></h2>
             </div>
 
             <!-- Criação de Cards de Produtos -->
@@ -42,7 +42,7 @@ require_once(__DIR__ . "/../include/header.php");
                                         <p class="card-text"><b>Preço:</b> R$ <?= $prod->getPrecoProdutoFormatado(); ?></p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-body-secondary-center"><button class="btn btn-outline-success" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);validarBtn();">Adicionar</button></small>
+                                        <small class="text-body-secondary-center"><button class="btn btn-outline-success" onclick="adicionarItem(<?= $prod->getIdProduto() ?>);">Adicionar</button></small>
                                     </div>
                                 </div>
                             </div>

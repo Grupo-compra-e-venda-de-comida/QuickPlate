@@ -12,7 +12,7 @@ require_once(__DIR__ . "/../../controller/usuarioController.php")
 <link href="../css/estiloMenu3.css" rel="stylesheet">
 <link href="../css/app.css" rel="stylesheet">
 
-<div class="container-fluid pb-5" style="padding-top: 70px; margin-bottom: 75px;">
+<div class="container-fluid pb-5" style="position: absolute; padding-top: 110px; margin-bottom: 75px;">
     <!-- Navbar -->
     <div class="row">
         <?php

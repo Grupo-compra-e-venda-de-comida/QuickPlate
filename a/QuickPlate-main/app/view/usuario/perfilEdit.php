@@ -12,12 +12,6 @@ include_once(__DIR__ . "/../include/header.php")
   <!-- Navbar -->
   <div class="row">
     <?php 
-    /*if ($_SESSION[SESSAO_USUARIO_TIPO] == "C") {
-      $menu = "/../include/menu.php";
-    } else if ($_SESSION[SESSAO_USUARIO_TIPO] == "V") {
-      $menu = "/../include/menu2.php";
-    }*/
-
     require_once(__DIR__ . $dados["menu"]);
     ?>
   </div>

@@ -18,6 +18,12 @@ class ReviewController extends Controller
 
     public function __construct()
     {
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
+            exit;
+        }
+
         //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
         $this->setActionDefault("formReview");
 
@@ -39,6 +45,8 @@ class ReviewController extends Controller
 
         $dados['idPedido'] = $ped->getIdPedido();
         $dados['idVendedor'] = $ped->getIdVendedor();
+        
+        $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
         $dados['pedido'] = $ped;
 
         $this->loadView("review/formReview.php", $dados);
@@ -50,7 +58,9 @@ class ReviewController extends Controller
         if (isset($_GET['idPedido']))
             $id = $_GET['idPedido'];
 
-        $ped = $this->pedidoDAO->findPedidoById($id);
+        $ped = $this->pedidoDAO->findPedidoByIdCompleto($id);
+        //print_r($ped);
+
         return $ped;
     }
 
@@ -83,8 +93,10 @@ class ReviewController extends Controller
 
                 if ($dados["id"] == 0) {
 
+                    // $ped->setReview($review);
                     //Inserindo
                     $this->reviewDAO->insertReview($review);
+                    
                 }
                 //Carrega a lista de vendedores
                 $vendedores = $this->vendedorDAO->list();
@@ -99,6 +111,8 @@ class ReviewController extends Controller
 
         //Carregar os valores recebidos por POST de volta para o formulário
         $dados["review"] = $review;
+        $dados["pedido"] = $this->pedidoDAO->findPedidoByIdCompleto($idPedido);
+        $dados["pedido"]->setItensPedido($this->pedidoDAO->listPedidoItens($dados["pedido"]->getIdPedido()));
 
         $msgsErro = implode("<br>", $erros);
         $this->loadView("review/formReview.php", $dados, $msgsErro);

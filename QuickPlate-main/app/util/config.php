@@ -19,10 +19,10 @@ define('APP_NAME', 'QuickPlate');
 //Página inicial do sistema
 define('HOME_PAGE', BASEURL . '/controller/homeController.php?action=home');
 
-//Página de logout do sistema
+//Página de login do sistema
 define('LOGIN_PAGE', BASEURL . '/controller/loginController.php?action=login');
 
-//Página de login do sistema
+//Página de logout do sistema
 define('LOGOUT_PAGE', BASEURL . '/controller/loginController.php?action=logout');
 
 //Sessão do usuário

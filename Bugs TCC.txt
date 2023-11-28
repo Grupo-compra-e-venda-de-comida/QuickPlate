@@ -1,8 +1,0 @@
-Geral:
-- Perfil edit n funciona (service buga por conta do tipoUsuario)
-
-Cliente:
-- Limitar a 1 review por cliente
-- Quando realiza o pedido o idCliente é sempre = 1
-- Botão de finalizar pedido n desaparece caso exclua todos os itens
-- Sessão expirada na tela de review
