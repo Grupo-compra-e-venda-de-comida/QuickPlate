@@ -11,11 +11,6 @@ require_once(__DIR__ . "/../../model/enum/tipoUsuario.php");
 $nome = "(Sessão expirada)";
 if (isset($_SESSION[SESSAO_USUARIO_NOME]))
   $nome = $_SESSION[SESSAO_USUARIO_NOME];
-
-//Variável para validar o acesso
-//$acessoCont = new AcessoController();
-//$isAdministrador = $acessoCont->tipoUsuario([TipoUsuario::ADMINISTRADOR]);
-
 ?>
 
 <!-- Navbar -->
@@ -31,10 +26,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
       </button>
 
       <div class="navbar-collapse collapse" id="navbarCollapse">
-        <a class="navbar-brand" href="#"> <a class="nav-link" href="#" style="margin-left: 50%;"><span> <?php echo $nome; ?></span></a>
-
+        <a class="navbar-brand" href="#"> <a class="nav-link" href="#" style="margin-left: 67%;"><span> <?php echo $nome; ?></span></a>
       </div>
-
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">

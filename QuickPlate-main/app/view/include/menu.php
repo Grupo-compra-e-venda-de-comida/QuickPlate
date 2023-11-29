@@ -23,7 +23,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
 
       <div class="navbar-collapse collapse" id="navbarCollapse">
 
-        <a class="nav-link" href="#" style="margin-left: 45%;"><span> <?php echo $nome; ?></span></a>
+        <a class="nav-link" href="#" style="margin-left: 43%;"><span> <?php echo $nome; ?></span></a>
 
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -40,7 +40,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME])) {
           </li>
 
           <li class="nav-item active">
-            <a class="nav-link" href="loginController.php?action=logout"><b><i class="bi bi-escape"></i> Sair</b></a>
+            <a class="nav-link" href="loginController.php?action=logout"><b><i class="bi bi-escape"></i>Sair</b></a>
           </li>
 
         </ul>

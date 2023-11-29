@@ -17,8 +17,11 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        if (!$this->usuarioLogado())
+        //Verificar se o usuário está logado
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
             exit;
+        }
 
         //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
         $tipoUsuarioLogado = $_SESSION[SESSAO_USUARIO_TIPO];

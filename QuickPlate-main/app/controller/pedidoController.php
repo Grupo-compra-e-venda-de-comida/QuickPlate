@@ -31,8 +31,8 @@ class PedidoController extends Controller
         $this->reviewDAO = new ReviewDAO();
 
         //Verificar se o usuário está logado
-        if (!$this->usuarioLogado()) {
-            echo "Usuário não está logado!";
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
             exit;
         }
 
@@ -193,6 +193,7 @@ class PedidoController extends Controller
 
         $dados["listPed"] = $pedidos;
         $dados["status"] = $status;
+        $dados["nota"] = $status;
 
         $this->loadView("review/listPed.php", $dados);
     }

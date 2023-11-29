@@ -64,11 +64,11 @@ require_once(__DIR__ . "/../include/header.php");
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="home-tab" tabindex="0">  
+                                        <div class="tab-pane fade show active" id="home-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                             <h5 class="card-title">Dados do pedido: </h5>
                                             <span><b>Vendedor: </b></span><span><?= $ped->getNomeVendedor() ?> </span><br>
                                             <span><b>Status do Pedido: </b></span><span><?= $ped->getStatusDesc() ?></span><br>
-                                            <span><b>Valor do Pedido: </b></span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br> 
+                                            <span><b>Valor do Pedido: </b></span><span>R$<?= $ped->getPrecoPedidoFormatado() ?></span><br>
                                         </div>
                                         <div class="tab-pane fade" id="profile-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                             <table id="tabUsuarios" class='table table-striped table-bordered'>
@@ -82,7 +82,7 @@ require_once(__DIR__ . "/../include/header.php");
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($ped->getItensPedido() as $item) :?>
+                                                    <?php foreach ($ped->getItensPedido() as $item) : ?>
                                                         <tr>
                                                             <td><?= $item->getProduto()->getNomeProduto(); ?></td>
                                                             <td><?= $item->getProduto()->getCategoriaDesc(); ?></td>
@@ -98,10 +98,19 @@ require_once(__DIR__ . "/../include/header.php");
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-body-secondary-center">
-                                        <?php if (!$ped->getReview()) : ?>
-                                            <a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido(); ?>&idVendedor=<?= $ped->getIdVendedor(); ?>">Avaliar Pedido</a>
-                                        <?php else : ?>
-                                            Pedido já Avaliado <?= $ped->getReview()->getAvaliacao() ?>
+                                        <?php if (!$ped->getReview()) :
+                                            if ($ped->getStatus() == "E") { ?>
+                                                <a class="btn btn-outline-success col-4 ml-3 mt-2" href="reviewController.php?action=formReview&idPedido=<?= $ped->getIdPedido(); ?>&idVendedor=<?= $ped->getIdVendedor(); ?>">Avaliar Pedido</a>
+                                            <?php } else if ($ped->getStatus() == "CC") {
+                                                echo "Pedido cancelado";
+                                            } else {
+                                                echo "Aguardando entrega";
+                                            } ?>
+                                            <?php else :
+                                            $nota = $ped->getReview()->getAvaliacao();
+                                            for ($i = 0; $i < $nota; $i++) { ?>
+                                                <span class="rating-star">&#9733;</span>
+                                            <?php } ?>
                                         <?php endif; ?>
                                     </small>
                                 </div>

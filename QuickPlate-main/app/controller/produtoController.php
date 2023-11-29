@@ -18,8 +18,8 @@ class ProdutoController extends Controller
     {
 
         //Verificar se o usuário está logado
-        if (!$this->usuarioLogado()) {
-            echo "Usuário não está logado!";
+        if(! $this->usuarioLogado()) {
+            echo "Usuário não está logado.";
             exit;
         }
 

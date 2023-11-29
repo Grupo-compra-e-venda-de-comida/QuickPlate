@@ -101,7 +101,7 @@ require_once(__DIR__ . "/../include/header.php");
                                     <div class="tab-pane fade" id="status-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="status-tab" tabindex="0">
                                         <span>Status do Pedido: </span><span id="labelStatus<?= $ped->getIdPedido() ?>"><?= $ped->getStatusDesc() ?></span><br>
                                         </br>
-
+                                        <?php if($ped->getStatus() != "E") { ?>
                                         <button class="btn btn-success" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'PP')">
                                             Preparando</button>
 
@@ -115,6 +115,7 @@ require_once(__DIR__ . "/../include/header.php");
 
                                         <button class="btn btn-danger" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'CC')">
                                             Cancelar</button>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

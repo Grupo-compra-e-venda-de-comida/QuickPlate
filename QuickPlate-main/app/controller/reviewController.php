@@ -23,7 +23,6 @@ class ReviewController extends Controller
             echo "Usuário não está logado.";
             exit;
         }
-
         //Seta uma action padrão caso a mesmo não tenha sido enviada por parâmetro
         $this->setActionDefault("formReview");
 
@@ -59,7 +58,6 @@ class ReviewController extends Controller
             $id = $_GET['idPedido'];
 
         $ped = $this->pedidoDAO->findPedidoByIdCompleto($id);
-        //print_r($ped);
 
         return $ped;
     }

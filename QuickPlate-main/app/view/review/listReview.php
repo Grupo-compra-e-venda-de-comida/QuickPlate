@@ -43,10 +43,14 @@ require_once(__DIR__ . "/../include/header.php");
                     foreach ($dados['listRev'] as $rev) :
                     ?>
                         <tr>
-                            <td><?= $rev->getNomeCliente(); ?></td>
-                            <td><?= $rev->getAvaliacao(); ?><span class="rating-star">&#9733;</span></td>
-                            <td><?= $rev->getComentario(); ?></td>
-                        </tr>
+                                <td><?= $rev->getNomeCliente(); ?></td>
+                                <td><?php $nota = $rev->getAvaliacao();
+                                    for ($i = 0; $i < $nota; $i++) { ?>
+                                        <span class="rating-star">&#9733;</span>
+                                    <?php } ?>
+                                </td>
+                                <td><?= $rev->getComentario(); ?></td>
+                            </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
