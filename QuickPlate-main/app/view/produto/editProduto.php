@@ -49,9 +49,9 @@ include_once(__DIR__ . "/../include/header.php")
 
                     <label class="selectlabel mb-2">Categoria</label>
                     <select class="select" id="catProd" name="catProd">
-                        <option value="S">Salgado</option>
-                        <option value="D">Doce</option>
-                        <option value="B">Bebida</option>
+                        <option value="S" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'S')  ? 'selected' : ''); ?>>Salgado</option>
+                        <option value="D" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'D')  ? 'selected' : ''); ?>>Doce</option>
+                        <option value="B" <?= ((isset($dados['produto']) && $dados['produto']->getCategoriaProduto() == 'B')  ? 'selected' : ''); ?>>Bebida</option>
                     </select>
 
                     <input type="hidden" id="idVendedor" name="idVendedor" value="<?= $dados['idVendedor']; ?>" />

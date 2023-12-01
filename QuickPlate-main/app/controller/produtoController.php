@@ -157,6 +157,7 @@ class ProdutoController extends Controller
 
         //Carregar os valores recebidos por POST de volta para o formulário
         $dados["produto"] = $produto;
+        $dados["idVendedor"] = $idVendedor;
         $dados["nome"] = $nomeProd;
         $dados["preco"] = $precoProd;
         $dados["detalhes"] = $detalhes;
