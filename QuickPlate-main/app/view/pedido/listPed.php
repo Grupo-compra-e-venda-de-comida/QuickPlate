@@ -99,22 +99,27 @@ require_once(__DIR__ . "/../include/header.php");
                                     </div>
 
                                     <div class="tab-pane fade" id="status-tab-pane<?= $ped->getIdPedido() ?>" role="tabpanel" aria-labelledby="status-tab" tabindex="0">
-                                        <span>Status do Pedido: </span><span id="labelStatus<?= $ped->getIdPedido() ?>"><?= $ped->getStatusDesc() ?></span><br>
+                                        <?php if ($ped->getStatus() != "E" && $ped->getStatus() != "CC") { ?>
+                                            <span>Status do Pedido: </span><span id="labelStatus<?= $ped->getIdPedido() ?>"><?= $ped->getStatusDesc() ?></span><br>
+                                            </br>
+
+                                            <button class="btn btn-success" onclick="confirm('Confirma a mudança de status?'); changeStatus(<?= $ped->getIdPedido() ?>, 'PP')">
+                                                Preparando</button>
+
+                                            <button class="btn btn-success" onclick="confirm('Confirma a mudança de status?'); changeStatus(<?= $ped->getIdPedido() ?>, 'C')">
+                                                Concluido</button>
+
+                                            </br></br>
+
+                                            <button class="btn btn-success" onclick="confirm('Confirma a entrega do pedido?'); changeStatus(<?= $ped->getIdPedido() ?>, 'E')">
+                                                Entregue</button>
+
+                                            <button class="btn btn-danger" onclick="confirm('Confirma o cancelamento do pedido?'); changeStatus(<?= $ped->getIdPedido() ?>, 'CC')">
+                                                Cancelar</button>
+                                        <?php } else { ?>
                                         </br>
-                                        <?php if($ped->getStatus() != "E") { ?>
-                                        <button class="btn btn-success" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'PP')">
-                                            Preparando</button>
-
-                                        <button class="btn btn-success" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'C')">
-                                            Concluido</button>
-
-                                        </br></br>
-
-                                        <button class="btn btn-success" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'E')">
-                                            Entregue</button>
-
-                                        <button class="btn btn-danger" onclick="changeStatus(<?= $ped->getIdPedido() ?>, 'CC')">
-                                            Cancelar</button>
+                                            <span>Status do Pedido: </span><span id="labelStatus<?= $ped->getIdPedido() ?>"><?= $ped->getStatusDesc() ?></span>
+                                        <br></br>
                                         <?php } ?>
                                     </div>
                                 </div>

@@ -35,12 +35,12 @@ class UsuarioService
 
         //Validar o cpf
         if (null !== $usuario->getTipo() && $usuario->getTipo() == "C" || null !== $usuario->getTipo() &&  $usuario->getTipo() == "V" && $tipoPessoa == "F")
-            if(strlen($usuario->getDocumento()) < 11 || strlen($usuario->getDocumento()) > 11)
+            if (strlen($usuario->getDocumento()) < 11 || strlen($usuario->getDocumento()) > 11)
                 array_push($erros, "Informe um [CPF] válido.");
 
         //Validar o cnpj
         if (null !== $usuario->getTipo() && $usuario->getTipo() == "V" && $tipoPessoa == "J")
-            if(strlen($usuario->getDocumento()) < 14 || strlen($usuario->getDocumento()) > 14)
+            if (strlen($usuario->getDocumento()) < 14 || strlen($usuario->getDocumento()) > 14)
                 array_push($erros, "Informe um [CNPJ] válido.");
 
         return $erros;
@@ -62,6 +62,11 @@ class UsuarioService
 
         if (!$confSenha)
             array_push($erros, "O campo [Confirmação da senha] é obrigatório.");
+
+        //Validar se a senha é igual a contra senha
+        if ($usuario->getSenha() && $confSenha && $usuario->getSenha() != $confSenha)
+            array_push($erros, "O campo [Senha] deve ser igual ao [Confirmação da senha].");
+
 
         return $erros;
     }

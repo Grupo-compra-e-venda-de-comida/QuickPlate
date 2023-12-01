@@ -96,11 +96,7 @@ class ReviewController extends Controller
                     $this->reviewDAO->insertReview($review);
                     
                 }
-                //Carrega a lista de vendedores
-                $vendedores = $this->vendedorDAO->list();
-                $dados['listaVendedores'] = $vendedores;
-
-                header("location: ../controller/homeController.php?action=homeCliente");
+                $this->listHist();
                 exit;
             } catch (PDOException $e) {
                 $erros = ["Erro ao salvar a avaliação na base de dados." . $e];
@@ -114,6 +110,36 @@ class ReviewController extends Controller
 
         $msgsErro = implode("<br>", $erros);
         $this->loadView("review/formReview.php", $dados, $msgsErro);
+    }
+
+    public function listHist()
+    {
+        $status = "";
+        if (isset($_GET["status"]))
+            $status = $_GET["status"];
+
+        //Carrega a lista de Pedidos do cliente (usuário logado)
+        $idUsuario = $_SESSION[SESSAO_USUARIO_ID];
+
+        $pedidos = [];
+        if ($status)
+            $pedidos = $this->pedidoDAO->listPedidosClienteByStatus($idUsuario, $status);
+        else
+            $pedidos = $this->pedidoDAO->listPedidosCliente($idUsuario);
+
+        foreach ($pedidos as $ped) {
+            //Carregando os itens de cada pedido
+            $ped->setItensPedido($this->pedidoDAO->listPedidoItens($ped->getIdPedido()));
+
+            //Carregar a revisão de cada pedido
+            $ped->setReview($this->reviewDAO->findReviewByIdPedido($ped->getIdPedido()));
+        }
+
+        $dados["listPed"] = $pedidos;
+        $dados["status"] = $status;
+        $dados["nota"] = $status;
+
+        $this->loadView("review/listPed.php", $dados);
     }
 
     public function listReview(){

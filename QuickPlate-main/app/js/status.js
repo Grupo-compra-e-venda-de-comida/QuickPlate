@@ -5,6 +5,7 @@ function changeStatus(idPedido, status){
         xhttp.open("GET", url, true);
 
         var label = document.getElementById("labelStatus" + idPedido);
+        var div = document.getElementById("status-tab-pane" + idPedido);
     
         xhttp.onload = function() {
             if (status == "PP"){
@@ -15,9 +16,11 @@ function changeStatus(idPedido, status){
             }
             else if (status == "E"){
                 label.innerHTML = "Entregue";
+                div.innerHTML = "<span>Status do Pedido: Entregue </span><br>";
             }
             else if (status == "CC"){
                 label.innerHTML = "Cancelado";
+                div.innerHTML = "<span>Status do Pedido: Cancelado </span><br>";
             }
         };
 
