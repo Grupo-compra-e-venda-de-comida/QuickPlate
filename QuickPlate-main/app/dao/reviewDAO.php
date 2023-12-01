@@ -51,8 +51,10 @@ class ReviewDAO
             $review->setIdReview($reg['id_review']);
             $review->setAvaliacao($reg['avaliacao']);
             $review->setComentario($reg['comentario']);
+            if($review->getNomeCliente() !== null){
+                $review->setNomeCliente($reg['nome']);
+            }
             $review->setIdPedido($reg['id_pedido']);
-            $review->setNomeCliente($reg['nome']);
             array_push($reviews, $review);
         }
 
